@@ -365,8 +365,8 @@ class RadarGrid { //extends Grid {
             return;
         }
 
-        $nbrticks = count($grid[0])/2;
-        $nbrpnts = count($grid);
+        $nbrticks = teste_count($grid[0])/2;
+        $nbrpnts = teste_count($grid);
         $img->SetColor($this->grid_color);
         $img->SetLineWeight($this->weight);
 
@@ -466,7 +466,7 @@ class RadarPlot {
     }
 
     function Stroke($img, $pos, $scale, $startangle) {
-        $nbrpnts = count($this->data);
+        $nbrpnts = teste_count($this->data);
         $astep=2*M_PI/$nbrpnts;
         $a=$startangle;
 
@@ -531,7 +531,7 @@ class RadarPlot {
     }
 
     function GetCount() {
-        return count($this->data);
+        return teste_count($this->data);
     }
 
     function Legend($graph) {
@@ -659,7 +659,7 @@ class RadarGraph extends Graph {
     	if( $aPlot == null ) {
             JpGraphError::RaiseL(25010);//("Graph::Add() You tried to add a null plot to the graph.");
         }
-        if( is_array($aPlot) && count($aPlot) > 0 ) {
+        if( is_array($aPlot) && teste_count($aPlot) > 0 ) {
             $cl = $aPlot[0];
         }
         else {
@@ -689,7 +689,7 @@ class RadarGraph extends Graph {
 
     function StrokeIcons() {
     	if( $this->iIcons != null ) {
-        	$n = count($this->iIcons);
+        	$n = teste_count($this->iIcons);
         	for( $i=0; $i < $n; ++$i ) {
             	$this->iIcons[$i]->Stroke($this->img);
         	}
@@ -698,7 +698,7 @@ class RadarGraph extends Graph {
 
 	function StrokeTexts() {
         if( $this->texts != null ) {
-			$n = count($this->texts);
+			$n = teste_count($this->texts);
             for( $i=0; $i < $n; ++$i ) {
                 $this->texts[$i]->Stroke($this->img);
             }
@@ -723,10 +723,10 @@ class RadarGraph extends Graph {
         // CSIM without storing an image to disk GetCSIM must call Stroke.
         $this->iHasStroked = true;
 
-        $n = count($this->plots);
+        $n = teste_count($this->plots);
         // Set Y-scale
 
-        if( !$this->yscale->IsSpecified() && count($this->plots) > 0 ) {
+        if( !$this->yscale->IsSpecified() && teste_count($this->plots) > 0 ) {
             list($min,$max) = $this->GetPlotsYMinMax($this->plots);
             $this->yscale->AutoScale($this->img,0,$max,$this->len/$this->ytick_factor);
         }
@@ -757,7 +757,7 @@ class RadarGraph extends Graph {
                 $this->axis_title[$i] = $i+1;
             }
         }
-        elseif( count($this->axis_title) < $nbrpnts) {
+        elseif( teste_count($this->axis_title) < $nbrpnts) {
             JpGraphError::RaiseL(18007);
             // ("Number of titles does not match number of points in plot.");
         }

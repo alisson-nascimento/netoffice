@@ -39,7 +39,7 @@ $id = str_replace("**", ",", $id);
 $tmpquery = "WHERE hol.id IN($id) ORDER BY hol.comments";
 $listHoliday = new request();
 $listHoliday->openHoliday($tmpquery);
-$comptListHoliday = count($listHoliday->hol_id);
+$comptListHoliday = teste_count($listHoliday->hol_id);
 
 for ($i = 0;$i < $comptListHoliday;$i++) {
     echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">#" . $listHoliday->hol_id[$i] . "</td><td>" . $listHoliday->hol_comments[$i] . "</td></tr>";

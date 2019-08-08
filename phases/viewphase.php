@@ -83,7 +83,7 @@ $teamMember = "false";
 $tmpquery = "WHERE tea.project = '$project' AND tea.member = '" . $_SESSION['idSession'] . "'";
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 
 if ($comptMemberTest == "0") {
     $teamMember = "false";
@@ -126,7 +126,7 @@ require_once("../themes/" . THEME . "/header.php");
 	$tmpquery = "WHERE tas.project = '$project' AND tas.parent_phase = '$parentPhase' AND tas.milestone != '0'";
 	$countPhaseTasks = new request();
 	$countPhaseTasks->openTasks($tmpquery);
-	$comptlistTasks = count($countPhaseTasks->tas_id);
+	$comptlistTasks = teste_count($countPhaseTasks->tas_id);
 
 	$comptlistTasksRow = "0";
 	$comptUncompleteTasks = "0";
@@ -139,7 +139,7 @@ require_once("../themes/" . THEME . "/header.php");
     $tmpquery = "WHERE tas.project = '$project' AND tas.parent_phase = '$parentPhase' AND tas.milestone = '0'";
     $countPhaseMilestones = new request();
     $countPhaseMilestones->openTasks($tmpquery);
-    $comptlistMilestones = count($countPhaseMilestones->tas_id);
+    $comptlistMilestones = teste_count($countPhaseMilestones->tas_id);
 
 	$block1->contentRow($strings["total_tasks"], $comptlistTasks);
 	$block1->contentRow($strings["uncomplete_tasks"], $comptUncompleteTasks);
@@ -196,7 +196,7 @@ require_once("../themes/" . THEME . "/header.php");
 	$tmpquery = "WHERE tas.project = '$project' AND tas.parent_phase = '$parentPhase' ORDER BY $block2->sortingValue";
 	$listTasks = new request();
 	$listTasks->openTasks($tmpquery);
-	$comptListTasks = count($listTasks->tas_id);
+	$comptListTasks = teste_count($listTasks->tas_id);
 
 	if ($comptListTasks != "0") {
 	    $block2->openResults();
@@ -329,7 +329,7 @@ require_once("../themes/" . THEME . "/header.php");
 
     $listTasks = new request();
     $listTasks->openTasks($tmpquery, $block2->borne, $block2->rowsLimit);
-    $comptListTasks = count($listTasks->tas_id);
+    $comptListTasks = teste_count($listTasks->tas_id);
     
     $block2->headingToggle($strings['tasks_open'] . ' <span class=addition>(' . $comptListTasks . ')</span>');
     $block2->openPaletteIcon();
@@ -517,7 +517,7 @@ require_once("../themes/" . THEME . "/header.php");
 
     $listMilestones = new request();
     $listMilestones->openTasks($tmpquery, $block9->borne, $block9->rowsLimit);
-    $comptListMilestones = count($listMilestones->tas_id);
+    $comptListMilestones = teste_count($listMilestones->tas_id);
     
     $block9->headingToggle($strings['milestone']. ' <span class=addition>(' . $comptListMilestones . ')</span>');
     $block9->openPaletteIcon();
@@ -628,7 +628,7 @@ require_once("../themes/" . THEME . "/header.php");
     //--- list ---------
     $listTasks = new request();
     $listTasks->openTasks($tmpquery, $block10->borne, $block10->rowsLimit);
-    $comptListTasks = count($listTasks->tas_id);
+    $comptListTasks = teste_count($listTasks->tas_id);
     
     $block10->headingToggle($strings['tasks_closed'] . ' <span class=addition>(' . $comptListTasks . ')</span>');
     $block10->openPaletteIcon();
@@ -780,7 +780,7 @@ require_once("../themes/" . THEME . "/header.php");
         
         $listFiles = new request();
         $listFiles->openFiles($tmpquery);
-        $comptListFiles = count($listFiles->fil_id);
+        $comptListFiles = teste_count($listFiles->fil_id);
 
         $block3->headingToggle($strings["linked_content"] . ' <span class=addition>(' . $comptListFiles . ')</span>');
         $block3->openPaletteIcon();

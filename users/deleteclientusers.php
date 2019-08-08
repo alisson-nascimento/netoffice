@@ -25,7 +25,7 @@ if ( ($_SESSION['profilSession'] == 4) || ($_SESSION['profilSession'] == 3) ||
 $tmpquery = "WHERE org.id = '$organization'";
 $detailOrganization = new request();
 $detailOrganization->openOrganizations($tmpquery);
-$comptDetailOrganization = count($detailOrganization->org_id);
+$comptDetailOrganization = teste_count($detailOrganization->org_id);
 
 if ($action == "delete") {
     $id = str_replace("**", ",", $id);
@@ -73,7 +73,7 @@ $tmpquery = "WHERE mem.id IN($id) ORDER BY mem.name";
 
 $listMembers = new request();
 $listMembers->openMembers($tmpquery);
-$comptListMembers = count($listMembers->mem_id);
+$comptListMembers = teste_count($listMembers->mem_id);
 
 for ($i = 0;$i < $comptListMembers;$i++) {
     echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">&nbsp;</td><td>" . $listMembers->mem_login[$i] . "&nbsp;(" . $listMembers->mem_name[$i] . ")</td></tr>";
@@ -91,7 +91,7 @@ echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">&nbsp;</td><td>" 
 $tmpquery = "WHERE mem.profil != '3' ORDER BY mem.name";
 $reassign = new request();
 $reassign->openMembers($tmpquery);
-$comptReassign = count($reassign->mem_id);
+$comptReassign = teste_count($reassign->mem_id);
 
 echo "<select name=\"at\">
 <option value=\"0\" selected>" . $strings["unassigned"] . "</option>";

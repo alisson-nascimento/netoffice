@@ -42,7 +42,7 @@ $teamMember = "false";
 $tmpquery = "WHERE tea.project = '" . $taskDetail->tas_project[0] . "' AND tea.member = '" . $_SESSION['idSession'] . "'";
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 
 if ($comptMemberTest == "0") {
     $teamMember = "false";
@@ -128,7 +128,7 @@ $blockPage->bornesNumber = "1";
 
 	$projmem = new request();
 	$projmem->openTeams($tmpquery);
-	$comptProjmem = count($projmem->tea_mem_id);
+	$comptProjmem = teste_count($projmem->tea_mem_id);
 
 	echo "
 	<tr class='odd'>
@@ -206,7 +206,7 @@ $blockPage->bornesNumber = "1";
 	$listTaskTimes = new request();
 
 	$listTaskTimes->openTaskTime($tmpquery, $block2->borne, $block2->rowsLimit);
-	$comptListTaskTimes = count($listTaskTimes->tim_id);
+	$comptListTaskTimes = teste_count($listTaskTimes->tim_id);
 
 	if ($comptListTaskTimes != "0") {
 	    $block2->openResults();

@@ -44,7 +44,7 @@ $id = str_replace("**", ",", $id);
 $tmpquery = "WHERE cal.id IN($id) ORDER BY cal.subject";
 $listCalendar = new request();
 $listCalendar->openCalendar($tmpquery);
-$comptListCalendar = count($listCalendar->cal_id);
+$comptListCalendar = teste_count($listCalendar->cal_id);
 
 for ($i = 0;$i < $comptListCalendar;$i++) {
     echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">#" . $listCalendar->cal_id[$i] . "</td><td>" . $listCalendar->cal_subject[$i] . "</td></tr>";

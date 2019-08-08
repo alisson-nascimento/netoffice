@@ -20,7 +20,7 @@ $id = $_GET['id'];
 $tmpquery = "WHERE org.id = '$id'";
 $clientDetail = new request();
 $clientDetail->openOrganizations($tmpquery);
-$comptClientDetail = count($clientDetail->org_id);
+$comptClientDetail = teste_count($clientDetail->org_id);
 
 if ($comptClientDetail == "0") {
     header('Location: ../clients/listclients.php?msg=blankClient');

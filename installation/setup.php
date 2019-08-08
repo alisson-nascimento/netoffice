@@ -93,24 +93,24 @@ if ($action == "generate") {
         require_once("./db_var.inc.php");
         require_once("./setup_db.php");
         if ($databaseType == "mysql") {
-            $my = mysql_connect($myserver, $mylogin, $mypassword);
-            if (mysql_errno($my) != 0) {
+            $my = mysqli_connect($myserver, $mylogin, $mypassword);
+            if (mysqli_errno($my) != 0) {
                 print '<br><b>PANIC! <br> Error during connection on server MySQL.</b><br>';
-                print "[". mysql_errno($my) . "] " . mysql_error($my) ."<br/>\n";
+                print "[". mysqli_errno($my) . "] " . mysql_error($my) ."<br/>\n";
                 exit;
             }
             
-            mysql_select_db($mydatabase, $my);
+            mysqli_select_db($my, $mydatabase);
             
-            if (mysql_errno() != 0) {
+            if (mysqli_errno($my) != 0) {
                 exit('<br><b>PANIC! <br> Error during selection database.</b><br>');
             }
 
-            for($con = 0; $con < count($SQL); $con++) {
-                mysql_query($SQL[$con]);
+            for($con = 0; $con < teste_count($SQL); $con++) {
+                mysqli_query($my, $SQL[$con]);
                 // echo $SQL[$con] . ';<br>';
                 
-                if (mysql_errno() != 0) {
+                if (mysqli_errno($my) != 0) {
                     exit('<br><b>PANIC! <br> Error during the creation of the tables.</b><br> Error: ' . mysql_error());
                 }
             }
@@ -242,7 +242,7 @@ if ($step == "2") {
 
 <tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">Table prefix :<br>[<a href=\"javascript:void(0);\" onmouseover=\"return overlib('" . addslashes($help["setup_myprefix"]) . "',ABOVE,SNAPX,550,BGCOLOR,'#5B7F93',FGCOLOR,'#C4D3DB');\" onmouseout=\"return nd();\">Help</a>] </td><td><input size=\"44\" value=\"$myprefix\" style=\"width: 200px\" name=\"myprefix\" maxlength=\"100\" type=\"text\"></td></tr>";
 
-    $safemodeTest = ini_get(safe_mode);
+    $safemodeTest = ini_get('safe_mode');
     if ($safemodeTest == "1") {
         $checked1_a = "checked"; //false
         $safemode = "on";
@@ -362,9 +362,9 @@ function get_password($newPassword)
     global $loginMethod;
 
     switch ($loginMethod) {
-        case MD5:
+        case 'MD5':
             return md5($newPassword);
-        case CRYPT:
+        case 'CRYPT':
             $salt = substr($newPassword, 0, 2);
             return crypt($newPassword, $salt);
         case PLAIN:

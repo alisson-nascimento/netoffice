@@ -50,7 +50,7 @@ if ($typeReports == 'create') {
         $tmpquery = "WHERE tea.member = '" . $_SESSION['idSession'] . "'";
         $memberTest = new request();
         $memberTest->openTeams($tmpquery);
-        $comptMemberTest = count($memberTest->tea_id);
+        $comptMemberTest = teste_count($memberTest->tea_id);
 
         if ($comptMemberTest == "0") {
             $listClients = "false";
@@ -77,7 +77,7 @@ if ($typeReports == 'create') {
 
     $listOrganizations = new request();
     $listOrganizations->openOrganizations($tmpquery);
-    $comptListOrganizations = count($listOrganizations->org_id);
+    $comptListOrganizations = teste_count($listOrganizations->org_id);
 
     echo "<select name=\"S_ORGSEL[]\" size=\"4\" multiple><option selected value=\"ALL\">" . $strings["select_all"] . "</option>";
 
@@ -96,7 +96,7 @@ if ($typeReports == 'create') {
 
     $listProjects = new request();
     $listProjects->openProjects($tmpquery);
-    $comptListProjects = count($listProjects->pro_id);
+    $comptListProjects = teste_count($listProjects->pro_id);
 
     echo "<select name=\"S_PRJSEL[]\" size=\"4\" multiple><option selected value=\"ALL\">" . $strings["select_all"] . "</option>";
 
@@ -114,7 +114,7 @@ if ($typeReports == 'create') {
 
     $listMembers = new request();
     $listMembers->openMembers($tmpquery);
-    $comptListMembers = count($listMembers->mem_id);
+    $comptListMembers = teste_count($listMembers->mem_id);
 
     echo "<select name=\"S_ATSEL[]\" size=\"4\" multiple><option selected value=\"ALL\">" . $strings["select_all"] . "</option><option value=\"0\">" . $strings["unassigned"] . "</option>";
 
@@ -173,7 +173,7 @@ if ($typeReports == 'create') {
 
     echo "</td></tr><tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">" . $strings["status"] . " :</td><td>";
 
-    $comptSta = count($status);
+    $comptSta = teste_count($status);
 
     echo "<select name=\"S_STATSEL[]\" size=\"4\" multiple><option value=\"ALL\" selected>" . $strings["select_all"] . "</option>";
 
@@ -183,7 +183,7 @@ if ($typeReports == 'create') {
 
     echo "</select></td></tr><tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">" . $strings["priority"] . " :</td><td>";
 
-    $comptPri = count($priority);
+    $comptPri = teste_count($priority);
 
     echo "<select name=\"S_PRIOSEL[]\" size=\"4\" multiple>
 <option value=\"ALL\" selected>" . $strings["select_all"] . "</option>";

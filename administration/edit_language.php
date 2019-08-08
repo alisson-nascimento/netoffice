@@ -91,8 +91,8 @@ function save_translation( $lang, $addition = '', $remove = array() )
 		fwrite( $file, "\n?>\n" );
 		fclose( $file );
 
-		echo count( $translations )-count( $lookup ). text( "translations_saved_ok" );
-		if ( count( $lookup ) )
+		echo teste_count( $translations )-count( $lookup ). text( "translations_saved_ok" );
+		if ( teste_count( $lookup ) )
 		{
 			echo "<BR>".count( $lookup ) . text( "labels_deleted" );
 		}
@@ -209,7 +209,7 @@ $block1->openForm("../administration/edit_language.php?action=save&language=".$s
 
 // build page links
 
-$numpages = count( $translations ) / $pagesize;
+$numpages = teste_count( $translations ) / $pagesize;
 $pagestr = "";
 for ( $i = 0; $i < $numpages; $i++ )
 {

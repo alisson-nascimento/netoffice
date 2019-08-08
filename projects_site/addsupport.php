@@ -22,7 +22,7 @@ $userDetail->openMembers($tmpquery);
 $tmpquery = "WHERE sr.member = '" . $_SESSION['idSession'] . "'";
 $listRequests = new request();
 $listRequests->openSupportRequests($tmpquery);
-$comptListRequests = count($listRequests->sr_id);
+$comptListRequests = teste_count($listRequests->sr_id);
 
 if ($action == "add") {
     $sub = convertData($sub);
@@ -53,7 +53,7 @@ echo "<table cellspacing=\"0\" width=\"90%\" border=\"0\" cellpadding=\"3\">
 <tr><th colspan=\"2\">" . $strings["add_support_request"] . "</th></tr>
 <tr><th>" . $strings["priority"] . " :</th><td><select name=\"pr\">";
 
-$comptPri = count($priority);
+$comptPri = teste_count($priority);
 for ($i = 0;$i < $comptPri;$i++) {
     if ($i != 0) {
         echo "<option value=\"$i\">$priority[$i]</option>";

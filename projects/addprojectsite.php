@@ -21,7 +21,7 @@ require_once('../includes/library.php');
 $tmpquery = "WHERE pro.id = '$id'";
 $projectDetail = new request();
 $projectDetail->openProjects($tmpquery);
-$comptProjectDetail = count($projectDetail->pro_id);
+$comptProjectDetail = teste_count($projectDetail->pro_id);
 
 if ($comptProjectDetail == '0') {
     header('Location: ../projects/listprojects.php?msg=blankProject');

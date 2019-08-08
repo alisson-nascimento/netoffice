@@ -12,9 +12,11 @@
  * (at your option) any later version.
  */
 
+require_once('new_functions.php');
+
 class request {
     // constructor
-    function request()
+    function __construct()
     {
     } 
     
@@ -34,18 +36,18 @@ class request {
         $comptRequest = $comptRequest + 1;
 
         if ($databaseType == 'mysql') {
-            $this->index = mysql_query($sql, $MY_DBH);
+            $this->index = mysql_query_to_mysqli_query($sql, $MY_DBH);
         } 
     } 
 
     function fetch()
     {
-        global $row, $databaseType;
+        global $row, $MY_DBH, $databaseType;
 
         if ($databaseType == 'mysql') {
-            @$row = mysql_fetch_row($this->index);
+            @$row = mysqli_fetch_row($this->index);
 
-            if (mysql_errno() != 0) {
+            if (mysqli_errno($MY_DBH) != 0) {
                 echo '<font color=red><b>' . mysql_error() . '</b></font><br>';
             } 
         } 
@@ -57,8 +59,8 @@ class request {
     {
         global $MY_DBH, $databaseType;
         if ($databaseType == "mysql") {
-            @mysql_free_result($this->index);
-            @mysql_close($MY_DBH);
+            @mysqli_free_result($this->index);
+            @mysqli_close($MY_DBH);
         } 
     } 
     // results sorting

@@ -36,13 +36,13 @@ if ($action == "publish") {
 $tmpquery = "WHERE fil.id = '$id'";
 $fileDetail = new request();
 $fileDetail->openFiles($tmpquery);
-$comptFileDetail = count($fileDetail->fil_id);
+$comptFileDetail = teste_count($fileDetail->fil_id);
 
 $teamMember = "false";
 $tmpquery = "WHERE tea.project = '" . $fileDetail->fil_project[0] . "' AND tea.member = '" . $_SESSION['idSession'] . "'";
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 if ($comptMemberTest == "0") {
     $teamMember = "false";
 } else {
@@ -320,7 +320,7 @@ require_once("../themes/" . THEME . "/header.php");
 	$tmpquery = "WHERE fil.id = '$id' OR fil.vc_parent = '$id' AND fil.vc_status = '3' ORDER BY fil.date DESC";
 	$listVersions = new request();
 	$listVersions->openFiles($tmpquery);
-	$comptListVersions = count($listVersions->fil_vc_parent);
+	$comptListVersions = teste_count($listVersions->fil_vc_parent);
 
 	echo"<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">" . $strings["ifc_version_history"] . " :</td><td>
 
@@ -426,7 +426,7 @@ if ($peerReview == "true") {
 	    $tmpquery = "WHERE fil.vc_parent = '$id' AND fil.vc_status != '3' ORDER BY fil.date";
 	    $listReviews = new request();
 	    $listReviews->openFiles($tmpquery);
-	    $comptListReviews = count($listReviews->fil_vc_parent);
+	    $comptListReviews = teste_count($listReviews->fil_vc_parent);
 	    for ($i = 0;$i < $comptListReviews;$i++) {
 	        // Sort odds and evens for bg color
 	        if (!($i % 2)) {
@@ -552,7 +552,7 @@ if ($fileDetail->fil_owner[0] == $_SESSION['idSession']) {
 	</td></tr>";
 
     echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">" . $strings["status"] . " :</td><td><select name=\"statusField\">";
-    $comptSta = count($statusFile);
+    $comptSta = teste_count($statusFile);
 
     for ($i = 0;$i < $comptSta;$i++) {
         if ($i == "2") {

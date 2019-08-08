@@ -23,7 +23,7 @@ require_once ("include_header.php");
 $tmpquery = "WHERE fil.project = '" . $_SESSION['projectSession'] . "' AND fil.published = '0' AND fil.vc_parent = '0' ORDER BY fil.name";
 $listFiles = new request();
 $listFiles->openFiles($tmpquery);
-$comptListFiles = count($listFiles->fil_id);
+$comptListFiles = teste_count($listFiles->fil_id);
 
 $block1 = new block();
 

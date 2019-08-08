@@ -569,7 +569,7 @@ class RGB {
     // a single color (specifeid as an RGB triple)
     static function tryHexConversion($aColor) {
         if( is_array( $aColor ) ) {
-            if( count( $aColor ) == 3 ) {
+            if( teste_count( $aColor ) == 3 ) {
                 if( is_numeric($aColor[0]) && is_numeric($aColor[1]) && is_numeric($aColor[2]) ) {
                     if( ($aColor[0] >= 0 && $aColor[0] <= 255) &&
                         ($aColor[1] >= 0 && $aColor[1] <= 255) &&

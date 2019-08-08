@@ -101,7 +101,7 @@ $tmpquery = "$query";
 // echo "<b>$query</b><br/>\n";
 $listTasks = new request();
 $listTasks->openTasks($tmpquery);
-$comptListTasks = count($listTasks->tas_id);
+$comptListTasks = teste_count($listTasks->tas_id);
 
 $dump_buffer = "\"$headerText\"" . $crlf;
 

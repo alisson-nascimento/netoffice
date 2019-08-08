@@ -68,7 +68,7 @@ echo "<tr><td>" . $strings["updates_task"] . " :</td><td>";
 $tmpquery = "WHERE upd.type='1' AND upd.item = '$id' ORDER BY upd.created DESC";
 $listUpdates = new request();
 $listUpdates->openUpdates($tmpquery);
-$comptListUpdates = count($listUpdates->upd_id);
+$comptListUpdates = teste_count($listUpdates->upd_id);
 
 if ($comptListUpdates != "0") {
     $j = 1;

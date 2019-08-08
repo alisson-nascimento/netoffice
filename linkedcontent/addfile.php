@@ -112,7 +112,7 @@ $teamMember = "false";
 $tmpquery = "WHERE tea.project = '$project' AND tea.member = '" . $_SESSION['idSession'] . "'";
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 if ($comptMemberTest == "0") {
     $teamMember = "false";
 } else {
@@ -177,7 +177,7 @@ $block1->openContent();
 $block1->contentTitle($strings["details"]);
 
 echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">" . $strings["status"] . " :</td><td><select name=\"statusField\">";
-$comptSta = count($statusFile);
+$comptSta = teste_count($statusFile);
 
 for ($i = 0;$i < $comptSta;$i++) {
     if ($i == "2") {

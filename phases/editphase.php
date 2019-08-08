@@ -28,7 +28,7 @@ $teamMember = "false";
 $tmpquery = "WHERE tea.project = '$project' AND tea.member = '" . $_SESSION['idSession'] . "'";
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 if ($comptMemberTest == "0") {
     $teamMember = "false";
 } else {
@@ -57,7 +57,7 @@ if ($action == "update") {
         $tmpquery = "WHERE tas.parent_phase = '$id' AND tas.status = '3'";
         $changeTasks = new request();
         $changeTasks->openTasks($tmpquery);
-        $comptchangeTasks = count($changeTasks->tas_id);
+        $comptchangeTasks = teste_count($changeTasks->tas_id);
         for ($i = 0;$i < $comptchangeTasks;$i++) {
             $taskID = $changeTasks->tas_id[$i];
             $tmpquery = "UPDATE " . $tableCollab["tasks"] . " SET status='4' WHERE id = '$taskID'";
@@ -94,7 +94,7 @@ echo"<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">" . $strings["phas
 
 echo"<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">" . $strings["status"] . " :</td><td><select name=\"st\">";
 
-$comptSta = count($phaseStatus);
+$comptSta = teste_count($phaseStatus);
 
 for ($i = 0;$i < $comptSta;$i++) {
     if ($phaseDetail->pha_status[0] == $i) {

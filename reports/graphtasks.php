@@ -154,7 +154,7 @@ $graph->scale->actinfo->SetFont(FF_FONT1,FS_BOLD);
 $tmpquery = "$queryStart $query ORDER BY tas.due_date";
 $listTasks = new request();
 $listTasks->openTasks($tmpquery);
-$comptListTasks = count($listTasks->tas_id);
+$comptListTasks = teste_count($listTasks->tas_id);
 
 $ms_cnt = 0;
 

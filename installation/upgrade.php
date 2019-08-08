@@ -57,22 +57,22 @@ if ($_GET['action'] == 'database') {
 
     if (count($SQL) >= 1) {
         if ($databaseType == 'mysql') {
-            $my = mysql_connect(MYSERVER, MYLOGIN, MYPASSWORD);
+            $my = mysqli_connect(MYSERVER, MYLOGIN, MYPASSWORD);
 
-            if (mysql_errno() != 0) {
+            if (mysqli_errno() != 0) {
                 exit('<br><b>PANIC! Error during connection on server MySQL.</b><br>');
             } 
 
             mysql_select_db(MYDATABASE, $my);
 
-            if (mysql_errno() != 0) {
+            if (mysqli_errno() != 0) {
                 exit('<br><b>PANIC! Error during selection database.</b><br>');
             } 
 
-            for($con = 0; $con < count($SQL); $con++) {
-                mysql_query($SQL[$con]); 
+            for($con = 0; $con < teste_count($SQL); $con++) {
+                mysql_query_to_mysqli_query($SQL[$con]); 
                 // echo $SQL[$con].'<br>';
-                if (mysql_errno() != 0) {
+                if (mysqli_errno() != 0) {
                     exit('<br><b>PANIC! Error during the update of the database.</b><br> Error: ' . mysql_error());
                 } 
             } 

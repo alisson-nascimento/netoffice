@@ -284,7 +284,7 @@ class PHPMailer
      * @return void
      */
     function AddAddress($address, $name = "") {
-        $cur = count($this->to);
+        $cur = teste_count($this->to);
         $this->to[$cur][0] = trim($address);
         $this->to[$cur][1] = $name;
     }
@@ -298,7 +298,7 @@ class PHPMailer
      * @return void
     */
     function AddCC($address, $name = "") {
-        $cur = count($this->cc);
+        $cur = teste_count($this->cc);
         $this->cc[$cur][0] = trim($address);
         $this->cc[$cur][1] = $name;
     }
@@ -312,7 +312,7 @@ class PHPMailer
      * @return void
      */
     function AddBCC($address, $name = "") {
-        $cur = count($this->bcc);
+        $cur = teste_count($this->bcc);
         $this->bcc[$cur][0] = trim($address);
         $this->bcc[$cur][1] = $name;
     }
@@ -324,7 +324,7 @@ class PHPMailer
      * @return void
      */
     function AddReplyTo($address, $name = "") {
-        $cur = count($this->ReplyTo);
+        $cur = teste_count($this->ReplyTo);
         $this->ReplyTo[$cur][0] = trim($address);
         $this->ReplyTo[$cur][1] = $name;
     }
@@ -345,7 +345,7 @@ class PHPMailer
         $body = "";
         $result = true;
 
-        if((count($this->to) + count($this->cc) + count($this->bcc)) < 1)
+        if((count($this->to) + teste_count($this->cc) + teste_count($this->bcc)) < 1)
         {
             $this->SetError($this->Lang("provide_address"));
             return false;
@@ -420,7 +420,7 @@ class PHPMailer
      */
     function MailSend($header, $body) {
         $to = "";
-        for($i = 0; $i < count($this->to); $i++)
+        for($i = 0; $i < teste_count($this->to); $i++)
         {
             if($i != 0) { $to .= ", "; }
             $to .= $this->to[$i][0];
@@ -474,17 +474,17 @@ class PHPMailer
         }
 
         // Attempt to send attach all recipients
-        for($i = 0; $i < count($this->to); $i++)
+        for($i = 0; $i < teste_count($this->to); $i++)
         {
             if(!$this->smtp->Recipient($this->to[$i][0]))
                 $bad_rcpt[] = $this->to[$i][0];
         }
-        for($i = 0; $i < count($this->cc); $i++)
+        for($i = 0; $i < teste_count($this->cc); $i++)
         {
             if(!$this->smtp->Recipient($this->cc[$i][0]))
                 $bad_rcpt[] = $this->cc[$i][0];
         }
-        for($i = 0; $i < count($this->bcc); $i++)
+        for($i = 0; $i < teste_count($this->bcc); $i++)
         {
             if(!$this->smtp->Recipient($this->bcc[$i][0]))
                 $bad_rcpt[] = $this->bcc[$i][0];
@@ -492,7 +492,7 @@ class PHPMailer
 
         if(count($bad_rcpt) > 0) // Create error message
         {
-            for($i = 0; $i < count($bad_rcpt); $i++)
+            for($i = 0; $i < teste_count($bad_rcpt); $i++)
             {
                 if($i != 0) { $error .= ", "; }
                 $error .= $bad_rcpt[$i];
@@ -532,7 +532,7 @@ class PHPMailer
         $connection = ($this->smtp->Connected()); 
 
         // Retry while there is no connection
-        while($index < count($hosts) && $connection == false)
+        while($index < teste_count($hosts) && $connection == false)
         {
             if(strstr($hosts[$index], ":"))
                 list($host, $port) = explode(":", $hosts[$index]);
@@ -622,7 +622,7 @@ class PHPMailer
         $addr_str .= $this->AddrFormat($addr[0]);
         if(count($addr) > 1)
         {
-            for($i = 1; $i < count($addr); $i++)
+            for($i = 1; $i < teste_count($addr); $i++)
                 $addr_str .= ", " . $this->AddrFormat($addr[$i]);
         }
         $addr_str .= $this->LE;
@@ -663,7 +663,7 @@ class PHPMailer
 
         $line = explode($this->LE, $message);
         $message = "";
-        for ($i=0 ;$i < count($line); $i++)
+        for ($i=0 ;$i < teste_count($line); $i++)
         {
           $line_part = explode(" ", $line[$i]);
           $buf = "";
@@ -806,7 +806,7 @@ class PHPMailer
         }
 
         // Add custom headers
-        for($index = 0; $index < count($this->CustomHeader); $index++)
+        for($index = 0; $index < teste_count($this->CustomHeader); $index++)
         {
             $result .= $this->HeaderLine(trim($this->CustomHeader[$index][0]), 
                        $this->EncodeHeader(trim($this->CustomHeader[$index][1])));
@@ -954,9 +954,9 @@ class PHPMailer
         {
             if(count($this->attachment) > 0)
                 $this->message_type = "attachments";
-            if(strlen($this->AltBody) > 0 && count($this->attachment) < 1)
+            if(strlen($this->AltBody) > 0 && teste_count($this->attachment) < 1)
                 $this->message_type = "alt";
-            if(strlen($this->AltBody) > 0 && count($this->attachment) > 0)
+            if(strlen($this->AltBody) > 0 && teste_count($this->attachment) > 0)
                 $this->message_type = "alt_attachments";
         }
     }
@@ -1005,7 +1005,7 @@ class PHPMailer
         if($name == "")
             $name = $filename;
 
-        $cur = count($this->attachment);
+        $cur = teste_count($this->attachment);
         $this->attachment[$cur][0] = $path;
         $this->attachment[$cur][1] = $filename;
         $this->attachment[$cur][2] = $name;
@@ -1029,7 +1029,7 @@ class PHPMailer
         $mime = array();
 
         // Add all attachments
-        for($i = 0; $i < count($this->attachment); $i++)
+        for($i = 0; $i < teste_count($this->attachment); $i++)
         {
             // Check for string attachment
             $bString = $this->attachment[$i][5];
@@ -1244,7 +1244,7 @@ class PHPMailer
     function AddStringAttachment($string, $filename, $encoding = "base64", 
                                  $type = "application/octet-stream") {
         // Append to $attachment array
-        $cur = count($this->attachment);
+        $cur = teste_count($this->attachment);
         $this->attachment[$cur][0] = $string;
         $this->attachment[$cur][1] = $filename;
         $this->attachment[$cur][2] = $filename;
@@ -1282,7 +1282,7 @@ class PHPMailer
             $name = $filename;
 
         // Append to $attachment array
-        $cur = count($this->attachment);
+        $cur = teste_count($this->attachment);
         $this->attachment[$cur][0] = $path;
         $this->attachment[$cur][1] = $filename;
         $this->attachment[$cur][2] = $name;
@@ -1302,7 +1302,7 @@ class PHPMailer
      */
     function InlineImageExists() {
         $result = false;
-        for($i = 0; $i < count($this->attachment); $i++)
+        for($i = 0; $i < teste_count($this->attachment); $i++)
         {
             if($this->attachment[$i][6] == "inline")
             {

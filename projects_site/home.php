@@ -19,7 +19,7 @@ if ($updateProject == "true") {
     $tmpquery = "WHERE tea.member = '" . $_SESSION['idSession'] . "' AND pro.id = '$project' AND pro.status IN(0,2,3) AND pro.published = '0'";
     $testProject = new request();
     $testProject->openTeams($tmpquery);
-    $comptTestProject = count($testProject->tea_id);
+    $comptTestProject = teste_count($testProject->tea_id);
 
     if ($comptTestProject != "0") {
         // $_SESSION['projectSession'] = null;
@@ -51,7 +51,7 @@ if ($_SESSION['projectSession'] == "" || $changeProject == "true") {
     $tmpquery = "WHERE tea.member = '" . $_SESSION['idSession'] . "' AND pro.status IN(0,2,3) AND pro.published = '0' ORDER BY pro.name";
     $listProjects = new request();
     $listProjects->openTeams($tmpquery);
-    $comptListProjects = count($listProjects->tea_id);
+    $comptListProjects = teste_count($listProjects->tea_id);
 
     $block1 = new block();
 
@@ -96,7 +96,7 @@ if ($_SESSION['projectSession'] != "" && $changeProject != "true") {
         $tmpquery = "WHERE pha.project_id = '" . $projectDetail->pro_id[0] . "' AND status = '1'";
         $currentPhase = new request();
         $currentPhase->openPhases($tmpquery);
-        $comptCurrentPhase = count($currentPhase->pha_id);
+        $comptCurrentPhase = teste_count($currentPhase->pha_id);
         if ($comptCurrentPhase == 0) {
             echo "" . $strings["no_current_phase"] . " ";
         } else {

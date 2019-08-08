@@ -26,7 +26,7 @@ $projectNoti->openProjects($tmpquery);
 $tmpquery = "WHERE noti.member IN($at)";
 $listNotifications = new request();
 $listNotifications->openNotifications($tmpquery);
-$comptListNotifications = count($listNotifications->not_id);
+$comptListNotifications = teste_count($listNotifications->not_id);
 
 if ($listNotifications->not_taskassignment[0] == "0") {
     $mail = new notification();

@@ -34,7 +34,7 @@ if ($id != "") {
     $tmpquery = "WHERE serv.id = '$id'";
     $detailService = new request();
     $detailService->openServices($tmpquery);
-    $comptDetailService = count($detailService->serv_id);
+    $comptDetailService = teste_count($detailService->serv_id);
     // set values in form
     $n = $detailService->serv_name[0];
     $np = $detailService->serv_name_print[0];

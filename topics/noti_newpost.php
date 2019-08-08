@@ -15,7 +15,7 @@
 $tmpquery = "WHERE pos.topic = '" . $detailTopic->top_id[0] . "'  AND pos.member != '" . $_SESSION['idSession'] . "' ORDER BY mem.id";
 $listPosts = new request();
 $listPosts->openPosts($tmpquery);
-$comptListPosts = count($listPosts->pos_id);
+$comptListPosts = teste_count($listPosts->pos_id);
 
 for ($i = 0;$i < $comptListPosts;$i++) {
     if ($listPosts->pos_mem_id[$i] != $distinct) {
@@ -31,7 +31,7 @@ if ($posters != "") {
     $tmpquery = "WHERE noti.member IN($posters)";
     $listNotifications = new request();
     $listNotifications->openNotifications($tmpquery);
-    $comptListNotifications = count($listNotifications->not_id);
+    $comptListNotifications = teste_count($listNotifications->not_id);
 
     $mail = new notification();
 

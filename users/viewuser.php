@@ -18,7 +18,7 @@ require_once("../includes/library.php");
 $tmpquery = "WHERE mem.id = '$id'";
 $userDetail = new request();
 $userDetail->openMembers($tmpquery);
-$comptUserDetail = count($userDetail->mem_id);
+$comptUserDetail = teste_count($userDetail->mem_id);
 
 if ($userDetail->mem_profil[0] == "3") {
     header("Location: ../users/viewclientuser.php?id=$id&organization=" . $userDetail->mem_organization[0]);

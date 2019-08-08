@@ -74,7 +74,7 @@ $teamMember = "false";
 $tmpquery = "WHERE tea.project = '" . $taskDetail->tas_project[0] . "' AND tea.member = '" . $_SESSION['idSession'] . "'";
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 if ($comptMemberTest == "0") {
     $teamMember = "false";
 } else {
@@ -222,7 +222,7 @@ $blockPage= new block();
 	$tmpquery = "WHERE upd.type='1' AND upd.item = '$id' ORDER BY upd.created DESC";
 	$listUpdates = new request();
 	$listUpdates->openUpdates($tmpquery);
-	$comptListUpdates = count($listUpdates->upd_id);
+	$comptListUpdates = teste_count($listUpdates->upd_id);
 
 	echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">&nbsp;</td><td>";
 	if ($comptListUpdates != "0") {
@@ -311,7 +311,7 @@ if ($fileManagement == "true") {
     $tmpquery = "WHERE fil.task = '$id' AND fil.vc_parent = '0' ORDER BY $block2->sortingValue";
     $listFiles = new request();
     $listFiles->openFiles($tmpquery);
-    $comptListFiles = count($listFiles->fil_id);
+    $comptListFiles = teste_count($listFiles->fil_id);
 
     if ($comptListFiles != "0") {
         $block2->openResults();
@@ -386,7 +386,7 @@ if ($fileManagement == "true") {
 	$tmpquery = "WHERE ass.task = '$id' ORDER BY $block3->sortingValue";
 	$listAssign = new request();
 	$listAssign->openAssignments($tmpquery);
-	$comptListAssign = count($listAssign->ass_id);
+	$comptListAssign = teste_count($listAssign->ass_id);
 
 	$block3->openResults($checkbox = "false");
 

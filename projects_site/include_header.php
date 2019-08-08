@@ -23,7 +23,7 @@ if ($_SESSION['projectSession'] != "" && $changeProject != "true") {
     $tmpquery = "WHERE tea.project = '" . $_SESSION['projectSession'] . "' AND tea.member = '" . $_SESSION['idSession'] . "'";
     $memberTest = new request();
     $memberTest->openTeams($tmpquery);
-    $comptMemberTest = count($memberTest->tea_id);
+    $comptMemberTest = teste_count($memberTest->tea_id);
     if ($comptMemberTest == "0") {
         $teamMember = "false";
     } else {

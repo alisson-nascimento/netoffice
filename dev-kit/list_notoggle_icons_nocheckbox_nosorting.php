@@ -38,7 +38,7 @@ $block1->closePaletteIcon();
 $tmpquery = "WHERE org.id != '1' ORDER BY org.url DESC";
 $listOrganizations = new request();
 $listOrganizations->openOrganizations($tmpquery);
-$comptListOrganizations = count($listOrganizations->org_id);
+$comptListOrganizations = teste_count($listOrganizations->org_id);
 
 if ($comptListOrganizations != "0") {
     $block1->openResults($checkbox = "false");

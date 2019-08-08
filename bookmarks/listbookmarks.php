@@ -79,7 +79,7 @@ if ($view == 'my') {
 $listBookmarks = new request();
 $listBookmarks->openBookmarks($tmpquery);
 
-$comptListBookmarks = count($listBookmarks->boo_id);
+$comptListBookmarks = teste_count($listBookmarks->boo_id);
 
 if ($comptListBookmarks != '0') {
     $block1->openResults();

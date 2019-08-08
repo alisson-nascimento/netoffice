@@ -214,7 +214,7 @@ class GanttActivityInfo {
     function GetWidth($aImg) {
         $txt = new TextProperty();
         $txt->SetFont($this->iFFamily,$this->iFStyle,$this->iFSize);
-        $n = count($this->iTitles) ;
+        $n = teste_count($this->iTitles) ;
         $rm=$this->iRightColMargin;
         $w = 0;
         for($h=0, $i=0; $i < $n; ++$i ) {
@@ -236,7 +236,7 @@ class GanttActivityInfo {
     }
 
     function GetColStart($aImg,&$aStart,$aAddLeftMargin=false) {
-        $n = count($this->iTitles) ;
+        $n = teste_count($this->iTitles) ;
         $adj = $aAddLeftMargin ? $this->iLeftColMargin : 0;
         $aStart=array($aImg->left_margin+$adj);
         for( $i=1; $i < $n; ++$i ) {
@@ -382,7 +382,7 @@ class GanttGraph extends Graph {
 
     // A utility function to help create basic Gantt charts
     function CreateSimple($data,$constrains=array(),$progress=array()) {
-        $num = count($data);
+        $num = teste_count($data);
         for( $i=0; $i < $num; ++$i) {
             switch( $data[$i][1] ) {
                 case ACTYPE_GROUP:
@@ -412,7 +412,7 @@ class GanttGraph extends Graph {
                     $a->SetPattern($this->iSimpleStyle,$this->iSimpleColor);
                     $a->SetFillColor($this->iSimpleBkgColor);
                     // Check if this activity should have a constrain line
-                    $n = count($constrains);
+                    $n = teste_count($constrains);
                     for( $j=0; $j < $n; ++$j ) {
                         if( empty($constrains[$j]) || (count($constrains[$j]) != 3) ) {
                             JpGraphError::RaiseL(6003,$j);
@@ -424,7 +424,7 @@ class GanttGraph extends Graph {
                     }
 
                     // Check if this activity have a progress bar
-                    $n = count($progress);
+                    $n = teste_count($progress);
                     for( $j=0; $j < $n; ++$j ) {
 
                         if( empty($progress[$j]) || (count($progress[$j]) != 2) ) {
@@ -496,7 +496,7 @@ class GanttGraph extends Graph {
 
     // Add a new Gantt object
     function Add($aObject) {
-        if( is_array($aObject) && count($aObject) > 0 ) {
+        if( is_array($aObject) && teste_count($aObject) > 0 ) {
             $cl = $aObject[0];
             if( class_exists('IconPlot',false) && ($cl instanceof IconPlot) ) {
                 $this->AddIcon($aObject);
@@ -505,7 +505,7 @@ class GanttGraph extends Graph {
             	$this->AddText($aObject);
             }
             else {
-                $n = count($aObject);
+                $n = teste_count($aObject);
                 for($i=0; $i < $n; ++$i)
                 $this->iObj[] = $aObject[$i];
             }
@@ -526,7 +526,7 @@ class GanttGraph extends Graph {
 	function StrokeTexts() {
         // Stroke any user added text objects
         if( $this->texts != null ) {
-        	$n = count($this->texts);
+        	$n = teste_count($this->texts);
             for($i=0; $i < $n; ++$i) {
             	if( $this->texts[$i]->iScalePosX !== null && $this->texts[$i]->iScalePosY !== null ) {
             		$x = $this->scale->TranslateDate($this->texts[$i]->iScalePosX);
@@ -567,7 +567,7 @@ class GanttGraph extends Graph {
         $m=10;
         if( $this->iObj != null ) {
             $marg = $this->scale->actinfo->iLeftColMargin+$this->scale->actinfo->iRightColMargin;
-            $n = count($this->iObj);
+            $n = teste_count($this->iObj);
             for($i=0; $i < $n; ++$i) {
                 if( !empty($this->iObj[$i]->title) ) {
                     if( $this->iObj[$i]->title->HasTabs() ) {
@@ -586,7 +586,7 @@ class GanttGraph extends Graph {
     function GetMaxLabelHeight() {
         $m=10;
         if( $this->iObj != null ) {
-            $n = count($this->iObj);
+            $n = teste_count($this->iObj);
             // We can not include the title of GnttVLine since that title is stroked at the bottom
             // of the Gantt bar and not in the activity title columns
             for($i=0; $i < $n; ++$i) {
@@ -602,7 +602,7 @@ class GanttGraph extends Graph {
         $m=0;
         if( $this->iObj != null ) {
             $m = $this->iObj[0]->GetAbsHeight($this->img);
-            $n = count($this->iObj);
+            $n = teste_count($this->iObj);
             for($i=1; $i < $n; ++$i) {
                 $m=max($m,$this->iObj[$i]->GetAbsHeight($this->img));
             }
@@ -615,7 +615,7 @@ class GanttGraph extends Graph {
         $m=1;
         if( $this->iObj != null ) {
             $m = $this->iObj[0]->GetLineNbr();
-            $n = count($this->iObj);
+            $n = teste_count($this->iObj);
             for($i=1; $i < $n; ++$i) {
                 $m=max($m,$this->iObj[$i]->GetLineNbr());
             }
@@ -626,7 +626,7 @@ class GanttGraph extends Graph {
     // Get the minumum and maximum used dates for all bars
     function GetBarMinMax() {
         $start = 0 ;
-        $n = count($this->iObj);
+        $n = teste_count($this->iObj);
         while( $start < $n && $this->iObj[$start]->GetMaxDate() === false )
         ++$start;
         if( $start >= $n ) {
@@ -677,7 +677,7 @@ class GanttGraph extends Graph {
 
             // If there are any added GanttVLine we must make sure that the
             // bottom margin is wide enough to hold a title.
-            $n = count($this->iObj);
+            $n = teste_count($this->iObj);
         	for($i=0; $i < $n; ++$i) {
             	if( $this->iObj[$i] instanceof GanttVLine ) {
 					$bm = max($bm,$this->iObj[$i]->title->GetHeight($this->img)+10);
@@ -929,14 +929,14 @@ class GanttGraph extends Graph {
     // to find out the maximum width of each column. In order to do that we
     // must walk through all the objects, sigh...
     function GetMaxActInfoColWidth() {
-        $n = count($this->iObj);
+        $n = teste_count($this->iObj);
         if( $n == 0 ) return;
         $w = array();
         $m = $this->scale->actinfo->iLeftColMargin + $this->scale->actinfo->iRightColMargin;
 
         for( $i=0; $i < $n; ++$i ) {
             $tmp = $this->iObj[$i]->title->GetColWidth($this->img,$m);
-            $nn = count($tmp);
+            $nn = teste_count($tmp);
             for( $j=0; $j < $nn; ++$j ) {
                 if( empty($w[$j]) )
                 $w[$j] = $tmp[$j];
@@ -1007,7 +1007,7 @@ class GanttGraph extends Graph {
         // Stroke Grid line
         $this->hgrid->Stroke($this->img,$this->scale);
 
-        $n = count($this->iObj);
+        $n = teste_count($this->iObj);
         for($i=0; $i < $n; ++$i) {
             //$this->iObj[$i]->SetLabelLeftMargin(round($maxwidth*$this->iLabelHMarginFactor/2));
             $this->iObj[$i]->Stroke($this->img,$this->scale);
@@ -1056,7 +1056,7 @@ class GanttGraph extends Graph {
     }
 
     function StrokeConstrains() {
-        $n = count($this->iObj);
+        $n = teste_count($this->iObj);
 
         // Stroke all constrains
         for($i=0; $i < $n; ++$i) {
@@ -1065,7 +1065,7 @@ class GanttGraph extends Graph {
             // for example we can add IconPlots which doesn't have this property.
             if( empty($this->iObj[$i]->constraints) ) continue;
 
-            $numConstrains = count($this->iObj[$i]->constraints);
+            $numConstrains = teste_count($this->iObj[$i]->constraints);
 
             for( $k = 0; $k < $numConstrains; $k++ ) {
                 $vpos = $this->iObj[$i]->constraints[$k]->iConstrainRow;
@@ -1084,7 +1084,7 @@ class GanttGraph extends Graph {
                         //('You have specifed a constrain from row='.$this->iObj[$i]->iVPos.' to row='.$vpos.' which does not have any activity.');
                     }
                     $c2 = $this->iObj[$targetobj]->iConstrainPos;
-                    if( count($c1) == 4 && count($c2 ) == 4) {
+                    if( teste_count($c1) == 4 && teste_count($c2 ) == 4) {
                         switch( $this->iObj[$i]->constraints[$k]->iConstrainType ) {
                             case CONSTRAIN_ENDSTART:
                                 if( $c1[1] < $c2[1] ) {
@@ -1147,7 +1147,7 @@ class GanttGraph extends Graph {
         $csim .= $this->subtitle->GetCSIMAreas();
         $csim .= $this->subsubtitle->GetCSIMAreas();
 
-        $n = count($this->iObj);
+        $n = teste_count($this->iObj);
         for( $i=$n-1; $i >= 0; --$i )
         $csim .= $this->iObj[$i]->GetCSIMArea();
         return $csim;
@@ -1464,7 +1464,7 @@ class PredefIcons {
      'bGUHIAIuydTIE5zfc5Wr4lJcahHnHTP3CVGm78DrgY38N+DEibp7dmYKdAQmBh1hjEFjis+9CTWYGK21H6PxPyOI0DobYwzZF/z7'.
      '7jadTvJtYG0kCD7lfwl49ijgT1gc0AH+dZSJA/xB+Mz/GSIvFoj/B7H1mAd8CO/zAAAAAElFTkSuQmCC' ;
 
-        $this->iLen = count($this->iBuiltinIcon);
+        $this->iLen = teste_count($this->iBuiltinIcon);
     }
 }
 
@@ -1628,7 +1628,7 @@ class TextProperty {
     }
 
     function SetColumnFonts($aFontArray) {
-        if( !is_array($aFontArray) || count($aFontArray[0]) != 3 ) {
+        if( !is_array($aFontArray) || teste_count($aFontArray[0]) != 3 ) {
             JpGraphError::RaiseL(6033);
             // 'Array of fonts must contain arrays with 3 elements, i.e. (Family, Style, Size)'
         }
@@ -1649,13 +1649,13 @@ class TextProperty {
         if( is_string($this->iText) ) {
             if( strlen($this->iText) == 0 ) return 0;
             $tmp = preg_split('/\t/',$this->iText);
-            if( count($tmp) <= 1 || !$aUseTabs ) {
+            if( teste_count($tmp) <= 1 || !$aUseTabs ) {
                 $w = $aImg->GetTextWidth($this->iText);
                 return $w + 2*$extra_margin;
             }
             else {
                 $tot=0;
-                $n = count($tmp);
+                $n = teste_count($tmp);
                 for($i=0; $i < $n; ++$i) {
                     $res[$i] = $aImg->GetTextWidth($tmp[$i]);
                     $tot += $res[$i]*$aTabExtraMargin;
@@ -1670,8 +1670,8 @@ class TextProperty {
         elseif( is_array($this->iText) ) {
             // Must be an array of texts. In this case we return the sum of the
             // length + a fixed margin of 4 pixels on each text string
-            $n = count($this->iText);
-            $nf = count($this->iFontArray);
+            $n = teste_count($this->iText);
+            $nf = teste_count($this->iFontArray);
             for( $i=0, $w=0; $i < $n; ++$i ) {
                 if( $i < $nf ) {
                     $aImg->SetFont($this->iFontArray[$i][0],$this->iFontArray[$i][1],$this->iFontArray[$i][2]);
@@ -1703,8 +1703,8 @@ class TextProperty {
     function GetColWidth($aImg,$aMargin=0) {
         $aImg->SetFont($this->iFFamily,$this->iFStyle,$this->iFSize);
         if( is_array($this->iText) ) {
-            $n = count($this->iText);
-            $nf = count($this->iFontArray);
+            $n = teste_count($this->iText);
+            $nf = teste_count($this->iFontArray);
             for( $i=0, $w=array(); $i < $n; ++$i ) {
                 $tmp = $this->iText[$i];
                 if( is_string($tmp) ) {
@@ -1732,7 +1732,7 @@ class TextProperty {
 
     // Get total height of text
     function GetHeight($aImg) {
-        $nf = count($this->iFontArray);
+        $nf = teste_count($this->iFontArray);
         $maxheight = -1;
 
         if( $nf > 0 ) {
@@ -1770,7 +1770,7 @@ class TextProperty {
                     if( is_array($aY) ) $aY=$aY[0];
                     $aImg->StrokeText($aX,$aY,$this->iText);
                 }
-                elseif( is_array($this->iText) && ($n = count($this->iText)) > 0 ) {
+                elseif( is_array($this->iText) && ($n = teste_count($this->iText)) > 0 ) {
                     $ax = is_array($aX) ;
                     $ay = is_array($aY) ;
                     if( $ax && $ay ) {
@@ -1786,15 +1786,15 @@ class TextProperty {
                         $aX = array_fill(0,$n,$aX);
                         $aY = array_fill(0,$n,$aY);
                     }
-                    $n = min($n, count($aX) ) ;
-                    $n = min($n, count($aY) ) ;
+                    $n = min($n, teste_count($aX) ) ;
+                    $n = min($n, teste_count($aY) ) ;
                     for($i=0; $i < $n; ++$i ) {
                         $tmp = $this->iText[$i];
                         if( is_object($tmp) ) {
                             $tmp->Stroke($aImg,$aX[$i],$aY[$i]);
                         }
                         else {
-                            if( $i < count($this->iFontArray) ) {
+                            if( $i < teste_count($this->iFontArray) ) {
                                 $font = $this->iFontArray[$i];
                                 $aImg->SetFont($font[0],$font[1],$font[2]);
                             }
@@ -1810,7 +1810,7 @@ class TextProperty {
                 $tmp = preg_split('/\t/',$this->iText);
                 $n = min(count($tmp),count($aX));
                 for($i=0; $i < $n; ++$i) {
-                    if( $i < count($this->iFontArray) ) {
+                    if( $i < teste_count($this->iFontArray) ) {
                         $font = $this->iFontArray[$i];
                         $aImg->SetFont($font[0],$font[1],$font[2]);
                     }

@@ -22,7 +22,7 @@ require_once ("include_header.php");
 $tmpquery = "WHERE topic.project = '" . $_SESSION['projectSession'] . "' AND topic.published = '0' ORDER BY topic.last_post DESC";
 $listTopics = new request();
 $listTopics->openTopics($tmpquery);
-$comptListTopics = count($listTopics->top_id);
+$comptListTopics = teste_count($listTopics->top_id);
 
 $block1 = new block();
 

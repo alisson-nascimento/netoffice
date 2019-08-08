@@ -30,7 +30,7 @@ if ($action == 'delete') {
     $tmpquery = "WHERE fil.id IN($id) OR fil.vc_parent IN($id) ORDER BY fil.name";
     $listFiles = new request();
     $listFiles->openFiles($tmpquery);
-    $comptListFiles = count($listFiles->fil_id);
+    $comptListFiles = teste_count($listFiles->fil_id);
     for ($i = 0;$i < $comptListFiles;$i++) {
         if ($task != "0") {
             if (file_exists ("../files/" . $project . "/" . $task . "/" . $listFiles->fil_name[$i])) {
@@ -99,7 +99,7 @@ $id = str_replace("**", ",", $id);
 $tmpquery = "WHERE fil.id IN($id) ORDER BY fil.name";
 $listFiles = new request();
 $listFiles->openFiles($tmpquery);
-$comptListFiles = count($listFiles->fil_id);
+$comptListFiles = teste_count($listFiles->fil_id);
 
 for ($i = 0;$i < $comptListFiles;$i++) {
     echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">&nbsp;</td><td>" . $listFiles->fil_name[$i] . "</td></tr>";

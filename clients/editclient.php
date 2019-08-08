@@ -28,7 +28,7 @@ if ($id != '') {
     $tmpquery = "WHERE org.id = '$id'";
     $clientDetail = new request();
     $clientDetail->openOrganizations($tmpquery);
-    $comptClientDetail = count($clientDetail->org_id);
+    $comptClientDetail = teste_count($clientDetail->org_id);
 
     if ($comptClientDetail == '0') {
         header('Location: ../clients/listclients.php?msg=blankClient');
@@ -83,7 +83,7 @@ if ($id == '') {
             $tmpquery = "WHERE org.name = '$cn'";
             $existsClient = new request();
             $existsClient->openOrganizations($tmpquery);
-            $comptExistsClient = count($existsClient->org_id);
+            $comptExistsClient = teste_count($existsClient->org_id);
 
             if ($comptExistsClient != '0') {
                 $error = $strings['organization_already_exists'];
@@ -163,7 +163,7 @@ if ($clientsFilter == 'true') {
     $tmpquery = "WHERE (mem.profil='5' OR mem.profil='1' OR mem.profil='0') AND mem.login != 'demo' ORDER BY mem.name";
     $clientOwner = new request();
     $clientOwner->openMembers($tmpquery);
-    $comptClientOwner = count($clientOwner->mem_id);
+    $comptClientOwner = teste_count($clientOwner->mem_id);
 
     for ($i = 0; $i < $comptClientOwner; $i++) {
         if ($clientDetail->org_owner[0] == $clientOwner->mem_id[$i] || $_SESSION['idSession'] == $clientOwner->mem_id[$i]) {

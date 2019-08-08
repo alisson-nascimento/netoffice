@@ -25,7 +25,7 @@ if ($action == "delete") {
     $tmpquery = "WHERE mee.id IN($id)";
     $listMeetings = new request();
     $listMeetings->openMeetings($tmpquery);
-    $comptListMeetings = count($listMeetings->mee_id);
+    $comptListMeetings = teste_count($listMeetings->mee_id);
     for ($i = 0;$i < $comptListMeetings;$i++) {
         if ($fileManagement == "true") {
             delDir("../files/" . $listMeetings->mee_project[$i] . "/meetings/" . $listMeetings->mee_id[$i]);
@@ -75,7 +75,7 @@ $id = str_replace("**", ",", $id);
 $tmpquery = "WHERE mee.id IN($id) ORDER BY mee.name";
 $listMeetings = new request();
 $listMeetings->openMeetings($tmpquery);
-$comptListMeetings = count($listMeetings->mee_id);
+$comptListMeetings = teste_count($listMeetings->mee_id);
 
 for ($i = 0;$i < $comptListMeetings;$i++) {
     echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">#" . $listMeetings->mee_id[$i] . "</td><td>" . $listMeetings->mee_name[$i] . "</td></tr>";

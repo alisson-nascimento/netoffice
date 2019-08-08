@@ -20,7 +20,7 @@ if ($supportType == "team") {
     $tmpquery = "WHERE tea.project = '$project' AND tea.member = '" . $_SESSION['idSession'] . "'";
     $memberTest = new request();
     $memberTest->openTeams($tmpquery);
-    $comptMemberTest = count($memberTest->tea_id);
+    $comptMemberTest = teste_count($memberTest->tea_id);
     if ($comptMemberTest == "0") {
         $teamMember = "false";
     } else {
@@ -119,7 +119,7 @@ if ($supportType == "team") {
 if ($action != "" || $action != " ") {
     $listRequests = new request();
     $listRequests->openSupportRequests($tmpquery);
-    $comptListRequests = count($listRequests->sr_id);
+    $comptListRequests = teste_count($listRequests->sr_id);
 } 
 
 if ($comptListRequests != "0") {
@@ -127,14 +127,14 @@ if ($comptListRequests != "0") {
     $block1->labels($labels = array(0 => $strings["id"], 1 => $strings["subject"], 2 => $strings["owner"], 3 => $strings["project"], 4 => $strings["priority"], 5 => $strings["status"], 6 => $strings["date_open"], 7 => $strings["date_close"]), "false");
 
     for ($i = 0;$i < $comptListRequests;$i++) {
-        $comptSta = count($requestStatus);
+        $comptSta = teste_count($requestStatus);
         for ($sr = 0;$sr < $comptSta;$sr++) {
             if ($listRequests->sr_status[$i] == $sr) {
                 $currentStatus = $requestStatus[$sr];
             } 
         } 
 
-        $comptPri = count($priority);
+        $comptPri = teste_count($priority);
         for ($rp = 0;$rp < $comptPri;$rp++) {
             if ($listRequests->sr_priority[$i] == $rp) {
                 $requestPriority = $priority[$rp];

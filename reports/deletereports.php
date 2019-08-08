@@ -48,7 +48,7 @@ $id = str_replace("**", ",", $id);
 $tmpquery = "WHERE rep.id IN($id) ORDER BY rep.name";
 $listReports = new request();
 $listReports->openReports($tmpquery);
-$comptListReports = count($listReports->rep_id);
+$comptListReports = teste_count($listReports->rep_id);
 
 for ($i = 0;$i < $comptListReports;$i++) {
     $block1->contentRow("#" . $listReports->rep_id[$i], $listReports->rep_name[$i]);

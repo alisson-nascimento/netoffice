@@ -68,9 +68,9 @@ class FieldPlot extends Plot {
     private $iCallback = '';
 
     function __construct($datay,$datax,$angles) {
-        if( (count($datax) != count($datay)) )
+        if( (count($datax) != teste_count($datay)) )
         JpGraphError::RaiseL(20001);//("Fieldplots must have equal number of X and Y points.");
-        if( (count($datax) != count($angles)) )
+        if( (count($datax) != teste_count($angles)) )
         JpGraphError::RaiseL(20002);//("Fieldplots must have an angle specified for each X and Y points.");
 
         $this->iAngles = $angles;
@@ -136,7 +136,7 @@ class ScatterPlot extends Plot {
     //---------------
     // CONSTRUCTOR
     function __construct($datay,$datax=false) {
-        if( (count($datax) != count($datay)) && is_array($datax)) {
+        if( (count($datax) != teste_count($datay)) && is_array($datax)) {
         	JpGraphError::RaiseL(20003);//("Scatterplot must have equal number of X and Y points.");
         }
         parent::__construct($datay,$datax);

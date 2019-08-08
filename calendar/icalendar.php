@@ -34,7 +34,7 @@ if ($_SESSION['icalAuth'] === false) {
 
     $listMember = new request();
     $listMember->openMembers($tmpquery);
-    $comptListMember = count($listMember->mem_id);
+    $comptListMember = teste_count($listMember->mem_id);
 
     if ($comptListMember != 1){
         authenticate();
@@ -60,7 +60,7 @@ $tmpquery = "WHERE tas.assigned_to = '" . $_SESSION['idSession'] .
             "' AND tas.status IN(0,2,3) AND pro.status IN(0,2,3)";
 $listTasks = new request();
 $listTasks->openTasks($tmpquery);
-$comptListTasks = count($listTasks->tas_id);
+$comptListTasks = teste_count($listTasks->tas_id);
 
 // iCal VTODO: Open Task(s)
 // iCal VEVENT: Milestones for open projects
@@ -189,9 +189,9 @@ if ($comptListTasks >= 1) {
                 0,                 // Class (0 = PRIVATE | 1 = PUBLIC | 2 = CONFIDENTIAL)
                 $attendee,         // attendees - Array (key = attendee name, value = e-mail, second value = role of the attendee [0 = CHAIR | 1 = REQ | 2 = OPT | 3 =NON])
                 $ical_priority,    // Priority = 0-9
-                0,                 // frequency: 0 = once, secoundly – yearly = 1–7
+                0,                 // frequency: 0 = once, secoundly ï¿½ yearly = 1ï¿½7
                 1,                 // Recurrency end: ('' = forever | integer = number of times | timestring = explicit date)
-                0,                 // Interval for frequency (every 2,3,4 weeks…)
+                0,                 // Interval for frequency (every 2,3,4 weeksï¿½)
                 '',                // Array with the number of the days the event accures (example: array(0,1,5) = Sunday, Monday, Friday
                 0,                 // Startday of the Week ( 0 = Sunday - 6 = Saturday)
                 '',                // exeption dates: Array with timestamps of dates that should not be includes in the recurring event
@@ -212,7 +212,7 @@ $tmpquery = " INNER JOIN {$tableCollab['attendants']} att ON att.meeting = mee.i
 
 $listMeetings = new request();
 $listMeetings->openMeetings($tmpquery);
-$comptListMeetings = count($listMeetings->mee_id);
+$comptListMeetings = teste_count($listMeetings->mee_id);
 
 // add iCal VEVENT for each open meeting, if any
 if ($comptListMeetings >= 1) {
@@ -235,7 +235,7 @@ if ($comptListMeetings >= 1) {
         $tmpquery = "WHERE att.meeting = '{$listMeetings->mee_id[$i]}'";
         $attendantDetail = new request();
         $attendantDetail->openAttendants($tmpquery);
-        $comptAttendantDetail = count($attendantDetail->att_id);
+        $comptAttendantDetail = teste_count($attendantDetail->att_id);
         
         if ($comptAttendantDetail >= 1) {
             for ($j = 0; $j < $comptAttendantDetail; $j++) {
@@ -296,9 +296,9 @@ if ($comptListMeetings >= 1) {
             0,                 // Class (0 = PRIVATE | 1 = PUBLIC | 2 = CONFIDENTIAL)
             $attendees,        // attendees - Array (key = attendee name, value = e-mail, second value = role of the attendee [0 = CHAIR | 1 = REQ | 2 = OPT | 3 =NON])
             $ical_priority,    // Priority = 0-9
-            0,                 // frequency: 0 = once, secoundly – yearly = 1–7
+            0,                 // frequency: 0 = once, secoundly ï¿½ yearly = 1ï¿½7
             1,                 // Recurrency end: ('' = forever | integer = number of times | timestring = explicit date)
-            0,                 // Interval for frequency (every 2,3,4 weeks…)
+            0,                 // Interval for frequency (every 2,3,4 weeksï¿½)
             '',                // Array with the number of the days the event accures (example: array(0,1,5) = Sunday, Monday, Friday
             0,                 // Startday of the Week ( 0 = Sunday - 6 = Saturday)
             '',                // exeption dates: Array with timestamps of dates that should not be includes in the recurring event

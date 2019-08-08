@@ -299,7 +299,7 @@ if ($version == $versionNew) {
     echo '<input value="' . $version . '" name="versionOldNew" type="hidden">';
 } 
 
-$safemodeTest = ini_get(safe_mode);
+$safemodeTest = ini_get('safe_mode');
 
 if ($safemodeTest == '1') {
     $safemode = 'on';

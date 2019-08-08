@@ -36,7 +36,7 @@ $checkSession = true;
 require_once("../includes/library.php");
 
 $breadcrumbs[]=$strings['reports'];
-$breadcrumbs[]=buildLink('../reports/createreport.php?typeReports=create', $strings["create_report"], in) . ' | ' . buildLink('../reports/createreport.php?typeReports=custom', $strings['custom_reports'], LINK_INSIDE);
+$breadcrumbs[]=buildLink('../reports/createreport.php?typeReports=create', $strings["create_report"], 'in') . ' | ' . buildLink('../reports/createreport.php?typeReports=custom', $strings['custom_reports'], LINK_INSIDE);
 
 $pageSection = 'reports';
 require_once("../themes/" . THEME . "/header.php");
@@ -54,7 +54,7 @@ $query = " WHERE tas.status > 1 and (tas.due_date < '$datenow' AND tas.due_date 
 $tmpquery = "$query ORDER BY $block1->sortingValue";
 $listTasks = new request();
 $listTasks->openTasks($tmpquery);
-$comptListTasks = count($listTasks->tas_id);
+$comptListTasks = teste_count($listTasks->tas_id);
 
 $block0 = new block();
 

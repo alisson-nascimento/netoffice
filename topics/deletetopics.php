@@ -20,7 +20,7 @@ if ($action == "delete") {
     $tmpquery1 = "DELETE FROM " . $tableCollab["topics"] . " WHERE id IN($id)";
     $tmpquery2 = "DELETE FROM " . $tableCollab["posts"] . " WHERE topic IN($id)";
     $pieces = explode(",", $id);
-    $num = count($pieces);
+    $num = teste_count($pieces);
     connectSql("$tmpquery1");
     connectSql("$tmpquery2");
     if ($project != "") {
@@ -65,7 +65,7 @@ $id = str_replace("**", ",", $id);
 $tmpquery = "WHERE topic.id IN($id) ORDER BY topic.subject";
 $listTopics = new request();
 $listTopics->openTopics($tmpquery);
-$comptListTopics = count($listTopics->top_id);
+$comptListTopics = teste_count($listTopics->top_id);
 
 for ($i = 0;$i < $comptListTopics;$i++) {
     echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">&nbsp;</td><td>" . $listTopics->top_subject[$i] . "</td></tr>";

@@ -25,7 +25,7 @@ if ( ($_SESSION['profilSession'] == 4) || ($_SESSION['profilSession'] == 3) ||
 $tmpquery = "WHERE org.id = '$organization'";
 $clientDetail = new request();
 $clientDetail->openOrganizations($tmpquery);
-$comptClientDetail = count($clientDetail->org_id);
+$comptClientDetail = teste_count($clientDetail->org_id);
 
 // case add client user
 // test if login already exists
@@ -36,7 +36,7 @@ if ($action == "add") {
         $tmpquery = "WHERE mem.login = '$un'";
         $existsUser = new request();
         $existsUser->openMembers($tmpquery);
-        $comptExistsUser = count($existsUser->mem_id);
+        $comptExistsUser = teste_count($existsUser->mem_id);
         if ($comptExistsUser != "0") {
             $error = $strings["user_already_exists"];
         } else {
@@ -105,7 +105,7 @@ $selectOrganization = "<select name=\"clod\">";
 $tmpquery = "WHERE org.id != '1' ORDER BY org.name";
 $listOrganizations = new request();
 $listOrganizations->openOrganizations($tmpquery);
-$comptListOrganizations = count($listOrganizations->org_id);
+$comptListOrganizations = teste_count($listOrganizations->org_id);
 
 for ($i = 0;$i < $comptListOrganizations;$i++) {
     if ($organization == $listOrganizations->org_id[$i]) {

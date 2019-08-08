@@ -80,6 +80,9 @@ require_once($base_dir . 'includes/error_handler.php');
 // load configuration settings
 require_once($base_dir . 'includes/settings.php');
 
+// load configuration settings
+require_once($base_dir . 'includes/new_functions.php');
+
 // set base URI
 $url_array = parse_url($root);
 $base_uri = $url_array['path'] . '/';
@@ -101,7 +104,7 @@ else {
 
 // Session Settings
 ini_set('session.use_trans_sid', 0); 		// Stop adding SID to URLs
-ini_set('session.save_handler', 'user'); 	// User-defined save handler (files|user)
+// ini_set('session.save_handler', 'user'); 	// User-defined save handler (files|user)
 ini_set('session.serialize_handler', 'php');// How to store data
 ini_set('session.use_cookies', 1); 			// Cookies store the session ID
 ini_set('session.cookie_path', $base_uri); 	// session cookie save path
@@ -142,7 +145,7 @@ $MY_DBH = null;
 define('DB_PCONNECT', false);
 
 // user call-back functions for session events
-session_set_save_handler('_sess_mysql_open', '_sess_mysql_close',
+session_set_save_handler('_sess_mysql_open', '_sess_mysqli_close',
                          '_sess_mysql_read', '_sess_mysql_write',
                          '_sess_mysql_destroy', '_sess_mysql_gc');
 
@@ -271,7 +274,7 @@ if ($checkSession && !$demoSession) {
     $tmpquery = "WHERE log.login = '" . $_SESSION['loginSession'] . "'";
     $checkLog = new request();
     $checkLog->openLogs($tmpquery);
-    $comptCheckLog = count($checkLog->log_id);
+    $comptCheckLog = teste_count($checkLog->log_id);
 
     // make sure there is a row for them
     if ($comptCheckLog != '0') {
@@ -389,7 +392,7 @@ function openDatabase() {
     global $MY_DBH,$databaseCharset;
 
     // set the database connection type
-    $connect_func = (constant("DB_PCONNECT")) ? 'mysql_pconnect' : 'mysql_connect';
+    $connect_func = (constant("DB_PCONNECT")) ? 'mysql_pconnect' : 'mysqli_connect';
 
     // Establish a database connection
     if (!$MY_DBH = $connect_func(MYSERVER, MYLOGIN, MYPASSWORD)) {
@@ -401,7 +404,8 @@ function openDatabase() {
     }
 
     // Set the database for this resource link
-    if (!mysql_select_db(MYDATABASE, $MY_DBH)) {
+    // if (!mysql_select_db(MYDATABASE, $MY_DBH)) {
+       if (!mysqli_select_db ($MY_DBH, MYDATABASE)) {
         // Unable to set the database
         print '<li>Unable to select database ' . MYDATABASE;
         print '<li>MySQL Error: ' . mysql_error();
@@ -409,7 +413,7 @@ function openDatabase() {
         exit;
     }
 
-	if ( $databaseCharset != '' ) mysql_query("SET NAMES '".$databaseCharset."'", $MY_DBH);
+	if ( $databaseCharset != '' ) mysql_query_to_mysqli_query("SET NAMES '".$databaseCharset."'", $MY_DBH);
     return($MY_DBH);
 }
 
@@ -972,15 +976,16 @@ function compt($tmpsql)
     if ($databaseType == 'mysql') {
         $res = openDatabase();
         $sql = $tmpsql;
-        $index = mysql_query($sql, $res);
+        $index = mysql_query_to_mysqli_query($sql, $res);
 
-        while ($row = mysql_fetch_row($index)) {
+        while ($row = mysqli_fetch_row($index)) {
             $countEnreg[] = ($row[0]);
         } 
 
-        $countEnregTotal = count($countEnreg);
-        @mysql_free_result($index);
-        @mysql_close($res);
+        //$countEnregTotal = teste_count($countEnreg);
+        $countEnregTotal = is_array($countEnreg)?count($countEnreg):strlen($countEnreg);
+        @mysqli_free_result($index);
+        @mysqli_close($res);
     } 
 
     return($countEnregTotal);
@@ -999,9 +1004,9 @@ function connectSql($tmpsql)
     if ($databaseType == 'mysql') {
         $res = openDatabase();
         $sql = $tmpsql;
-        $index = mysql_query($sql, $res);
-        @mysql_free_result($index); //!!! index might be invalid
-        @mysql_close($res);
+        $index = mysql_query_to_mysqli_query($sql, $res);
+        @mysqli_free_result($index); //!!! index might be invalid
+        @mysqli_close($res);
     } 
 }
 
@@ -1019,14 +1024,14 @@ function last_id($tmpsql)
         $res = openDatabase();
         global $lastId;
         $sql = 'SELECT id FROM ' . $tmpsql . ' ORDER BY id DESC';
-        $index = mysql_query($sql, $res);
+        $index = mysql_query_to_mysqli_query($sql, $res);
 
-        while ($row = mysql_fetch_row($index)) {
+        while ($row = mysqli_fetch_row($index)) {
             $lastId[] = $row[0];
         } 
 
-        @mysql_free_result($index);
-        @mysql_close($res);
+        @mysqli_free_result($index);
+        @mysqli_close($res);
     } 
 }
 
@@ -1071,12 +1076,12 @@ function _sess_mysql_open($save_path, $session_name)
 //
 // (Note, do not confuse this with _sess_mysql_destroy(), which is called to
 // kill the session).
-function _sess_mysql_close()
+function _sess_mysqli_close()
 { 
     global $MY_DBH; 
 
     // Closes non-persistent database connections
-    if (@mysql_close($MY_DBH) != true) {
+    if (@mysqli_close($MY_DBH) != true) {
         return(false);
     }
 
@@ -1112,7 +1117,7 @@ function _sess_mysql_read($session_id)
     $MY_DBH = openDatabase();
 
     // Execute the query
-    if (!$result = mysql_query($select, $MY_DBH)) {
+    if (!$result = mysql_query_to_mysqli_query($select, $MY_DBH)) {
         // error with query
         print '<li>Unable to query the database ' . MYDATABASE;
         print '<li>MySQL Error: ' . mysql_error();
@@ -1120,9 +1125,9 @@ function _sess_mysql_read($session_id)
     } 
 
     // Check for result, must only be one to return data
-    if (mysql_num_rows($result) == 1) {
+    if (mysqli_num_rows($result) == 1) {
         // Session data found, strip any slashes used for escaping
-        $row = mysql_fetch_array($result);
+        $row = mysqli_fetch_array($result);
         $data = stripSlashes($row['session_data']);
     } else {
         // We have an invalid or stale session, destroy it!
@@ -1130,7 +1135,7 @@ function _sess_mysql_read($session_id)
     }
 
     // Free up the resources used by the statement
-    @mysql_free_result($result);
+    @mysqli_free_result($result);
 
     return($data);
 }
@@ -1170,9 +1175,9 @@ function _sess_mysql_write($session_id, $val)
 
     // First try the insert, if that doesn't succeed, it means the
     // session already exists and we need to update it instead.
-    if (!mysql_query($insert, $MY_DBH)) {
+    if (!mysql_query_to_mysqli_query($insert, $MY_DBH)) {
         // Insert failed, issue an update
-        if (!mysql_query($update, $MY_DBH)) {
+        if (!mysql_query_to_mysqli_query($update, $MY_DBH)) {
             // Everything faild, return false
             return(false);
         } 
@@ -1200,7 +1205,7 @@ function _sess_mysql_destroy($session_id)
     $MY_DBH = openDatabase();
 
     // Execute the query
-    if (!$result = mysql_query($select, $MY_DBH)) {
+    if (!$result = mysql_query_to_mysqli_query($select, $MY_DBH)) {
         // error with query
         print '<li>Unable to query the database ' . MYDATABASE;
         print '<li>MySQL Error: ' . mysql_error();
@@ -1208,7 +1213,7 @@ function _sess_mysql_destroy($session_id)
     } 
 
     // Free up resources used by the query
-    @mysql_free_result($result);
+    @mysqli_free_result($result);
 
     return($result);
 }
@@ -1229,7 +1234,7 @@ function _sess_mysql_gc($max_lifetime)
    $MY_DBH = openDatabase();
 
     // Execute the query
-    if (!$result = mysql_query($query, $MY_DBH)) {
+    if (!$result = mysql_query_to_mysqli_query($query, $MY_DBH)) {
         // error with query
         print '<li>Unable to query the database ' . MYDATABASE;
         print '<li>MySQL Error: ' . mysql_error();
@@ -1237,7 +1242,7 @@ function _sess_mysql_gc($max_lifetime)
     } 
 
     // Free up resources used by the query
-    @mysql_free_result($result);
+    @mysqli_free_result($result);
 
     return($result);
 }
@@ -1334,7 +1339,7 @@ function diff_hour($date1, $date2) {
         $tmpquery = " WHERE hol.date='$currDate'";
         $listHoliday = new request();
         $listHoliday->openHoliday($tmpquery);
-        $comptListHoliday = count($listHoliday->hol_id);
+        $comptListHoliday = teste_count($listHoliday->hol_id);
         if ($comptListHoliday == 0) {
             $weekDay = date("w", $timestamp1);
             $diff += $dayHourArray[$weekDay];
@@ -1361,7 +1366,7 @@ function hours_after($date1, $hour1) {
         $tmpquery = " WHERE hol.date='$currDate'";
         $listHoliday = new request();
         $listHoliday->openHoliday($tmpquery);
-        $comptListHoliday = count($listHoliday->hol_id);
+        $comptListHoliday = teste_count($listHoliday->hol_id);
         if ($comptListHoliday == 0) {
             $weekDay = date("w", $timestamp1);
             $diff += $dayHourArray[$weekDay];
@@ -1390,7 +1395,7 @@ function hours_before($date1, $hour1) {
         $tmpquery = " WHERE hol.date='$currDate'";
         $listHoliday = new request();
         $listHoliday->openHoliday($tmpquery);
-        $comptListHoliday = count($listHoliday->hol_id);
+        $comptListHoliday = teste_count($listHoliday->hol_id);
         if ($comptListHoliday == 0) {
             $weekDay = date("w", $timestamp1);
             $diff += $dayHourArray[$weekDay];

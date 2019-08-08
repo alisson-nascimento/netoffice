@@ -225,7 +225,7 @@ class Htpasswd {
 
             $this->CONTENTS = $contents;
             $Mytemp = split("\n", $contents);
-            for($count = 0;$count < count($Mytemp);$count++) {
+            for($count = 0;$count < teste_count($Mytemp);$count++) {
                 $user = "";
                 $pass = "";
 

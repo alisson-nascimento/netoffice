@@ -41,7 +41,7 @@ $detailTopic->openTopics($tmpquery);
 $tmpquery = "WHERE pos.topic = '" . $detailTopic->top_id[0] . "' ORDER BY pos.created DESC";
 $listPosts = new request();
 $listPosts->openPosts($tmpquery);
-$comptListPosts = count($listPosts->pos_id);
+$comptListPosts = teste_count($listPosts->pos_id);
 
 $tmpquery = "WHERE pro.id = '" . $detailTopic->top_project[0] . "'";
 $detailProject = new request();
@@ -51,7 +51,7 @@ $teamMember = "false";
 $tmpquery = "WHERE tea.project = '" . $detailTopic->top_project[0] . "' AND tea.member = '" . $_SESSION['idSession'] . "'";
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 if ($comptMemberTest == "0") {
     $teamMember = "false";
 } else {
@@ -110,7 +110,7 @@ $block1->contentTitle($strings["info"]);
 
 $block1->contentRow($strings["project"], buildLink("../projects/viewproject.php?id=" . $detailProject->pro_id[0], $detailProject->pro_name[0] . " (#" . $detailProject->pro_id[0] . ")", LINK_INSIDE));
 $block1->contentRow($strings["organization"], $detailProject->pro_org_name[0]);
-$block1->contentRow($strings["owner"], buildLink("../users/viewuser.php?id=" . $detailProject->pro_mem_id[0], $detailProject->pro_mem_name[0], in) . " (" . buildLink($detailProject->pro_mem_email_work[0], $detailProject->pro_mem_login[0], LINK_MAIL) . ")");
+$block1->contentRow($strings["owner"], buildLink("../users/viewuser.php?id=" . $detailProject->pro_mem_id[0], $detailProject->pro_mem_name[0], 'in') . " (" . buildLink($detailProject->pro_mem_email_work[0], $detailProject->pro_mem_login[0], LINK_MAIL) . ")");
 
 if ($sitePublish == "true") {
     $block1->contentRow($strings["published"], $statusPublish[$idPublish]);

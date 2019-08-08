@@ -44,7 +44,7 @@ if ($action == "delete") {
     $tmpquery = "WHERE pro.owner IN($id)";
     $listProjects = new request();
     $listProjects->openProjects($tmpquery);
-    $comptListProjects = count($listProjects->pro_id);
+    $comptListProjects = teste_count($listProjects->pro_id);
     for ($i = 0;$i < $comptListProjects;$i++) {
         $listTeams->tea_id = "";
         $listTeams->tea_project = "";
@@ -57,7 +57,7 @@ if ($action == "delete") {
         $tmpquery = "WHERE tea.project = '" . $listProjects->pro_id[$i] . "' AND tea.member = '$atProject'";
         $listTeams = new request();
         $listTeams->openTeams($tmpquery);
-        $comptListTeams = count($listTeams->tea_id);
+        $comptListTeams = teste_count($listTeams->tea_id);
         if ($comptListTeams == "0") {
             $tmpquery = "INSERT INTO " . $tableCollab["teams"] . "(project,member,published,authorized) VALUES('" . $listProjects->pro_id[$i] . "','$atProject','1','0')";
 
@@ -80,7 +80,7 @@ if ($action == "delete") {
             $tmpquery = "WHERE tea.member = '$pieces[$j]'";
             $listTeams = new request();
             $listTeams->openTeams($tmpquery);
-            $comptListTeams = count($listTeams->tea_id);
+            $comptListTeams = teste_count($listTeams->tea_id);
             for ($i = 0;$i < $comptListTeams;$i++) {
                 cvs_delete_user($listTeams->tea_mem_login[$i], $listTeams->tea_pro_id[$i]);
             } 
@@ -127,7 +127,7 @@ $id = str_replace("**", ",", $id);
 $tmpquery = "WHERE mem.id IN($id) ORDER BY mem.name";
 $listMembers = new request();
 $listMembers->openMembers($tmpquery);
-$comptListMembers = count($listMembers->mem_id);
+$comptListMembers = teste_count($listMembers->mem_id);
 
 for ($i = 0;$i < $comptListMembers;$i++) {
     echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">&nbsp;</td><td>" . $listMembers->mem_login[$i] . "&nbsp;(" . $listMembers->mem_name[$i] . ")</td></tr>";
@@ -151,7 +151,7 @@ echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">&nbsp;</td><td>" 
 $tmpquery = "WHERE mem.profil != '3' AND mem.id NOT IN($id) ORDER BY mem.name";
 $reassign = new request();
 $reassign->openMembers($tmpquery);
-$comptReassign = count($reassign->mem_id);
+$comptReassign = teste_count($reassign->mem_id);
 
 echo "<select name=\"at\">
 <option value=\"0\" selected>" . $strings["unassigned"] . "</option>";

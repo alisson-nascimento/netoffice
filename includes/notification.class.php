@@ -13,7 +13,7 @@
  */
 
 class notification extends phpmailer {
-    function notification()
+    function __construct()
     {
         global $strings, $root, $notificationMethod, $setCharset, $base_dir;
 
@@ -65,7 +65,7 @@ class notification extends phpmailer {
         $tmpquery = "WHERE noti.member IN ($pAssigneeID)";
         $listNotifications = new request();
         $listNotifications->openNotifications($tmpquery);
-        $comptListNotifications = count($listNotifications->not_id);
+        $comptListNotifications = teste_count($listNotifications->not_id);
 
         if ($listNotifications->not_taskassignment[0] == "0") {
             $this->getUserinfo($idSession, "from");

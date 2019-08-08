@@ -72,11 +72,11 @@ function listfiles($folder)
 function drawtop($listing, $dir = '')
 {
     global $rgb_top, $rgb_sub, $theme, $modulehref, $moduledir, $color;
-    $elements = count($listing);
+    $elements = teste_count($listing);
     $color = ($color == $rgb_top) ? $rgb_sub : $rgb_top;
     if (ereg("/", $dir)) {
         $dirlist = split("/", $dir);
-        $dirs = count($dirlist);
+        $dirs = teste_count($dirlist);
         for ($i = 0; $i < $dirs-2; $i++) {
             $link .= $dirlist[$i] . "/";
         } 
@@ -104,7 +104,7 @@ function drawbottom($listing, $dir = '', $path)
     global $rgb_off, $rgb_sub, $theme, $color;
     global $modulehref, $moduledir, $textutil;
     global $browser, $cvsrep;
-    $elements = count($listing);
+    $elements = teste_count($listing);
     for ($i = 0; $i < $elements; $i++) {
         $rev = $browser->getRevision($path . $listing[$i]);
         $file = str_replace(",v", "", $listing[$i]);
@@ -126,7 +126,7 @@ function drawbottom($listing, $dir = '', $path)
 function filetotal($files, $path)
 {
     global $textutil;
-    $total = count($files);
+    $total = teste_count($files);
     $retval = 0;
     for ($i = 0; $i < $total; $i++) {
         $retval += filesize($path . $files[$i]);
@@ -137,16 +137,16 @@ function filetotal($files, $path)
 function drawstats($files, $dirs, $path)
 {
     global $rgb_off, $rgb_sub, $theme, $color;
-    if (count($dirs) || count($files)) {
+    if (count($dirs) || teste_count($files)) {
         $color = ($color == $rgb_sub) ? $rgb_off : $rgb_sub;
         echo $theme->opentable("100%", 0, 0, $color, $color);
         echo '<center>... ';
         if (count($dirs)) {
-            echo '<b>' . count($dirs) . '</b> dirs';
+            echo '<b>' . teste_count($dirs) . '</b> dirs';
             if (count($files)) echo ' ... ';
         } 
         if (count($files)) {
-            echo '<b>' . count($files) . '</b> files ';
+            echo '<b>' . teste_count($files) . '</b> files ';
             echo '(<b>' . filetotal($files, $path) . '</b>)';
         } 
         echo ' ...</center>';
@@ -177,7 +177,7 @@ function checkout($file, $filename)
                 echo "\n" . nl2br(htmlspecialchars($i['comment'])) . "\n";
                 echo $theme->closetable() . "<br>\n";
             } 
-            echo count($info['log']) . " revision" . ((count($info['log']) > 1) ? "s":"");
+            echo teste_count($info['log']) . " revision" . ((count($info['log']) > 1) ? "s":"");
             echo " sofar.";
         } else {
             echo "<hr noshade>\n";
@@ -262,7 +262,7 @@ if ($cvs_access) {
     } else {
         if (count($conf['cvsreps']) > 1) {
             echo $htmlform->start($modulehref);
-            for ($i = 0; $i < count($conf['cvsreps']); $i++)
+            for ($i = 0; $i < teste_count($conf['cvsreps']); $i++)
             $data[] = array(urlencode($conf['cvsreps'][$i]), htmlspecialchars($conf['cvsreps'][$i]));
             echo $htmlform->selectlist("cvsrep", $data, urlencode($cvsrep));
             echo $htmlform->input("submit", " Go ", "submit");

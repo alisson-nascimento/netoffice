@@ -44,7 +44,7 @@ class browsecvs {
     {
         $r1 = split("\.", $rev1);
         $r2 = split("\.", $rev2);
-        while (count($r1) > 0 && count($r2) > 0) {
+        while (count($r1) > 0 && teste_count($r2) > 0) {
             $a = array_shift($r1);
             $b = array_shift($r2);
             if ($a != $b) return $a - $b;
@@ -82,7 +82,7 @@ class browsecvs {
         exec("$rlog $f,v", $log);
         $info = null; 
         // retrieve head info
-        for ($i = 0; $i < count($log) && !ereg("^-+$", $log[$i]); $i++) {
+        for ($i = 0; $i < teste_count($log) && !ereg("^-+$", $log[$i]); $i++) {
             if (ereg("^([^:]+): *(.*)$", $log[$i], $regs)) {
                 $key = ereg_replace(" ", "_", strtoupper($regs[1]));
                 switch ($regs[1]) {
@@ -99,7 +99,7 @@ class browsecvs {
                         $i--;
                         break;
                     case 'description':
-                        while (++$i < count($log) && !ereg("^-+$", $log[$i]))
+                        while (++$i < teste_count($log) && !ereg("^-+$", $log[$i]))
                         $info[$key] .= ereg_replace("\n$", "", $log[$i]);
                         $i--;
                         break;
@@ -108,7 +108,7 @@ class browsecvs {
         } 
         $i++; 
         // retrieve log info
-        while ($i < count($log)) {
+        while ($i < teste_count($log)) {
             // pick revision number
             if (! ereg("^revision *([0-9.]+)$", $log[$i], $regs)) break;
             $rev = $regs[1];
@@ -122,14 +122,14 @@ class browsecvs {
                 $info['log'][$rev]['lines'] = $regs[1];
             $i++; 
             // pick branch
-            while ($i < count($log) && ereg("^branches: *([0-9.]+)", $log[$i], $regs)) {
+            while ($i < teste_count($log) && ereg("^branches: *([0-9.]+)", $log[$i], $regs)) {
                 $info['log'][$rev]['branches'] = array();
                 foreach (split(";", $regs[1]) as $branches)
                 array_push($info['log'][$rev]['branches'], trim($branches));
                 $i++;
             } 
             // pick comment lines
-            while ($i < count($log) && !ereg("^(-+|=+)$", $log[$i]))
+            while ($i < teste_count($log) && !ereg("^(-+|=+)$", $log[$i]))
             $info['log'][$rev]['comment'] .= $log[$i++] . "\n";
             $i++;
         } 

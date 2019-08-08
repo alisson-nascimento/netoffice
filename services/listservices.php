@@ -45,7 +45,7 @@ $block1->closePaletteIcon();
 $tmpquery = "ORDER BY serv.name ASC";
 $listServices = new request();
 $listServices->openServices($tmpquery);
-$comptListServices = count($listServices->serv_id);
+$comptListServices = teste_count($listServices->serv_id);
 
 if ($comptListServices != "0") {
     $block1->openResults();

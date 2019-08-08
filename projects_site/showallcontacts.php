@@ -22,7 +22,7 @@ require_once ("include_header.php");
 $tmpquery = "WHERE tea.project = '" . $_SESSION['projectSession'] . "' AND tea.published = '0' ORDER BY mem.name";
 $listContacts = new request();
 $listContacts->openTeams($tmpquery);
-$comptListTeams = count($listContacts->tea_id);
+$comptListTeams = teste_count($listContacts->tea_id);
 
 $block1 = new block();
 

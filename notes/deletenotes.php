@@ -44,7 +44,7 @@ $id = str_replace("**", ",", $id);
 $tmpquery = "WHERE note.id IN($id) ORDER BY note.subject";
 $listNotes = new request();
 $listNotes->openNotes($tmpquery);
-$comptListNotes = count($listNotes->note_id);
+$comptListNotes = teste_count($listNotes->note_id);
 
 for ($i = 0;$i < $comptListNotes;$i++) {
     $block1->contentRow("#" . $listNotes->note_id[$i], $listNotes->note_subject[$i]);

@@ -23,7 +23,7 @@ if ($id != "" && $action != "update" && $action != "add") {
     $tmpquery = "WHERE att.meeting = '$id'";
     $attendantDetail = new request();
     $attendantDetail->openAttendants($tmpquery);
-    $comptAttendantDetail = count($attendantDetail->att_id);
+    $comptAttendantDetail = teste_count($attendantDetail->att_id);
 
     $tmpquery = "WHERE pro.id = '" . $meetingDetail->mee_project[0] . "'";
     $project = $meetingDetail->mee_project[0];
@@ -39,7 +39,7 @@ $teamMember = "false";
 $tmpquery = "WHERE tea.project = '$project' AND tea.member = '" . $_SESSION['idSession'] . "'";
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 if ($comptMemberTest == "0") {
     $teamMember = "false";
 } else {
@@ -83,7 +83,7 @@ if ($id != "") {
                 $tmpquery2 = "WHERE tea.project = '$project' AND mem.profil != '3'";
                 $listTeam1 = new request();
                 $listTeam1->openTeams($tmpquery2);
-                $comptListTeam1 = count($listTeam1->tea_id);
+                $comptListTeam1 = teste_count($listTeam1->tea_id);
                 $comptATSEL = $comptListTeam1;
 
                 for ($i = 0; $i < $comptListTeam1; $i++) {
@@ -101,7 +101,7 @@ if ($id != "") {
                     $tmpquery2 = "WHERE mem.organization = '" . $projectDetail->pro_org_id[0] . "' AND mem.profil = '3'";
                     $listClientMem1 = new request();
                     $listClientMem1->openMembers($tmpquery2);
-                    $comptListClientMem1 = count($listClientMem1->mem_id);
+                    $comptListClientMem1 = teste_count($listClientMem1->mem_id);
                     $comptATSEL += $comptListClientMem1;
 
                     for ($i = 0; $i < $comptListClientMem1; $i++) {
@@ -119,7 +119,7 @@ if ($id != "") {
                 $tmpquery2 = "WHERE tea.project = '$project' AND mem.profil != '3'";
                 $listTeam1 = new request();
                 $listTeam1->openTeams($tmpquery2);
-                $comptListTeam1 = count($listTeam1->tea_id);
+                $comptListTeam1 = teste_count($listTeam1->tea_id);
                 $comptATSEL = $comptListTeam1;
 
                 for ($i = 0; $i < $comptListTeam1; $i++) {
@@ -134,7 +134,7 @@ if ($id != "") {
                 }
             }
             else {
-                $comptATSEL = count($S_ATSEL);
+                $comptATSEL = teste_count($S_ATSEL);
 
                 for ($i = 0; $i < $comptATSEL; $i++) {
                     $mem_id1 = $S_ATSEL[$i];
@@ -202,7 +202,7 @@ if ($id != "") {
                 $tmpquery2 = "WHERE tea.project = '$project' AND mem.profil != '3'";
                 $listTeam1 = new request();
                 $listTeam1->openTeams($tmpquery2);
-                $comptListTeam1 = count($listTeam1->tea_id);
+                $comptListTeam1 = teste_count($listTeam1->tea_id);
                 $comptATSEL = $comptListTeam1;
 
                 for ($i = 0; $i < $comptListTeam1; $i++) {
@@ -218,7 +218,7 @@ if ($id != "") {
                     $tmpquery2 = "WHERE mem.organization = '" . $old_org_id . "' AND mem.profil = '3'";
                     $listClientMem1 = new request();
                     $listClientMem1->openMembers($tmpquery2);
-                    $comptListClientMem1 = count($listClientMem1->mem_id);
+                    $comptListClientMem1 = teste_count($listClientMem1->mem_id);
                     $comptATSEL += $comptListClientMem1;
 
                     for ($i = 0; $i < $comptListClientMem1; $i++) {
@@ -234,7 +234,7 @@ if ($id != "") {
                 $tmpquery2 = "WHERE tea.project = '$project' AND mem.profil != '3'";
                 $listTeam1 = new request();
                 $listTeam1->openTeams($tmpquery2);
-                $comptListTeam1 = count($listTeam1->tea_id);
+                $comptListTeam1 = teste_count($listTeam1->tea_id);
                 $comptATSEL = $comptListTeam1;
 
                 for ($i = 0; $i < $comptListTeam1; $i++) {
@@ -246,7 +246,7 @@ if ($id != "") {
                     $new_attendants_count++;
                 }
             } else {
-                $comptATSEL = count($S_ATSEL);
+                $comptATSEL = teste_count($S_ATSEL);
 
                 for ($i = 0; $i < $comptATSEL; $i++) {
                     if ($att_mem_id_list != "") {
@@ -379,7 +379,7 @@ if ($id == "") {
             $tmpquery2 = "WHERE tea.project = '$project' AND mem.profil != '3'";
             $listTeam1 = new request();
             $listTeam1->openTeams($tmpquery2);
-            $comptListTeam1 = count($listTeam1->tea_id);
+            $comptListTeam1 = teste_count($listTeam1->tea_id);
             $comptATSEL = $comptListTeam1;
 
             for ($i = 0; $i < $comptListTeam1; $i++) {
@@ -397,7 +397,7 @@ if ($id == "") {
                 $tmpquery2 = "WHERE mem.organization = '" . $projectDetail->pro_org_id[0] . "' AND mem.profil = '3'";
                 $listClientMem1 = new request();
                 $listClientMem1->openMembers($tmpquery2);
-                $comptListClientMem1 = count($listClientMem1->mem_id);
+                $comptListClientMem1 = teste_count($listClientMem1->mem_id);
                 $comptATSEL += $comptListClientMem1;
 
                 for ($i = 0; $i < $comptListClientMem1; $i++) {
@@ -415,7 +415,7 @@ if ($id == "") {
             $tmpquery2 = "WHERE tea.project = '$project' AND mem.profil != '3'";
             $listTeam1 = new request();
             $listTeam1->openTeams($tmpquery2);
-            $comptListTeam1 = count($listTeam1->tea_id);
+            $comptListTeam1 = teste_count($listTeam1->tea_id);
             $comptATSEL = $comptListTeam1;
 
             for ($i = 0; $i < $comptListTeam1; $i++) {
@@ -430,7 +430,7 @@ if ($id == "") {
             }
         }
         else {
-            $comptATSEL = count($S_ATSEL);
+            $comptATSEL = teste_count($S_ATSEL);
 
             for ($i = 0; $i < $comptATSEL; $i++) {
                 $mem_id1 = $S_ATSEL[$i];
@@ -545,7 +545,7 @@ if ($projectsFilter == "true") {
 } 
 $listProjects = new request();
 $listProjects->openProjects($tmpquery);
-$comptListProjects = count($listProjects->pro_id);
+$comptListProjects = teste_count($listProjects->pro_id);
 
 for ($i = 0;$i < $comptListProjects;$i++) {
     if ($listProjects->pro_id[$i] == $projectDetail->pro_id[0]) {
@@ -572,13 +572,13 @@ echo "$mn\" style=\"width: 400px\" name=\"mn\" maxlength=\"100\" type=\"TEXT\"><
 $tmpquery = "WHERE tea.project = '$project' AND mem.profil != '3'";
 $listTeam = new request();
 $listTeam->openTeams($tmpquery);
-$comptListTeam = count($listTeam->tea_id);
+$comptListTeam = teste_count($listTeam->tea_id);
 
 if ($projectDetail->pro_org_id[0] != "1") {
     $tmpquery = "WHERE mem.organization = '" . $projectDetail->pro_org_id[0] . "' AND mem.profil = '3'";
     $listClientMem = new request();
     $listClientMem->openMembers($tmpquery);
-    $comptListClientMem = count($listClientMem->mem_id);
+    $comptListClientMem = teste_count($listClientMem->mem_id);
 }
 else {
     $comptListClientMem = "0" ;
@@ -615,7 +615,7 @@ if ($comptListSum != "0") {
 
 echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">" . $strings["status"] . " :</td><td><select name=\"st\">";
 
-$comptSta = count($status);
+$comptSta = teste_count($status);
 
 for ($i = 0;$i < $comptSta;$i++) {
     if ($meetingDetail->mee_status[0] == $i) {
@@ -628,7 +628,7 @@ for ($i = 0;$i < $comptSta;$i++) {
 echo "</select></td></tr>
 <tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">" . $strings["priority"] . " :</td><td><select name=\"pr\">";
 
-$comptPri = count($priority);
+$comptPri = teste_count($priority);
 
 for ($i = 0;$i < $comptPri;$i++) {
     if ($meetingDetail->mee_priority[0] == $i) {

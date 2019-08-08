@@ -270,7 +270,7 @@ class PiePlot {
         $colors = array_keys($graph->img->rgb->rgb_table);
         sort($colors);
         $ta=$this->themearr[$this->theme];
-        $n = count($this->data);
+        $n = teste_count($this->data);
 
         if( $this->setslicecolors==null ) {
             $numcolors=count($ta);
@@ -303,7 +303,7 @@ class PiePlot {
         for( $i=$n-1; $i >= 0; --$i ) {
             $l = $this->legends[$i];
             // Replace possible format with actual values
-            if( count($this->csimalts) > $i ) {
+            if( teste_count($this->csimalts) > $i ) {
                 $fmt = $this->csimalts[$i];
             }
             else {
@@ -355,7 +355,7 @@ class PiePlot {
         $tmp = array();
         $result = array();
         $quote_sum=0;
-        $n = count($aData) ;
+        $n = teste_count($aData) ;
         for( $i=0, $sum=0; $i < $n; ++$i )
         $sum+=$aData[$i];
         foreach($aData as $index => $value) {
@@ -412,7 +412,7 @@ class PiePlot {
         $colors = array_keys($img->rgb->rgb_table);
         sort($colors);
         $ta=$this->themearr[$this->theme];
-        $n = count($this->data);
+        $n = teste_count($this->data);
 
         if( $this->setslicecolors==null ) {
             $numcolors=count($ta);
@@ -463,7 +463,7 @@ class PiePlot {
             $yc = $this->posy ;
         }
 
-        $n = count($this->data);
+        $n = teste_count($this->data);
 
         if( $this->explode_all ) {
             for($i=0; $i < $n; ++$i) {
@@ -674,7 +674,7 @@ class PiePlot {
     }
 
     function StrokeGuideLabels($img,$xc,$yc,$radius) {
-        $n = count($this->labels);
+        $n = teste_count($this->labels);
 
         //-----------------------------------------------------------------------
         // Step 1 of the algorithm is to construct a number of clusters
@@ -813,7 +813,7 @@ class PiePlot {
         $this->value->SetMargin(0);
 
         // Number of clusters found
-        $nc = count($clusters);
+        $nc = teste_count($clusters);
 
         // Walk through all the clusters
         for($i=0; $i < $nc; ++$i) {
@@ -942,7 +942,7 @@ class PiePlot {
 
     function StrokeAllLabels($img,$xc,$yc,$radius) {
         // First normalize all angles for labels
-        $n = count($this->la);
+        $n = teste_count($this->la);
         for($i=0; $i < $n; ++$i) {
             $this->la[$i] = $this->NormAngle($this->la[$i]);
         }
@@ -950,7 +950,7 @@ class PiePlot {
             $this->StrokeGuideLabels($img,$xc,$yc,$radius);
         }
         else {
-            $n = count($this->labels);
+            $n = teste_count($this->labels);
             for($i=0; $i < $n; ++$i) {
                 $this->StrokeLabel($this->labels[$i],$img,$xc,$yc,
                 $this->la[$i],
@@ -1258,7 +1258,7 @@ class PieGraph extends Graph {
     // PUBLIC METHODS
     function Add($aObj) {
 
-        if( is_array($aObj) && count($aObj) > 0 )
+        if( is_array($aObj) && teste_count($aObj) > 0 )
         $cl = $aObj[0];
         else
         $cl = $aObj;
@@ -1269,7 +1269,7 @@ class PieGraph extends Graph {
         $this->AddIcon($aObj);
         else {
             if( is_array($aObj) ) {
-                $n = count($aObj);
+                $n = teste_count($aObj);
                 for($i=0; $i < $n; ++$i ) {
                     //if ($aObj[$i]->theme) {
                     //    $this->ClearTheme();
@@ -1311,12 +1311,12 @@ class PieGraph extends Graph {
         $csim.= $this->legend->GetCSIMareas();
         if (preg_match_all("/area shape=\"(\w+)\" coords=\"([0-9\, ]+)\"/", $csim, $coords)) {
             $this->img->SetColor($this->csimcolor);
-            $n = count($coords[0]);
+            $n = teste_count($coords[0]);
             for ($i=0; $i < $n; $i++) {
                 if ($coords[1][$i]=="poly") {
                     preg_match_all('/\s*([0-9]+)\s*,\s*([0-9]+)\s*,*/',$coords[2][$i],$pts);
                     $this->img->SetStartPoint($pts[1][count($pts[0])-1],$pts[2][count($pts[0])-1]);
-                    $m = count($pts[0]);
+                    $m = teste_count($pts[0]);
                     for ($j=0; $j < $m; $j++) {
                         $this->img->LineTo($pts[1][$j],$pts[2][$j]);
                     }
@@ -1357,7 +1357,7 @@ class PieGraph extends Graph {
         // CSIM without storing an image to disk GetCSIM must call Stroke.
         $this->iHasStroked = true;
 
-        $n = count($this->plots);
+        $n = teste_count($this->plots);
 
         if( $this->pieaa ) {
 
@@ -1383,7 +1383,7 @@ class PieGraph extends Graph {
 
             // Make all icons *2 i size since we will be scaling down the
             // imahe to do the anti aliasing
-            $ni = count($this->iIcons);
+            $ni = teste_count($this->iIcons);
             for($i=0; $i < $ni; ++$i) {
                 $this->iIcons[$i]->iScale *= 2 ;
                 if( $this->iIcons[$i]->iX > 1 )
@@ -1451,7 +1451,7 @@ class PieGraph extends Graph {
 
             // Stroke texts
             if( $this->texts != null ) {
-                $n = count($this->texts);
+                $n = teste_count($this->texts);
                 for($i=0; $i < $n; ++$i ) {
                     $this->texts[$i]->Stroke($this->img);
                 }

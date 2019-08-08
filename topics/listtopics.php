@@ -22,7 +22,7 @@ if ($action == "publish") {
             $id = str_replace("**", ",", $id);
             $tmpquery1 = "UPDATE " . $tableCollab["topics"] . " SET status='0' WHERE id IN($id)";
             $pieces = explode(",", $id);
-            $num = count($pieces);
+            $num = teste_count($pieces);
         } else {
             $tmpquery1 = "UPDATE " . $tableCollab["topics"] . " SET status='0' WHERE id = '$id'";
             $num = "1";
@@ -66,7 +66,7 @@ if ($project != "") {
     $tmpquery = "WHERE tea.project = '$project' AND tea.member = '" . $_SESSION['idSession'] . "'";
     $memberTest = new request();
     $memberTest->openTeams($tmpquery);
-    $comptMemberTest = count($memberTest->tea_id);
+    $comptMemberTest = teste_count($memberTest->tea_id);
     if ($comptMemberTest == "0") {
         $teamMember = "false";
     } 
@@ -124,7 +124,7 @@ if ($project != "") {
 } 
 $listTopics = new request();
 $listTopics->openTopics($tmpquery);
-$comptListTopics = count($listTopics->top_id);
+$comptListTopics = teste_count($listTopics->top_id);
 
 if ($comptListTopics != "0") {
     $block1->openResults();

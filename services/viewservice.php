@@ -23,7 +23,7 @@ if ($_SESSION['profilSession'] != "0") {
 $tmpquery = "WHERE serv.id = '$id'";
 $detailService = new request();
 $detailService->openServices($tmpquery);
-$comptDetailService = count($detailService->serv_id);
+$comptDetailService = teste_count($detailService->serv_id);
 
 //--- header ---
 $breadcrumbs[]=buildLink("../administration/admin.php?", $strings["administration"], LINK_INSIDE);

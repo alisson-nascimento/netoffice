@@ -21,7 +21,7 @@ require_once("../includes/library.php");
 
 
 $breadcrumbs[]=$strings['reports'];
-$breadcrumbs[]=buildLink('../reports/createreport.php?typeReports=create', $strings["create_report"], in) . ' | ' . buildLink('../reports/createreport.php?typeReports=custom', $strings['custom_reports'], LINK_INSIDE);
+$breadcrumbs[]=buildLink('../reports/createreport.php?typeReports=create', $strings["create_report"], 'in') . ' | ' . buildLink('../reports/createreport.php?typeReports=custom', $strings['custom_reports'], LINK_INSIDE);
 
 $pageSection = 'reports';
 require_once("../themes/" . THEME . "/header.php");
@@ -37,7 +37,7 @@ $query = "WHERE pro.status IN (0,2,3) AND pro.phase_set != 0";
 $tmpquery = "$query ORDER BY pro.name";
 $listProjects = new request();
 $listProjects->openProjects($tmpquery);
-$comptListProjects = count($listProjects->pro_id);
+$comptListProjects = teste_count($listProjects->pro_id);
 // show the nice number-of-results header
 $block0 = new block();
 $block0->openContent();
@@ -72,7 +72,7 @@ if ($comptListProjects != "0") {
 
         $listPhases = new request();
         $listPhases->openPhases($queryPhase);
-        $comptListPhases = count($listPhases->pha_id);
+        $comptListPhases = teste_count($listPhases->pha_id);
 
         $blockProject->openResults($checkbox = "false");
         // $blockProject->labels($labels = array(0=>$strings["phase"],1=>$strings["status"],2=>$strings["total_tasks"],3=>$strings["uncomplete_tasks"],4=>$strings["date_start"],5=>$strings["date_end"],6=>$strings['completion']),"true");
@@ -89,7 +89,7 @@ if ($comptListProjects != "0") {
                 $tmpquery .= "AND tas.parent_phase = '$phaseNum'";
                 $countPhaseTasks = new request();
                 $countPhaseTasks->openTasks($tmpquery);
-                $comptlistTasks = count($countPhaseTasks->tas_id);
+                $comptlistTasks = teste_count($countPhaseTasks->tas_id);
 
                 $comptlistTasksRow = "0";
                 $comptUncompleteTasks = "0";

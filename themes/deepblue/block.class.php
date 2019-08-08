@@ -13,7 +13,7 @@
  */
 
 class block {
-    function block() {
+    function __construct() {
         $this->iconWidth = "23";
         $this->iconHeight = "23";
         $this->bgColor = "#5B7F93";
@@ -341,7 +341,7 @@ document." . $this->form . "Form.buttons = new Array();\n";
             $explode = explode(" ", $this->sortingValue);
         }
 
-        for ($i = 0;$i < count($sortingFields);$i++) {
+        for ($i = 0;$i < teste_count($sortingFields);$i++) {
             if ($sortingFields[$i] == $explode[0] && $explode[1] == "DESC") {
                 $sortingOrders[$i] = "ASC";
                 $sortingArrows[$i] = "&#160;<img border=\"0\" src=\"$this->pathImg/$this->theme/icon_sort_za.gif\" alt=\"\" width=\"11\" height=\"11\">";
@@ -412,9 +412,9 @@ document." . $this->form . "Form.buttons = new Array();\n";
         $sortingStyles = $this->sortingStyles;
 
         if ($sitePublish == "false" && $published == "true") {
-            $comptLabels = count($labels) - 1;
+            $comptLabels = teste_count($labels) - 1;
         } else {
-            $comptLabels = count($labels);
+            $comptLabels = teste_count($labels);
         }
 
         for ($i = 0;$i < $comptLabels;$i++) {

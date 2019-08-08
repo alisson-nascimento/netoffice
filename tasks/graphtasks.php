@@ -93,7 +93,7 @@ $graph->scale->actinfo->SetFont(FF_FONT1,FS_BOLD);
 $tmpquery = "WHERE tas.project = '" . $project . "' AND tas.start_date != '--' AND tas.due_date != '--' ORDER BY tas.due_date";
 $listTasks = new request();
 $listTasks->openTasks($tmpquery);
-$comptListTasks = count($listTasks->tas_id);
+$comptListTasks = teste_count($listTasks->tas_id);
 
 $ms_cnt = 0;
 

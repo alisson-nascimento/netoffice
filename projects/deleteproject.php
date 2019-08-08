@@ -27,7 +27,7 @@ $id = str_replace('**', ',', $id);
 $tmpquery = 'WHERE pro.id IN(' . $id . ') ORDER BY pro.name';
 $listProjects = new request();
 $listProjects->openProjects($tmpquery);
-$comptListProjects = count($listProjects->pro_id);
+$comptListProjects = teste_count($listProjects->pro_id);
 
 if ($comptListProjects == '0') {
     header('Location: ../projects/listprojects.php?msg=blankProject');
@@ -43,7 +43,7 @@ if ($action == 'delete') {
     $id = str_replace('**', ',', $id);
     $tmpquery1 = 'DELETE FROM ' . $tableCollab['projects'] . ' WHERE id IN(' . $id . ')';
     $pieces = explode(',', $id);
-    $comptPro = count($pieces);
+    $comptPro = teste_count($pieces);
 
     for ($i = 0; $i < $comptPro; $i++) {
         if ($fileManagement == 'true') {
@@ -63,7 +63,7 @@ if ($action == 'delete') {
     $tmpquery = 'WHERE tas.project IN(' . $id . ')';
     $listTasks = new request();
     $listTasks->openTasks($tmpquery);
-    $comptListTasks = count($listTasks->tas_id);
+    $comptListTasks = teste_count($listTasks->tas_id);
 
     for ($i = 0; $i < $comptListTasks; $i++) {
         if ($fileManagement == 'true') {
@@ -80,7 +80,7 @@ if ($action == 'delete') {
     $tmpquery = 'WHERE topic.project IN(' . $id .')';
     $listTopics = new request();
     $listTopics->openTopics($tmpquery);
-    $comptListTopics = count($listTopics->top_id);
+    $comptListTopics = teste_count($listTopics->top_id);
 
     for ($i = 0; $i < $comptListTopics; $i++) {
         $topics .= $listTopics->top_id[$i];

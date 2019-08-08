@@ -73,7 +73,7 @@ $block1->contentTitle($strings["details"]);
 $tmpquery = "WHERE upd.type='$type' AND upd.item = '$item' ORDER BY upd.created DESC";
 $listUpdates = new request();
 $listUpdates->openUpdates($tmpquery);
-$comptListUpdates = count($listUpdates->upd_id);
+$comptListUpdates = teste_count($listUpdates->upd_id);
 
 for ($i = 0;$i < $comptListUpdates;$i++) {
     if (ereg("\[status:([0-9])\]", $listUpdates->upd_comments[$i])) {

@@ -26,7 +26,7 @@ $projectNoti->openProjects($tmpquery);
 $tmpquery = "WHERE noti.member IN($att_mem_id_list)";
 $listNotifications = new request();
 $listNotifications->openNotifications($tmpquery);
-$comptListNotifications = count($listNotifications->not_id);
+$comptListNotifications = teste_count($listNotifications->not_id);
 
 for ($i = 0; $i < $comptListNotifications; $i++) {
     if ($listNotifications->not_meetingassignment[$i] != "0")

@@ -62,7 +62,7 @@ $meetingDetail->openMeetings($tmpquery);
 $tmpquery = "WHERE att.meeting = '$id'";
 $attendantDetail = new request();
 $attendantDetail->openAttendants($tmpquery);
-$comptAttendantDetail = count($attendantDetail->att_id);
+$comptAttendantDetail = teste_count($attendantDetail->att_id);
 
 $tmpquery = "WHERE pro.id = '" . $meetingDetail->mee_project[0] . "'";
 $projectDetail = new request();
@@ -72,7 +72,7 @@ $teamMember = "false";
 $tmpquery = "WHERE tea.project = '" . $meetingDetail->mee_project[0] . "' AND tea.member = '" . $_SESSION['idSession'] . "'";
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 if ($comptMemberTest == "0") {
     $teamMember = "false";
 } else {
@@ -196,7 +196,7 @@ $block1->contentTitle($strings["updates_meeting"]);
 $tmpquery = "WHERE upd.type='M' AND upd.item = '$id' ORDER BY upd.created DESC";
 $listUpdates = new request();
 $listUpdates->openUpdates($tmpquery);
-$comptListUpdates = count($listUpdates->upd_id);
+$comptListUpdates = teste_count($listUpdates->upd_id);
 
 echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">&nbsp;</td><td>";
 if ($comptListUpdates != "0") {
@@ -281,7 +281,7 @@ if ($fileManagement == "true") {
     $tmpquery = "WHERE mat.meeting = '$id' AND mat.vc_parent = '0' ORDER BY $block2->sortingValue";
     $listAttachments = new request();
     $listAttachments->openMeetingsAttachment($tmpquery);
-    $comptListFiles = count($listAttachments->mat_id);
+    $comptListFiles = teste_count($listAttachments->mat_id);
 
     if ($comptListFiles != "0") {
         $block2->openResults();

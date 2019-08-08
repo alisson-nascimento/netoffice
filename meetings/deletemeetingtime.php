@@ -42,7 +42,7 @@ $teamMember = "false";
 $tmpquery = "WHERE tea.project = '" . $meetingDetail->mee_project[0] . "' AND tea.member = '" . $_SESSION['idSession'] . "'";
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 
 if ($comptMemberTest == "0") {
     $teamMember = "false";
@@ -79,7 +79,7 @@ $id = str_replace("**", ",", $id);
 $tmpquery = "WHERE mti.id IN($id) ORDER BY mti.id";
 $listMeetingTime = new request();
 $listMeetingTime->openMeetingTime($tmpquery);
-$comptListMeetingTime = count($listMeetingTime->mti_id);
+$comptListMeetingTime = teste_count($listMeetingTime->mti_id);
 
 for ($i = 0;$i < $comptListMeetingTime;$i++) {
     echo "<tr class='odd'><td valign='top' class='leftvalue'>#"

@@ -40,7 +40,7 @@ $teamMember = 'false';
 $tmpquery = "WHERE tea.project = '$project' AND tea.member = '" . $_SESSION['idSession'] . "'";
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 
 if ($comptMemberTest == '0') {
     $teamMember = 'false';
@@ -129,7 +129,7 @@ if ($id != '') {
                 $tmpquery = "WHERE tea.project = '$project' AND tea.member = '$at'";
                 $testinTeam = new request();
                 $testinTeam->openTeams($tmpquery);
-                $comptTestinTeam = count($testinTeam->tea_id);
+                $comptTestinTeam = teste_count($testinTeam->tea_id);
                 
                 if ($comptTestinTeam == '0') {
                     $tmpquery3 = 'INSERT INTO ' . $tableCollab['teams'] . "(project,member,published,authorized) VALUES('$project','$at','1','0')";
@@ -244,7 +244,7 @@ if ($id != '') {
                 $tmpquery = "WHERE tea.project = '$project' AND tea.member = '$at'";
                 $testinTeam = new request();
                 $testinTeam->openTeams($tmpquery);
-                $comptTestinTeam = count($testinTeam->tea_id);
+                $comptTestinTeam = teste_count($testinTeam->tea_id);
                 
                 if ($comptTestinTeam == "0") {
                     $tmpquery3 = "INSERT INTO " . $tableCollab["teams"] . "(project,member,published,authorized) VALUES('$project','$at','1','0')";
@@ -419,7 +419,7 @@ if ($id == "") {
             $tmpquery = "WHERE tea.project = '$project' AND tea.member = '$at'";
             $testinTeam = new request();
             $testinTeam->openTeams($tmpquery);
-            $comptTestinTeam = count($testinTeam->tea_id);
+            $comptTestinTeam = teste_count($testinTeam->tea_id);
             
             if ($comptTestinTeam == "0") {
                 $tmpquery3 = "INSERT INTO " . $tableCollab["teams"] . "(project,member,published,authorized) VALUES('$project','$at','1','0')";
@@ -531,7 +531,7 @@ if ($projectsFilter == "true") {
 } 
 $listProjects = new request();
 $listProjects->openProjects($tmpquery);
-$comptListProjects = count($listProjects->pro_id);
+$comptListProjects = teste_count($listProjects->pro_id);
 
 for ($i = 0;$i < $comptListProjects;$i++) {
     if ($listProjects->pro_id[$i] == $projectDetail->pro_id[0]) {
@@ -568,7 +568,7 @@ if ($taskDetail->tas_assigned_to[0] == "0") {
 $tmpquery = "WHERE tea.project = '$project' ORDER BY mem.name";
 $assignto = new request();
 $assignto->openTeams($tmpquery);
-$comptAssignto = count($assignto->tea_mem_id);
+$comptAssignto = teste_count($assignto->tea_mem_id);
 
 for ($i = 0;$i < $comptAssignto;$i++) {
     $clientUser = "";
@@ -596,7 +596,7 @@ if ($projectDetail->pro_phase_set[0] != "0") {
     $projectPhaseList = new request();
     $projectPhaseList->openPhases($tmpquery);
 
-    $comptlistPhase = count($projectPhaseList->pha_id);
+    $comptlistPhase = teste_count($projectPhaseList->pha_id);
     for ($i = 0;$i < $comptlistPhase;$i++) {
         $phaseNum = $projectPhaseList->pha_order_num[$i];
         if ($taskDetail->tas_parent_phase[0] == $phaseNum || $phase == $phaseNum) {
@@ -610,7 +610,7 @@ if ($projectDetail->pro_phase_set[0] != "0") {
 
 echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">" . $strings["status"] . " :</td><td><select name=\"st\" onchange=\"changeSt(this)\" $stDisabled>";
 
-$comptSta = count($status);
+$comptSta = teste_count($status);
 
 for ($i = 0;$i < $comptSta;$i++) {
     if ($taskDetail->tas_status[0] == $i) {
@@ -635,7 +635,7 @@ for ($i = 0;$i < 11;$i++) {
 echo "</select></td></tr>
 <tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">" . $strings["priority"] . " :</td><td><select name=\"pr\" $prDisabled>";
 
-$comptPri = count($priority);
+$comptPri = teste_count($priority);
 
 for ($i = 0;$i < $comptPri;$i++) {
     if ($taskDetail->tas_priority[0] == $i) {
@@ -674,7 +674,7 @@ echo "
 $tmpquery = 'WHERE 1 ORDER BY  name_print';
 $serviceDetail = new request();
 $serviceDetail->openServices($tmpquery);
-$comptServiceDetail = count($serviceDetail->serv_id);
+$comptServiceDetail = teste_count($serviceDetail->serv_id);
 
 echo "
   <tr class=\"odd\">

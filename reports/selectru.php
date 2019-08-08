@@ -23,7 +23,7 @@ require_once("../includes/library.php");
 
 //--- header ---
 $breadcrumbs[]=$strings['reports'];
-$breadcrumbs[]=buildLink('../reports/createreport.php?typeReports=create', $strings["create_report"], in) . ' | ' . buildLink('../reports/createreport.php?typeReports=custom', $strings['custom_reports'], LINK_INSIDE);
+$breadcrumbs[]=buildLink('../reports/createreport.php?typeReports=create', $strings["create_report"], 'in') . ' | ' . buildLink('../reports/createreport.php?typeReports=custom', $strings['custom_reports'], LINK_INSIDE);
 
 $pageSection = 'reports';
 require_once("../themes/" . THEME . "/header.php");
@@ -44,7 +44,7 @@ if ($demoMode == true) {
 
 $listMembers = new request();
 $listMembers->openMembers($tmpquery);
-$comptListMembers = count($listMembers->mem_id);
+$comptListMembers = teste_count($listMembers->mem_id);
 
 echo "<select name=\"S_ATSEL[]\" size=\"4\" multiple><option selected value=\"ALL\">" . $strings["select_all"] . "</option><option value=\"0\">" . $strings["unassigned"] . "</option>";
 

@@ -52,7 +52,7 @@ $teamMember = "false";
 $tmpquery = "WHERE tea.project = '$project' AND tea.member = '" . $_SESSION['idSession'] . "'";
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 if ($comptMemberTest == "0") {
     $teamMember = "false";
 } else {
@@ -89,7 +89,7 @@ if ($teamMember == "true") {
 } 
 $block1->closePaletteIcon();
 
-$comptTopic = count($topicNote);
+$comptTopic = teste_count($topicNote);
 
 if ($comptTopic != "0") {
     $block1->sorting("notes", $sortingUser->sor_notes[0], "note.date DESC", $sortingFields = array(0 => "note.subject", 1 => "note.topic", 2 => "note.date", 3 => "mem.login", 4 => "note.published"));
@@ -99,11 +99,11 @@ if ($comptTopic != "0") {
 $tmpquery = "WHERE note.project = '$project' ORDER BY $block1->sortingValue";
 $listNotes = new request();
 $listNotes->openNotes($tmpquery);
-$comptListNotes = count($listNotes->note_id);
+$comptListNotes = teste_count($listNotes->note_id);
 
 if ($comptListNotes != "0") {
     $block1->openResults();
-    $comptTopic = count($topicNote);
+    $comptTopic = teste_count($topicNote);
 
     if ($comptTopic != "0") {
         $block1->labels($labels = array(0 => $strings["subject"], 1 => $strings["topic"], 2 => $strings["date"], 3 => $strings["owner"], 4 => $strings["published"]), "true");

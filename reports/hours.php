@@ -66,7 +66,7 @@ require_once("../includes/library.php");
 
 //--- header ---
 $breadcrumbs[]=$strings['reports'];
-$breadcrumbs[]=buildLink('../reports/createreport.php?typeReports=create', $strings["create_report"], in) . ' | ' . buildLink('../reports/createreport.php?typeReports=custom', $strings['custom_reports'], LINK_INSIDE);
+$breadcrumbs[]=buildLink('../reports/createreport.php?typeReports=create', $strings["create_report"], 'in') . ' | ' . buildLink('../reports/createreport.php?typeReports=custom', $strings['custom_reports'], LINK_INSIDE);
 
 $pageSection = 'reports';
 require_once("../themes/" . THEME . "/header.php");
@@ -107,7 +107,7 @@ if ($S_org != "ALL" && $S_org != "") {
 $tmpquery = "$query ORDER BY org.name,pro.name,mem.name,tim.date";
 $listHours = new request();
 $listHours->openTaskTime($tmpquery);
-$comptListHours = count($listHours->tim_id);
+$comptListHours = teste_count($listHours->tim_id);
 
 $block0 = new block();
 

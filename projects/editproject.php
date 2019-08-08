@@ -53,7 +53,7 @@ if ($id != '') {
     $tmpquery = "WHERE pro.id = '$id'";
     $projectDetail = new request();
     $projectDetail->openProjects($tmpquery);
-    $comptProjectDetail = count($projectDetail->pro_id);
+    $comptProjectDetail = teste_count($projectDetail->pro_id);
 
     if ($comptProjectDetail == '0') {
         header('Location: ../projects/listprojects.php?msg=blankProject');
@@ -110,7 +110,7 @@ STAMP;
             $tmpquery = "WHERE tas.project = '$id'";
             $listTasks = new request();
             $listTasks->openTasks($tmpquery);
-            $comptListTasks = count($listTasks->tas_id);
+            $comptListTasks = teste_count($listTasks->tas_id);
 
             for ($i = 0; $i < $comptListTasks; $i++) {
                 $assigned = '';
@@ -147,7 +147,7 @@ STAMP;
                     $tmpquery = "WHERE tea.project = '$projectNew' AND tea.member = '$at'";
                     $testinTeam = new request();
                     $testinTeam->openTeams($tmpquery);
-                    $comptTestinTeam = count($testinTeam->tea_id);
+                    $comptTestinTeam = teste_count($testinTeam->tea_id);
                     if ($comptTestinTeam == '0') {
                         $tmpquery3 = 'INSERT INTO ' . $tableCollab['teams'] . "(project,member,published,authorized) VALUES('$projectNew','$at','1','0')";
                         connectSql($tmpquery3);
@@ -180,7 +180,7 @@ STAMP;
             }
             // create phase structure if enable phase was selected as true
             if ($thisPhase != '0') {
-                $comptThisPhase = count($phaseArraySets[$thisPhase]);
+                $comptThisPhase = teste_count($phaseArraySets[$thisPhase]);
 
                 for($i = 0; $i < $comptThisPhase; $i++) {
                     $tmpquery = 'INSERT INTO ' . $tableCollab['phases'] . "(project_id,order_num,status,name) VALUES('$projectNew','$i','0','" . $phaseArraySets[$thisPhase][$i] . "')";
@@ -196,7 +196,7 @@ STAMP;
                 $tmpquery = "WHERE tea.project = '$id' AND tea.member = '$pown'";
                 $testinTeam = new request();
                 $testinTeam->openTeams($tmpquery);
-                $comptTestinTeam = count($testinTeam->tea_id);
+                $comptTestinTeam = teste_count($testinTeam->tea_id);
                 if ($comptTestinTeam == '0') {
                     $tmpquery2 = 'INSERT INTO ' . $tableCollab['teams'] . "(project,member,published,authorized) VALUES('$id','$pown','1','0')";
                     connectSql($tmpquery2);
@@ -216,7 +216,7 @@ STAMP;
                 $tmpquery = "WHERE tea.project = '$id' AND mem.profil = '3'";
                 $suppTeamClient = new request();
                 $suppTeamClient->openTeams($tmpquery);
-                $comptSuppTeamClient = count($suppTeamClient->tea_id);
+                $comptSuppTeamClient = teste_count($suppTeamClient->tea_id);
                 if ($comptSuppTeamClient == '0') {
                     for ($i = 0; $i < $comptSuppTeamClient; $i++) {
                         $membersTeam .= $suppTeamClient->tea_mem_id[$i];
@@ -243,7 +243,7 @@ STAMP;
             }
             // Create new Phases
             if ($targetProject->pro_phase_set[0] != $thisPhase) {
-                $comptThisPhase = count($phaseArraySets[$thisPhase]);
+                $comptThisPhase = teste_count($phaseArraySets[$thisPhase]);
 
                 for($i = 0; $i < $comptThisPhase; $i++) {
                     $tmpquery = 'INSERT INTO ' . $tableCollab['phases'] . "(project_id,order_num,status,name) VALUES('$id','$i','0','" . $phaseArraySets[$thisPhase][$i] . "')";
@@ -253,17 +253,17 @@ STAMP;
                 $tmpquery = "WHERE tas.project = '" . $targetProject->pro_id[0] . "'";
                 $listTasks = new request();
                 $listTasks->openTasks($tmpquery);
-                $comptListTasks = count($listTasks->tas_id);
+                $comptListTasks = teste_count($listTasks->tas_id);
 
                 $tmpquery = "WHERE fil.project = '" . $targetProject->pro_id[0] . "' AND fil.phase !='0'";
                 $listFiles = new request();
                 $listFiles->openFiles($tmpquery);
-                $comptListFiles = count($listFiles->fil_id);
+                $comptListFiles = teste_count($listFiles->fil_id);
 
                 $tmpquery = "WHERE pha.project_id = '" . $targetProject->pro_id[0] . "' AND pha.order_num ='0'";
                 $targetPhase = new request();
                 $targetPhase->openPhases($tmpquery);
-                $comptTargetPhase = count($targetPhase->pha_id);
+                $comptTargetPhase = teste_count($targetPhase->pha_id);
 
                 for($i = 0; $i < $comptListTasks; $i++) {
                     $tmpquery = 'UPDATE ' . $tableCollab['tasks'] . " SET parent_phase='0' WHERE id = '" . $listTasks->tas_id[$i] . "'";
@@ -365,7 +365,7 @@ STAMP;
         }
         // create phase structure if enable phase was selected as true
         if ($thisPhase != '0') {
-            $comptThisPhase = count($phaseArraySets[$thisPhase]);
+            $comptThisPhase = teste_count($phaseArraySets[$thisPhase]);
 
             for($i = 0; $i < $comptThisPhase; $i++) {
                 $tmpquery = 'INSERT INTO ' . $tableCollab['phases'] . "(project_id,order_num,status,name) VALUES('$num','$i','0','" . $phaseArraySets[$thisPhase][$i] . "')";
@@ -444,7 +444,7 @@ if ($cpy == 'true') {
 echo "$pn\" style=\"width: 400px\" name=\"pn\" maxlength=\"100\" type=\"text\"></td></tr>
 <tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">" . $strings['priority'] . ' :</td><td><select name="pr">';
 
-$comptPri = count($priority);
+$comptPri = teste_count($priority);
 
 for ($i = 0; $i < $comptPri; $i++) {
     if ($projectDetail->pro_priority[0] == $i) {
@@ -469,7 +469,7 @@ if ($demoMode == true) {
 $assignOwner = new request();
 
 $assignOwner->openMembers($tmpquery);
-$comptAssignOwner = count($assignOwner->mem_id);
+$comptAssignOwner = teste_count($assignOwner->mem_id);
 
 for ($i = 0; $i < $comptAssignOwner; $i++) {
     if ($projectDetail->pro_mem_id[0] == $assignOwner->mem_id[$i]) {
@@ -489,7 +489,7 @@ if ($clientsFilter == 'true' && $_SESSION['profilSession'] == '1') {
 }
 $listClients = new request();
 $listClients->openOrganizations($tmpquery);
-$comptListClients = count($listClients->org_id);
+$comptListClients = teste_count($listClients->org_id);
 
 if ($projectDetail->pro_org_id[0] == '1') {
     echo '<option value="1" selected>' . $strings['none'] . '</option>';
@@ -509,7 +509,7 @@ echo '</select></td></tr>
 <tr class="odd"><td valign="top" class="leftvalue">' . $strings['enable_phases'] . ' :</td><td>
 <select name="thisPhase">';
 
-$compSets = count($phaseArraySets['sets']);
+$compSets = teste_count($phaseArraySets['sets']);
 
 if ($projectDetail->pro_phase_set[0] == '0') {
     echo '<option value="0" selected>' . $strings['none'] . '</option>';
@@ -528,7 +528,7 @@ for($i = 1; $i <= $compSets; $i++) {
 echo '</select></td></tr>
 <tr class="odd"><td valign="top" class="leftvalue">' . $strings['status'] . ' :</td><td><select name="st">';
 
-$comptSta = count($status);
+$comptSta = teste_count($status);
 
 for ($i = 0; $i < $comptSta; $i++) {
     if ($projectDetail->pro_status[0] == $i) {

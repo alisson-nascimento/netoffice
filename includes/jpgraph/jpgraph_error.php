@@ -46,7 +46,7 @@ class ErrorPlot extends Plot {
         $img->SetLineWeight($this->weight);
 
         if( isset($this->coords[1]) ) {
-            if( count($this->coords[1])!=$numpoints )
+            if( teste_count($this->coords[1])!=$numpoints )
             JpGraphError::RaiseL(2003,count($this->coords[1]),$numpoints);
             //("Number of X and Y points are not equal. Number of X-points:".count($this->coords[1])." Number of Y-points:$numpoints");
             else
@@ -91,7 +91,7 @@ class ErrorLinePlot extends ErrorPlot {
     function __construct($datay,$datax=false) {
         parent::__construct($datay,$datax);
         // Calculate line coordinates as the average of the error limits
-        $n = count($datay);
+        $n = teste_count($datay);
         for($i=0; $i < $n; $i+=2 ) {
             $ly[]=($datay[$i]+$datay[$i+1])/2;
         }
@@ -124,7 +124,7 @@ class LineErrorPlot extends ErrorPlot {
     // Data is (val, errdeltamin, errdeltamax)
     function __construct($datay,$datax=false) {
         $ly=array(); $ey=array();
-        $n = count($datay);
+        $n = teste_count($datay);
         if( $n % 3 != 0 ) {
             JpGraphError::RaiseL(4002);
             //('Error in input data to LineErrorPlot. Number of data points must be a multiple of 3');

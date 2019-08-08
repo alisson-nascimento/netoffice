@@ -24,7 +24,7 @@ require_once ("include_header.php");
 $tmpquery = "WHERE tas.project = '" . $_SESSION['projectSession'] . "' AND tas.assigned_to != '0' AND tas.published = '0' AND tas.milestone <> '0' AND mem.organization = '1' ORDER BY tas.name";
 $listTasks = new request();
 $listTasks->openTasks($tmpquery);
-$comptListTasks = count($listTasks->tas_id);
+$comptListTasks = teste_count($listTasks->tas_id);
 
 $block1 = new block();
 

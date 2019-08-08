@@ -31,7 +31,7 @@ function reschedule($date1) {
     $taskList = new request();
     $taskList->openTasks($tmpquery);
     
-    $comptTaskList = count($taskList->tas_id);
+    $comptTaskList = teste_count($taskList->tas_id);
     $adjArray = array();
     
     for ($i = 0;$i < $comptTaskList;$i++) {
@@ -60,7 +60,7 @@ function reschedule($date1) {
         $tmpquery8 = " WHERE pre.task = '" . $taskList->tas_id[$i] . "'";
         $predecessorList = new request();
         $predecessorList->openTaskPredecessor($tmpquery8);
-        $comptPredecessorList = count($predecessorList->pre_id);
+        $comptPredecessorList = teste_count($predecessorList->pre_id);
         
         if (($dd != $old_dd || $sd != $old_sd) && $comptPredecessorList > 0) {
             $sdLowerLimit = -1;
@@ -254,7 +254,7 @@ function reschedule($date1) {
         $tmpquery8 = " WHERE pre.predecessor='$adjTaskID'";
         $successorList = new request();
         $successorList->openTaskPredecessor($tmpquery8);
-        $comptSuccessorList = count($successorList->pre_id);
+        $comptSuccessorList = teste_count($successorList->pre_id);
         
         for ($i = 0; $i < $comptSuccessorList; $i++) {
             $timestampSD = date2timestamp(hours_after($successorList->pre_tas_start_date[$i], 1));
@@ -384,7 +384,7 @@ if ($action == "add") {
     $tmpquery = " WHERE id IN($id) ORDER BY hol.date";
     $holidayList = new request();
     $holidayList->openHoliday($tmpquery, 0, 1);
-    $comptHolidayList = count($holidayList->hol_id);
+    $comptHolidayList = teste_count($holidayList->hol_id);
     $tmpquery = "DELETE FROM " . $tableCollab["holiday"] . " WHERE id IN($id)";
     connectSql("$tmpquery");
     if ($comptHolidayList != "0") {
@@ -424,7 +424,7 @@ $block1->closePaletteIcon();
 $tmpquery = " ORDER BY hol.date DESC";
 $holidayList = new request();
 $holidayList->openHoliday($tmpquery);
-$comptHolidayList = count($holidayList->hol_id);
+$comptHolidayList = teste_count($holidayList->hol_id);
 
 $block1->recordsTotal = $comptHolidayList;
 

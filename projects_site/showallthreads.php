@@ -41,7 +41,7 @@ require_once ("include_header.php");
 $tmpquery = "WHERE pos.topic = '" . $detailTopic->top_id[0] . "' ORDER BY pos.created DESC";
 $listPosts = new request();
 $listPosts->openPosts($tmpquery);
-$comptListPosts = count($listPosts->pos_id);
+$comptListPosts = teste_count($listPosts->pos_id);
 
 $idStatus = $detailTopic->top_status[0];
 

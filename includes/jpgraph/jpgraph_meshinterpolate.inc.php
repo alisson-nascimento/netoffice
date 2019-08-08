@@ -72,8 +72,8 @@ class MeshInterpolate {
     function Linear( &$aData, $aIntFactor ) {
         $step = pow( 2, $aIntFactor-1 );
 
-        $orig_cols = count( $aData[0] );
-        $orig_rows = count( $aData );
+        $orig_cols = teste_count( $aData[0] );
+        $orig_rows = teste_count( $aData );
         // Number of new columns/rows
         // N = (a-1) * 2^(f-1) + 1
         $p = pow( 2, $aIntFactor-1 );

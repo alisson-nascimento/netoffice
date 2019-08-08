@@ -137,7 +137,7 @@ $headBonus
 
 //--- breadcrumbs ----
 {
-	if(isset($breadcrumbs) && count($breadcrumbs)) {
+	if(isset($breadcrumbs) && teste_count($breadcrumbs)) {
         echo "<div id=\"breadcrumbs\">";
         foreach($breadcrumbs as $crump) {
         	echo '<img src="../themes/'. THEME. '/brdcmb_carrat.gif" alt="" align="absmiddle"> '.$crump;

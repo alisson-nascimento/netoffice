@@ -25,7 +25,7 @@ if ($action == 'publish') {
             $id = str_replace('**', ',', $id);
             $tmpquery1 = 'UPDATE ' . $tableCollab['topics'] . " SET status='0' WHERE id IN($id)";
             $pieces = explode(',', $id);
-            $num = count($pieces);
+            $num = teste_count($pieces);
         } else {
             $tmpquery1 = 'UPDATE ' . $tableCollab['topics'] . " SET status='0' WHERE id = '$id'";
             $num = 1;
@@ -199,7 +199,7 @@ if ($msg == 'demo') {
 $tmpquery = "WHERE pro.id = '$id'";
 $projectDetail = new request();
 $projectDetail->openProjects($tmpquery);
-$comptProjectDetail = count($projectDetail->pro_id);
+$comptProjectDetail = teste_count($projectDetail->pro_id);
 
 if ($comptProjectDetail == '0') {
     header('Location: ../projects/listprojects.php?msg=blankProject');
@@ -209,7 +209,7 @@ if ($comptProjectDetail == '0') {
 $tmpquery = "WHERE tas.project = '$id' AND tas.milestone <> '0' ORDER BY tas.name";
 $listTasksTime = new request();
 $listTasksTime->openTasks($tmpquery);
-$comptListTasksTime = count($listTasksTime->tas_id);
+$comptListTasksTime = teste_count($listTasksTime->tas_id);
 
 if ($comptListTasksTime != '0') {
     for ($i = 0; $i < $comptListTasksTime; $i++) {
@@ -235,7 +235,7 @@ $teamMember = 'false';
 $tmpquery = "WHERE tea.project = '$id' AND tea.member = '" . $_SESSION['idSession'] . "'";
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 
 if ($comptMemberTest == '0') {
     $teamMember = 'false';
@@ -252,17 +252,17 @@ if ($enableHelpSupport == 'true' && ($teamMember == 'true' || $_SESSION['profilS
     $tmpquery = "WHERE sr.status = '0' AND sr.project = '" . $projectDetail->pro_id[0] . "'";
     $listNewRequests = new request();
     $listNewRequests->openSupportRequests($tmpquery);
-    $comptListNewRequests = count($listNewRequests->sr_id);
+    $comptListNewRequests = teste_count($listNewRequests->sr_id);
 
     $tmpquery = "WHERE sr.status = '1' AND sr.project = '" . $projectDetail->pro_id[0] . "'";
     $listOpenRequests = new request();
     $listOpenRequests->openSupportRequests($tmpquery);
-    $comptListOpenRequests = count($listOpenRequests->sr_id);
+    $comptListOpenRequests = teste_count($listOpenRequests->sr_id);
 
     $tmpquery = "WHERE sr.status = '2' AND sr.project = '" . $projectDetail->pro_id[0] . "'";
     $listCompleteRequests = new request();
     $listCompleteRequests->openSupportRequests($tmpquery);
-    $comptListCompleteRequests = count($listCompleteRequests->sr_id);
+    $comptListCompleteRequests = teste_count($listCompleteRequests->sr_id);
 }
 
 //--- header ----------------------------------------------------------------------------------
@@ -326,7 +326,7 @@ $idPriority = $projectDetail->pro_priority[0];
         $tmpquery = "WHERE pha.project_id = '$id' AND status = '1' ORDER BY pha.order_num";
         $currentPhase = new request();
         $currentPhase->openPhases($tmpquery);
-        $comptCurrentPhase = count($currentPhase->pha_id);
+        $comptCurrentPhase = teste_count($currentPhase->pha_id);
         
         if ($comptCurrentPhase == 0) {
             $block1->contentRow($strings['current_phase'], $strings['no_current_phase']);
@@ -438,7 +438,7 @@ if ($projectDetail->pro_phase_set[0] != '0') {
     $tmpquery = "WHERE pha.project_id = '$id' ORDER BY $block7->sortingValue";
     $listPhases = new request();
     $listPhases->openPhases($tmpquery);
-    $comptListPhases = count($listPhases->pha_id);
+    $comptListPhases = teste_count($listPhases->pha_id);
     
     $block7->headingToggle($strings['phases'] . " <span class=addition>($comptListPhases)</span>");
     $block7->openPaletteIcon();
@@ -460,7 +460,7 @@ if ($projectDetail->pro_phase_set[0] != '0') {
         $tmpquery = "WHERE tas.project = '$id'";
         $countPhaseTasks = new request();
         $countPhaseTasks->openTasks($tmpquery);
-        $comptlistTasks = count($countPhaseTasks->tas_id);
+        $comptlistTasks = teste_count($countPhaseTasks->tas_id);
 
         for ($i = 0; $i < $comptListPhases; $i++) {
             $comptlistTasksRow = 0;
@@ -563,7 +563,7 @@ if ($projectDetail->pro_phase_set[0] != '0') {
 
     $listTasks = new request();
     $listTasks->openTasks($tmpquery, $block2->borne, $block2->rowsLimit);
-    $comptListTasks = count($listTasks->tas_id);
+    $comptListTasks = teste_count($listTasks->tas_id);
     
     $block2->headingToggle($strings['tasks_open'] . ' <span class=addition>(' . $comptListTasks . ')</span>');
     $block2->openPaletteIcon();
@@ -794,7 +794,7 @@ if ($projectDetail->pro_phase_set[0] != '0') {
 
     $listMilestones = new request();
     $listMilestones->openTasks($tmpquery, $block9->borne, $block9->rowsLimit);
-    $comptListMilestones = count($listMilestones->tas_id);
+    $comptListMilestones = teste_count($listMilestones->tas_id);
     
     $block9->headingToggle($strings['milestone']. ' <span class=addition>(' . $comptListMilestones . ')</span>');
     $block9->openPaletteIcon();
@@ -933,7 +933,7 @@ if ($projectDetail->pro_phase_set[0] != '0') {
     //--- list ---------
     $listTasks = new request();
     $listTasks->openTasks($tmpquery, $block10->borne, $block10->rowsLimit);
-    $comptListTasks = count($listTasks->tas_id);
+    $comptListTasks = teste_count($listTasks->tas_id);
     
     $block10->headingToggle($strings['tasks_closed'] . ' <span class=addition>(' . $comptListTasks . ')</span>');
     $block10->openPaletteIcon();
@@ -1097,7 +1097,7 @@ if ($projectDetail->pro_phase_set[0] != '0') {
     $listMeetings = new request();
 
     $listMeetings->openMeetings($tmpquery, $block8->borne, $block8->rowsLimit);
-    $comptListMeetings = count($listMeetings->mee_id);
+    $comptListMeetings = teste_count($listMeetings->mee_id);
     
     $block8->headingToggle($strings['meetings'] . ' <span class=addition>(' . $comptListMeetings . ')</span>');
     $block8->openPaletteIcon();
@@ -1216,7 +1216,7 @@ if ($projectDetail->pro_phase_set[0] != '0') {
 
     $listTopics = new request();
     $listTopics->openTopics($tmpquery, $block3->borne, $block3->rowsLimit);
-    $comptListTopics = count($listTopics->top_id);
+    $comptListTopics = teste_count($listTopics->top_id);
     
     $block3->headingToggle($strings['discussions'] . ' <span class=addition>(' . $comptListTopics . ')</span>');
     $block3->openPaletteIcon();
@@ -1325,7 +1325,7 @@ if ($projectDetail->pro_phase_set[0] != '0') {
 
     $listTeam = new request();
     $listTeam->openTeams($tmpquery, $block4->borne, $block4->rowsLimit);
-    $comptListTeam = count($listTeam->tea_id);
+    $comptListTeam = teste_count($listTeam->tea_id);
     
     $block4->headingToggle($strings['team'] . ' <span class=addition>(' . $comptListTeam . ')</span>');
     $block4->openPaletteIcon();
@@ -1418,7 +1418,7 @@ if ($projectDetail->pro_phase_set[0] != '0') {
         
         $listFiles = new request();
         $listFiles->openFiles($tmpquery);
-        $comptListFiles = count($listFiles->fil_id);
+        $comptListFiles = teste_count($listFiles->fil_id);
 
         $block5->headingToggle($strings['linked_content'] . ' <span class=addition>(' . $comptListFiles . ')</span>');
         $block5->openPaletteIcon();
@@ -1511,7 +1511,7 @@ if ($projectDetail->pro_phase_set[0] != '0') {
     $block6->borne = $blockPage->returnBorne('4');
     $block6->rowsLimit = '5';
 
-    $comptTopic = count($topicNote);
+    $comptTopic = teste_count($topicNote);
 
     if ($comptTopic != '0') {
         $block6->sorting('notes', $sortingUser->sor_notes[0], 'note.date DESC', $sortingFields = array(0 => 'note.subject', 1 => 'note.topic', 2 => 'note.date', 3 => 'mem.login', 4 => 'note.published'));
@@ -1526,7 +1526,7 @@ if ($projectDetail->pro_phase_set[0] != '0') {
     $listNotes = new request();
 
     $listNotes->openNotes($tmpquery, $block6->borne, $block6->rowsLimit);
-    $comptListNotes = count($listNotes->note_id);
+    $comptListNotes = teste_count($listNotes->note_id);
     
     $block6->headingToggle($strings['notes'] . ' <span class=addition>(' . $comptListNotes . ')</span>');
     $block6->openPaletteIcon();

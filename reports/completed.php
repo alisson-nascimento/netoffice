@@ -85,7 +85,7 @@ if ($S_mem != "ALL" && $S_mem != "") {
 $tmpquery = "$query ORDER BY $block1->sortingValue";
 $listTasks = new request();
 $listTasks->openTasks($tmpquery);
-$comptListTasks = count($listTasks->tas_id);
+$comptListTasks = teste_count($listTasks->tas_id);
 
 $block0 = new block();
 

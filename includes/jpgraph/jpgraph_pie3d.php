@@ -461,7 +461,7 @@ class PiePlot3D extends PiePlot {
         //
         $idx=0;
         $adjexplode=array();
-        $numcolors = count($colors);
+        $numcolors = teste_count($colors);
         for($i=0; $i<count($data); ++$i, ++$idx ) {
             $da = $data[$i]/$sum * 360;
 
@@ -556,7 +556,7 @@ class PiePlot3D extends PiePlot {
         }
 
         // Total number of slices
-        $n = count($angles);
+        $n = teste_count($angles);
 
         for($i=0; $i<$n; ++$i) {
             list($dbgs,$dbge) = $angles[$i];
@@ -650,7 +650,7 @@ class PiePlot3D extends PiePlot {
             // Now print possible labels and add csim
             $this->value->ApplyFont($img);
             $margin = $img->GetFontHeight()/2 + $this->value->margin ;
-            for($i=0; $i < count($data); ++$i ) {
+            for($i=0; $i < teste_count($data); ++$i ) {
                 $la = $labeldata[$i][0];
                 $x = $labeldata[$i][1] + cos($la*M_PI/180)*($d+$margin)*$this->ilabelposadj;
                 $y = $labeldata[$i][2] - sin($la*M_PI/180)*($h+$margin)*$this->ilabelposadj;
@@ -695,7 +695,7 @@ class PiePlot3D extends PiePlot {
         $img->SetLineWeight($edgeweight);
 
         $fulledge = true;
-        for($i=0; $i < count($data) && $fulledge; ++$i ) {
+        for($i=0; $i < teste_count($data) && $fulledge; ++$i ) {
             if( empty($this->explode_radius[$i]) ) {
                 $this->explode_radius[$i]=0;
             }
@@ -705,7 +705,7 @@ class PiePlot3D extends PiePlot {
         }
          
 
-        for($i=0; $i < count($data); ++$i, ++$idx ) {
+        for($i=0; $i < teste_count($data); ++$i, ++$idx ) {
 
             $da = $data[$i]/$sum * 2*M_PI;
             $this->StrokeFullSliceFrame($img,$xc,$yc,$a,$a+$da,$d,$h,$z,$edgecolor,
@@ -776,7 +776,7 @@ class PiePlot3D extends PiePlot {
     }
 
     function Stroke($img,$aaoption=0) {
-        $n = count($this->data);
+        $n = teste_count($this->data);
 
         // If user hasn't set the colors use the theme array
         if( $this->setslicecolors==null ) {
@@ -784,7 +784,7 @@ class PiePlot3D extends PiePlot {
             sort($colors);
             $idx_a=$this->themearr[$this->theme];
             $ca = array();
-            $m = count($idx_a);
+            $m = teste_count($idx_a);
             for($i=0; $i < $m; ++$i) {
                 $ca[$i] = $colors[$idx_a[$i]];
             }

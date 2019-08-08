@@ -26,7 +26,7 @@ if ($action == 'delete') {
     $tmpquery = "WHERE mat.id IN($id) OR mat.vc_parent IN($id) ORDER BY mat.name";
     $listFiles = new request();
     $listFiles->openMeetingsAttachment($tmpquery);
-    $comptListFiles = count($listFiles->mat_id);
+    $comptListFiles = teste_count($listFiles->mat_id);
     for ($i = 0;$i < $comptListFiles;$i++) {
         if (file_exists ("../files/" . $project . "/meetings/" . $meeting . "/" . $listFiles->mat_name[$i])) {
             deleteFile("files/" . $project . "/meetings/" . $meeting . "/" . $listFiles->mat_name[$i]);
@@ -74,7 +74,7 @@ $id = str_replace("**", ",", $id);
 $tmpquery = "WHERE mat.id IN($id) ORDER BY mat.name";
 $listFiles = new request();
 $listFiles->openMeetingsAttachment($tmpquery);
-$comptListFiles = count($listFiles->mat_id);
+$comptListFiles = teste_count($listFiles->mat_id);
 
 for ($i = 0;$i < $comptListFiles;$i++) {
     echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">&nbsp;</td><td>" . $listFiles->mat_name[$i] . "</td></tr>";

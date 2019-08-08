@@ -38,7 +38,7 @@ if ($id != "") {
             $tmpquery = "WHERE mem.login = '$un' AND mem.login != '$unOld'";
             $existsUser = new request();
             $existsUser->openMembers($tmpquery);
-            $comptExistsUser = count($existsUser->mem_id);
+            $comptExistsUser = teste_count($existsUser->mem_id);
             if ($comptExistsUser != "0") {
                 $error = $strings["user_already_exists"];
             } else {
@@ -60,7 +60,7 @@ if ($id != "") {
                         $tmpquery = "WHERE tea.member = '$id'";
                         $listProjects = new request();
                         $listProjects->openTeams($tmpquery);
-                        $comptListProjects = count($listProjects->tea_id);
+                        $comptListProjects = teste_count($listProjects->tea_id);
 
                         if ($comptListProjects != "0") {
                             for ($i = 0;$i < $comptListProjects;$i++) {
@@ -83,7 +83,7 @@ if ($id != "") {
                                 $tmpquery = "WHERE tea.member = '$id'";
                                 $listProjects = new request();
                                 $listProjects->openTeams($tmpquery);
-                                $comptListProjects = count($listProjects->tea_id);
+                                $comptListProjects = teste_count($listProjects->tea_id);
                             } 
 
                             if ($comptListProjects != "0") {
@@ -121,7 +121,7 @@ if ($id != "") {
     $tmpquery = "WHERE mem.id = '$id'";
     $detailUser = new request();
     $detailUser->openMembers($tmpquery);
-    $comptDetailUser = count($detailUser->mem_id);
+    $comptDetailUser = teste_count($detailUser->mem_id);
     // test exists selected user, redirect to list if not
     if ($comptDetailUser == "0") {
         header("Location: ../users/listusers.php?msg=blankUser");
@@ -165,7 +165,7 @@ if ($id == "") {
             $tmpquery = "WHERE mem.login = '$un'";
             $existsUser = new request();
             $existsUser->openMembers($tmpquery);
-            $comptExistsUser = count($existsUser->mem_id);
+            $comptExistsUser = teste_count($existsUser->mem_id);
             if ($comptExistsUser != "0") {
                 $error = $strings["user_already_exists"];
             } else {

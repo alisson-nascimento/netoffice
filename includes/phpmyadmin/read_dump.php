@@ -294,7 +294,7 @@ if (!$cfgAllowUserDropDatabase
     // Checks if the user is a Superuser
     // TODO: set a global variable with this information
     // loic1: optimized query
-    $result = @mysql_query('USE mysql');
+    $result = @mysql_query_to_mysqli_query('USE mysql');
     if (mysql_error()) {
         include('header.inc.php');
         PMA_mysqlDie($strNoDropDatabases, '', '', $err_url);
@@ -309,7 +309,7 @@ define('PMA_CHK_DROP', 1);
 if ($sql_query != '') {
     $pieces       = array();
     PMA_splitSqlFile($pieces, $sql_query, PMA_MYSQL_INT_VERSION);
-    $pieces_count = count($pieces);
+    $pieces_count = teste_count($pieces);
 
     // Copy of the cleaned sql statement for display purpose only (see near the
     // beginning of "db_details.php" & "tbl_properties.php")
@@ -339,7 +339,7 @@ if ($sql_query != '') {
     else if (mysql_select_db($db)) {
         for ($i = 0; $i < $pieces_count; $i++) {
             $a_sql_query = $pieces[$i];
-            $result = mysql_query($a_sql_query);
+            $result = mysql_query_to_mysqli_query($a_sql_query);
             if ($result == FALSE) { // readdump failed
                 $my_die = $a_sql_query;
                 break;
@@ -378,7 +378,7 @@ if ($goto == 'tbl_properties.php') {
     if (!isset($table)) {
         $goto     = 'db_details.php';
     } else {
-        $is_table = @mysql_query('SHOW TABLES LIKE \'' . PMA_sqlAddslashes($table, TRUE) . '\'');
+        $is_table = @mysql_query_to_mysqli_query('SHOW TABLES LIKE \'' . PMA_sqlAddslashes($table, TRUE) . '\'');
         if (!@mysql_numrows($is_table)) {
             $goto = 'db_details.php';
             unset($table);

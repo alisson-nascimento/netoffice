@@ -44,6 +44,8 @@ function escape($string)
     return str_replace(";", "\;", $string);
 } 
 // taken from PHP documentation comments
+
+if (function_exists('quoted_printable_encode')) {
 function quoted_printable_encode($input, $line_max = 76)
 {
     $hex = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F');
@@ -53,7 +55,7 @@ function quoted_printable_encode($input, $line_max = 76)
     $escape = "=";
     $output = "";
 
-    for ($j = 0;$j < count($lines);$j++) {
+    for ($j = 0;$j < teste_count($lines);$j++) {
         $line = $lines[$j];
         $linlen = strlen($line);
         $newline = "";
@@ -74,10 +76,11 @@ function quoted_printable_encode($input, $line_max = 76)
             $newline .= $c;
         } // end of for
         $output .= $newline;
-        if ($j < count($lines)-1) $output .= $linebreak;
+        if ($j < teste_count($lines)-1) $output .= $linebreak;
     } 
     return trim($output);
-} 
+    } 
+}
 
 class vCard {
     var $properties;

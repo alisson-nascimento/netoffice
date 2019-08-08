@@ -32,7 +32,7 @@ if ($action == "deleteRequest") {
     $tmpquery1 = "DELETE FROM " . $tableCollab["support_requests"] . " WHERE id IN($id)";
     $tmpquery2 = "DELETE FROM " . $tableCollab["support_posts"] . " WHERE request_id IN($id)";
     $pieces = explode(",", $id);
-    $num = count($pieces);
+    $num = teste_count($pieces);
     connectSql("$tmpquery1");
     connectSql("$tmpquery2");
 
@@ -44,7 +44,7 @@ if ($action == "deletePost") {
     $id = str_replace("**", ",", $id);
     $tmpquery3 = "DELETE FROM " . $tableCollab["support_posts"] . " WHERE id IN($id)";
     $pieces = explode(",", $id);
-    $num = count($pieces);
+    $num = teste_count($pieces);
     connectSql("$tmpquery3");
 
     header("Location: ../support/viewrequest.php?msg=delete&id=$sendto");
@@ -56,18 +56,18 @@ if ($action == "deleteR") {
     $tmpquery = "WHERE sr.id IN($id) ORDER BY sr.subject";
     $listRequest = new request();
     $listRequest->openSupportRequests($tmpquery);
-    $comptListRequest = count($listRequest->sr_id);
+    $comptListRequest = teste_count($listRequest->sr_id);
 } elseif ($action == "deleteP") {
     $id = str_replace("**", ",", $id);
     $tmpquery = "WHERE sp.id IN($id) ORDER BY sp.id";
     $listPost = new request();
     $listPost->openSupportPosts($tmpquery);
-    $comptListPost = count($listPost->sp_id);
+    $comptListPost = teste_count($listPost->sp_id);
 
     $tmpquery2 = "WHERE sr.id IN(" . $listPost->sp_request_id[0] . ") ORDER BY sr.subject";
     $listRequest = new request();
     $listRequest->openSupportRequests($tmpquery2);
-    $comptListRequest = count($listRequest->sr_id);
+    $comptListRequest = teste_count($listRequest->sr_id);
 } 
 
 

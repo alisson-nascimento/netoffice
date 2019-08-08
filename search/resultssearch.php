@@ -20,7 +20,7 @@ $searchFor = urldecode($searchFor);
 $searchfor = convertData($searchfor);
 $searchfor = strtolower($searchfor);
 $mots = split(" ", $searchfor);
-$nombre_mots = count($mots);
+$nombre_mots = teste_count($mots);
 
 if ($heading == "ALL") {
     $validNotes = "true";
@@ -166,7 +166,7 @@ if ($validProjects == "true") {
 
     $listProjects = new request();
     $listProjects->openProjects($tmpquery, $block1->borne, $block1->rowsLimit);
-    $comptListProjects = count($listProjects->pro_id); 
+    $comptListProjects = teste_count($listProjects->pro_id); 
     // echo "$tmpquery<br>";
 } 
 
@@ -183,7 +183,7 @@ if ($projectsFilter == "true") {
 
     $listProjectsFilter = new request();
     $listProjectsFilter->openProjects($tmpquery);
-    $comptListProjectsFilter = count($listProjectsFilter->pro_id);
+    $comptListProjectsFilter = teste_count($listProjectsFilter->pro_id);
 
     if ($comptListProjectsFilter != "0") {
         for ($i = 0;$i < $comptListProjectsFilter;$i++) {
@@ -211,7 +211,7 @@ if ($validTasks == "true") {
 
     $listTasks = new request();
     $listTasks->openTasks($tmpquery, $block2->borne, $block2->rowsLimit);
-    $comptListTasks = count($listTasks->tas_id); 
+    $comptListTasks = teste_count($listTasks->tas_id); 
     // echo "$tmpquery<br>";
 } 
 
@@ -233,7 +233,7 @@ if ($validMembers == "true") {
 
     $listMembers = new request();
     $listMembers->openMembers($tmpquery, $block3->borne, $block3->rowsLimit);
-    $comptListMembers = count($listMembers->mem_id); 
+    $comptListMembers = teste_count($listMembers->mem_id); 
     // echo "$tmpquery<br>";
 } 
 
@@ -249,7 +249,7 @@ if ($clientsFilter == "true" && $_SESSION['profilSession'] == "2") {
     $tmpquery = "WHERE tea.member = '" . $_SESSION['idSession'] . "'";
     $memberTest = new request();
     $memberTest->openTeams($tmpquery);
-    $comptMemberTest = count($memberTest->tea_id);
+    $comptMemberTest = teste_count($memberTest->tea_id);
     if ($comptMemberTest == "0") {
         $listClients = "false";
     } else {
@@ -277,7 +277,7 @@ if ($validOrganizations == "true") {
 
     $listOrganizations = new request();
     $listOrganizations->openOrganizations($tmpquery, $block4->borne, $block4->rowsLimit);
-    $comptListOrganizations = count($listOrganizations->org_id); 
+    $comptListOrganizations = teste_count($listOrganizations->org_id); 
     // echo "$tmpquery<br>";
 } 
 
@@ -304,13 +304,13 @@ if ($validTopics == "true") {
 
     $listTopics = new request();
     $listTopics->openTopics($tmpquery, $block5->borne, $block5->rowsLimit);
-    $comptListTopics = count($listTopics->top_id); 
+    $comptListTopics = teste_count($listTopics->top_id); 
     // echo "$tmpquery<br>";
 }
 
 $block6 = new block();
 
-$comptTopic = count($topicNote);
+$comptTopic = teste_count($topicNote);
 
 $block6->borne = $blockPage->returnBorne("6");
 $block6->rowsLimit = "10";
@@ -337,7 +337,7 @@ if ($validNotes == "true") {
 
     $listNotes = new request();
     $listNotes->openNotes($tmpquery, $block6->borne, $block6->rowsLimit);
-    $comptListNotes = count($listNotes->note_id);
+    $comptListNotes = teste_count($listNotes->note_id);
     // echo "$tmpquery<br>";
 }
 

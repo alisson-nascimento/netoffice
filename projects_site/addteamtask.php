@@ -66,7 +66,7 @@ echo "<table cellpadding=\"3\" cellspacing=\"0\" border=\"0\">
 <input type=\"hidden\" value=\"1\" name=\"miles\">
 <tr><th>" . $strings["priority"] . " :</th><td><select name=\"pr\">";
 
-$comptPri = count($priority);
+$comptPri = teste_count($priority);
 
 for ($i = 0;$i < $comptPri;$i++) {
     if ($taskDetail->tas_priority[0] == $i) {

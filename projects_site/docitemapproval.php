@@ -44,7 +44,7 @@ echo "<table cellspacing=\"0\" width=\"90%\" border=\"0\" cellpadding=\"3\">
 <tr><th>" . $strings["document"] . " :</th><td><a href=\"clientfiledetail.php?id=" . $fileDetail->fil_id[0] . "\">" . $fileDetail->fil_name[0] . "</a></td></tr>
 <tr><th>" . $strings["status"] . " :</th><td><select name=\"statusField\">";
 
-$comptSta = count($statusFile);
+$comptSta = teste_count($statusFile);
 
 for ($i = 0;$i < $comptSta;$i++) {
     if ($fileDetail->fil_status[0] == $i) {

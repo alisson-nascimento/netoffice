@@ -46,7 +46,7 @@ class PolarPlot {
     private $coord=null;
 
     function __construct($aData) {
-        $n = count($aData);
+        $n = teste_count($aData);
         if( $n & 1 ) {
             JpGraphError::RaiseL(17001);
             //('Polar plots must have an even number of data point. Each data point is a tuple (angle,radius).');
@@ -223,7 +223,7 @@ class PolarAxis extends Axis {
         // Stroke the minor arcs
         $pmin = array();
         $p = $this->scale->ticks->ticks_pos;
-        $n = count($p);
+        $n = teste_count($p);
         $i = 0;
         $this->img->SetColor($this->gridminor_color);
         while( $i < $n ) {
@@ -529,7 +529,7 @@ class PolarAxis extends Axis {
         // Mirror the positions for the left side of the scale
         //
         $mid = 2*($this->img->left_margin+$this->img->plotwidth/2);
-        $n = count($this->scale->ticks->ticks_pos);
+        $n = teste_count($this->scale->ticks->ticks_pos);
         $i=0;
         while( $i < $n ) {
             $this->scale->ticks->ticks_pos[$i] =
@@ -537,7 +537,7 @@ class PolarAxis extends Axis {
             ++$i;
         }
 
-        $n = count($this->scale->ticks->maj_ticks_pos);
+        $n = teste_count($this->scale->ticks->maj_ticks_pos);
         $i=0;
         while( $i < $n ) {
             $this->scale->ticks->maj_ticks_pos[$i] =
@@ -545,7 +545,7 @@ class PolarAxis extends Axis {
             ++$i;
         }
 
-        $n = count($this->scale->ticks->maj_ticklabels_pos);
+        $n = teste_count($this->scale->ticks->maj_ticklabels_pos);
         $i=1;
         while( $i < $n ) {
             $this->scale->ticks->maj_ticklabels_pos[$i] =
@@ -554,7 +554,7 @@ class PolarAxis extends Axis {
         }
 
         // Draw the left side of the scale
-        $n = count($this->scale->ticks->ticks_pos);
+        $n = teste_count($this->scale->ticks->ticks_pos);
         $yu = $pos - $this->scale->ticks->direction*$this->scale->ticks->GetMinTickAbsSize();
 
 
@@ -568,7 +568,7 @@ class PolarAxis extends Axis {
             }
         }
 
-        $n = count($this->scale->ticks->maj_ticks_pos);
+        $n = teste_count($this->scale->ticks->maj_ticks_pos);
         $yu = $pos - $this->scale->ticks->direction*$this->scale->ticks->GetMajTickAbsSize();
 
 
@@ -734,7 +734,7 @@ class PolarGraph extends Graph {
 
     // Private methods
     function GetPlotsMax() {
-        $n = count($this->plots);
+        $n = teste_count($this->plots);
         $m = $this->plots[0]->Max();
         $i=1;
         while($i < $n) {
@@ -765,7 +765,7 @@ class PolarGraph extends Graph {
         $this->iHasStroked = true;
 
         //Check if we should autoscale axis
-        if( !$this->scale->IsSpecified() && count($this->plots)>0 ) {
+        if( !$this->scale->IsSpecified() && teste_count($this->plots)>0 ) {
             $max = $this->GetPlotsMax();
             $t1 = $this->img->plotwidth;
             $this->img->plotwidth /= 2;
@@ -816,7 +816,7 @@ class PolarGraph extends Graph {
         }
 
         // Stroke all plots for Y1 axis
-        for($i=0; $i < count($this->plots); ++$i) {
+        for($i=0; $i < teste_count($this->plots); ++$i) {
             $this->plots[$i]->Stroke($this->img,$this->scale);
         }
 
@@ -863,7 +863,7 @@ class PolarGraph extends Graph {
             $this->StrokeTitles();
         }
 
-        for($i=0; $i < count($this->plots) ; ++$i ) {
+        for($i=0; $i < teste_count($this->plots) ; ++$i ) {
             $this->plots[$i]->Legend($this);
         }
 

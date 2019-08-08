@@ -125,7 +125,7 @@ $block2->contentTitle($strings["details"]);
 if ($action == "status") {
     echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">" . $strings["status"] . " :</td><td><select name=\"sta\">";
 
-    $comptSta = count($requestStatus);
+    $comptSta = teste_count($requestStatus);
     for ($i = 0;$i < $comptSta;$i++) {
         if ($requestDetail->sr_status[0] == $i) {
             echo "<option value=\"$i\" selected>$requestStatus[$i]</option>";

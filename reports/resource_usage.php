@@ -99,7 +99,7 @@ require_once("../includes/library.php");
 
 //--- header ---
 $breadcrumbs[]=$strings['reports'];
-$breadcrumbs[]=buildLink('../reports/createreport.php?typeReports=create', $strings["create_report"], in) . ' | ' . buildLink('../reports/createreport.php?typeReports=custom', $strings['custom_reports'], LINK_INSIDE);
+$breadcrumbs[]=buildLink('../reports/createreport.php?typeReports=create', $strings["create_report"], 'in') . ' | ' . buildLink('../reports/createreport.php?typeReports=custom', $strings['custom_reports'], LINK_INSIDE);
 
 $pageSection = 'reports';
 require_once("../themes/" . THEME . "/header.php");
@@ -131,7 +131,7 @@ if ($S_mem != 'ALL' && $S_mem != "") {
 $tmpquery = "$query ORDER BY org.name,pro.name,mem.name";
 $listHours = new request();
 $listHours->openTaskTime($tmpquery);
-$comptListHours = count($listHours->tim_id);
+$comptListHours = teste_count($listHours->tim_id);
 
 $block0 = new block();
 
@@ -258,7 +258,7 @@ if ($comptListHours != "0") {
             $block1->openRow();
             $block1->checkboxRow($listHours->tim_id[$i], $checkbox = "false");
             $block1->cellRow("");
-            $block1->cellRow(buildLink("../projects/viewproject.php?id=" . $listHours->tim_project[$i], $listHours->tim_pro_name[$i], in));
+            $block1->cellRow(buildLink("../projects/viewproject.php?id=" . $listHours->tim_project[$i], $listHours->tim_pro_name[$i], 'in'));
             $block1->cellRow("");
             $block1->cellRow("");
             $block1->closeRow();
@@ -296,7 +296,7 @@ if ($comptListHours != "0") {
             $block1->openRow();
             $block1->checkboxRow($listHours->tim_id[$i], $checkbox = "false");
             $block1->cellRow("");
-            $block1->cellRow(buildLink("../projects/viewproject.php?id=" . $listHours->tim_project[$i], $listHours->tim_pro_name[$i], in));
+            $block1->cellRow(buildLink("../projects/viewproject.php?id=" . $listHours->tim_project[$i], $listHours->tim_pro_name[$i], 'in'));
             $block1->cellRow("");
             $block1->cellRow("");
             $block1->closeRow(); 
@@ -362,7 +362,7 @@ if ($comptListHours != "0") {
         $block1->openRow();
         $block1->checkboxRow($listHours->tim_id[$i], $checkbox = "false");
         $block1->cellRow("");
-        $block1->cellRow(buildLink("../projects/viewproject.php?id=" . $listHours->$project_name, $listHours->tim_pro_name[$i], in));
+        $block1->cellRow(buildLink("../projects/viewproject.php?id=" . $listHours->$project_name, $listHours->tim_pro_name[$i], 'in'));
         $block1->cellRow("<b>Total project hours:</b>");
         $nice_print = sprintf("%01.2f", $total_project_hours);
         $block1->cellRow("<b>$nice_print</b>");

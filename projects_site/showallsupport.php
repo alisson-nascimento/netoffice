@@ -26,7 +26,7 @@ $userDetail->openMembers($tmpquery);
 $tmpquery = "WHERE sr.member = '" . $_SESSION['idSession'] . "' AND sr.project = '$project'";
 $listRequests = new request();
 $listRequests->openSupportRequests($tmpquery);
-$comptListRequests = count($listRequests->sr_id);
+$comptListRequests = teste_count($listRequests->sr_id);
 
 $block1 = new block();
 
@@ -45,14 +45,14 @@ if ($comptListRequests != "0") {
             $highlightOff = $block1->evenColor;
         }
 
-        $comptSta = count($requestStatus);
+        $comptSta = teste_count($requestStatus);
         for ($sr = 0;$sr < $comptSta;$sr++) {
             if ($listRequests->sr_status[$i] == $sr) {
                 $currentStatus = $requestStatus[$sr];
             }
         }
 
-        $comptPri = count($priority);
+        $comptPri = teste_count($priority);
         for ($rp = 0;$rp < $comptPri;$rp++) {
             if ($listRequests->sr_priority[$i] == $rp) {
                 $requestPriority = $priority[$rp];

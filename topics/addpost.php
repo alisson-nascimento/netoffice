@@ -45,7 +45,7 @@ $idPublish = $detailTopic->top_published[0];
 $tmpquery = "WHERE pos.topic = '" . $detailTopic->top_id[0] . "' ORDER BY pos.created DESC";
 $listPosts = new request();
 $listPosts->openPosts($tmpquery);
-$comptListPosts = count($listPosts->pos_id);
+$comptListPosts = teste_count($listPosts->pos_id);
 
 if ($projectDetail->pro_org_id[0] == "1") {
     $projectDetail->pro_org_name[0] = $strings["none"];

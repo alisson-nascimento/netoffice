@@ -25,7 +25,7 @@ if ($action == "add") {
 
 
 if ($id == "" && $tri != "true") {
-    $compt1 = count($S_PRJSEL);
+    $compt1 = teste_count($S_PRJSEL);
     $S_pro = "";
     for($i = 0; $i < $compt1; $i++) {
         if ($S_PRJSEL[$i] == "ALL") {
@@ -38,7 +38,7 @@ if ($id == "" && $tri != "true") {
             $S_pro .= $S_PRJSEL[$i];
         } 
     } 
-    $compt2 = count($S_ATSEL);
+    $compt2 = teste_count($S_ATSEL);
     $S_mem = "";
     for($i = 0; $i < $compt2; $i++) {
         if ($S_ATSEL[$i] == "ALL") {
@@ -51,7 +51,7 @@ if ($id == "" && $tri != "true") {
             $S_mem .= $S_ATSEL[$i];
         } 
     } 
-    $compt3 = count($S_STATSEL);
+    $compt3 = teste_count($S_STATSEL);
     $S_sta = "";
     for($i = 0; $i < $compt3; $i++) {
         if ($S_STATSEL[$i] == "ALL") {
@@ -64,7 +64,7 @@ if ($id == "" && $tri != "true") {
             $S_sta .= $S_STATSEL[$i];
         } 
     } 
-    $compt4 = count($S_PRIOSEL);
+    $compt4 = teste_count($S_PRIOSEL);
     $S_pri = "";
     for($i = 0; $i < $compt4; $i++) {
         if ($S_PRIOSEL[$i] == "ALL") {
@@ -77,7 +77,7 @@ if ($id == "" && $tri != "true") {
             $S_pri .= $S_PRIOSEL[$i];
         } 
     } 
-    $compt5 = count($S_ORGSEL);
+    $compt5 = teste_count($S_ORGSEL);
     $S_org = "";
     for($i = 0; $i < $compt5; $i++) {
         if ($S_ORGSEL[$i] == "ALL") {
@@ -212,7 +212,7 @@ if ($projectsFilter == "true") {
 
     $listProjectsTasks = new request();
     $listProjectsTasks->openProjects($tmpquery);
-    $comptListProjectsTasks = count($listProjectsTasks->pro_id);
+    $comptListProjectsTasks = teste_count($listProjectsTasks->pro_id);
 
     if ($comptListProjectsTasks != "0") {
         for ($i = 0;$i < $comptListProjectsTasks;$i++) {
@@ -234,7 +234,7 @@ if ($projectsFilter == "true") {
 } 
 $listTasks = new request();
 $listTasks->openTasks($tmpquery);
-$comptListTasks = count($listTasks->tas_id);
+$comptListTasks = teste_count($listTasks->tas_id);
 
 $block0 = new block();
 
@@ -276,8 +276,8 @@ if ($comptListTasks != "0") {
         $idPublish = $listTasks->tas_published[$i];
         $block1->openRow($listTasks->tas_id[$i]);
         $block1->checkboxRow($listTasks->tas_id[$i]);
-        $block1->cellRow(buildLink("../tasks/viewtask.php?id=" . $listTasks->tas_id[$i], $listTasks->tas_id[$i], in));
-        $block1->cellRow(buildLink("../tasks/viewtask.php?id=" . $listTasks->tas_id[$i], $listTasks->tas_name[$i], in));
+        $block1->cellRow(buildLink("../tasks/viewtask.php?id=" . $listTasks->tas_id[$i], $listTasks->tas_id[$i], 'in'));
+        $block1->cellRow(buildLink("../tasks/viewtask.php?id=" . $listTasks->tas_id[$i], $listTasks->tas_name[$i], 'in'));
         $block1->cellRow('<img src="../themes/' . THEME . '/gfx_priority/' . $idPriority . '.gif" alt="' . $priority[$idPriority] . '">&nbsp;' . $priority[$idPriority], '', true);
         $block1->cellRow($status[$idStatus]);
         if ($listTasks->tas_due_date[$i] <= $date && $listTasks->tas_completion[$i] != "10") {
@@ -294,7 +294,7 @@ if ($comptListTasks != "0") {
         } else {
             $block1->cellRow(buildLink($listTasks->tas_mem_email_work[$i], $listTasks->tas_mem_login[$i], LINK_MAIL));
         } 
-        $block1->cellRow(buildLink("../projects/viewproject.php?id=" . $listTasks->tas_project[$i], $listTasks->tas_pro_name[$i], in));
+        $block1->cellRow(buildLink("../projects/viewproject.php?id=" . $listTasks->tas_project[$i], $listTasks->tas_pro_name[$i], 'in'));
         if ($sitePublish == "true") {
             $block1->cellRow($statusPublish[$idPublish]);
         } 

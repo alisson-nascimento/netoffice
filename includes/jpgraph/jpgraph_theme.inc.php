@@ -87,7 +87,7 @@ abstract class Theme {
   
         $i = 0;
         while (true) {
-            for ($j = 0; $j < count($this->GetColorList()); $j++) {
+            for ($j = 0; $j < teste_count($this->GetColorList()); $j++) {
                 if (++$count > $num) {
                     break 2;
                 }
@@ -111,7 +111,7 @@ abstract class Theme {
         if (isset($color_list[$this->color_index])) {
             $color = $color_list[$this->color_index];
         } else {
-            $color_count = count($color_list);
+            $color_count = teste_count($color_list);
             if ($color_count <= $this->color_index) {
                 $color_tmp = $color_list[$this->color_index % $color_count];
                 $brightness = 1.0 - intval($this->color_index / $color_count) * 0.2;

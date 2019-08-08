@@ -607,7 +607,7 @@ class GTextTable {
         if( $aArg2===NULL && $aArg3===NULL ) {
             if( is_array($aArg1) ) {
                 if( is_array($aArg1[0]) ) {
-                    $m = count($aArg1);
+                    $m = teste_count($aArg1);
                     // Find the longest row
                     $n=0;
                     for($i=0; $i < $m; ++$i)
@@ -1238,7 +1238,7 @@ class GTextTable {
         // adjust row and column size depending on cell content
         $this->_autoSizeTable($aImg);
 
-        if( $this->iSize[1] != count($this->iColWidth) || $this->iSize[0] != count($this->iRowHeight) ) {
+        if( $this->iSize[1] != teste_count($this->iColWidth) || $this->iSize[0] != teste_count($this->iRowHeight) ) {
             JpGraphError::RaiseL(27008);
             //('Column and row size arrays must match the dimesnions of the table');
         }

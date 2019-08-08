@@ -282,7 +282,7 @@ class FlagImages {
                 JpGraphError::RaiseL(5001,$aSize);
                 //('Unknown flag size. ('.$aSize.')');
         }
-        $this->iFlagCount = count($this->iCountryNameMap);
+        $this->iFlagCount = teste_count($this->iCountryNameMap);
     }
 
     function GetNum() {
@@ -307,7 +307,7 @@ class FlagImages {
 
     function GetIdxByOrdinal($aOrd,&$outFullName) {
         $aOrd--;
-        $n = count($this->iOrdIdx);
+        $n = teste_count($this->iOrdIdx);
         if( $n == 0 ) {
             reset($this->iCountryNameMap);
             $this->iOrdIdx=array();

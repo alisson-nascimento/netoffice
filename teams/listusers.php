@@ -18,7 +18,7 @@ require_once("../includes/library.php");
 $tmpquery = "WHERE pro.id = '$id'";
 $projectDetail = new request();
 $projectDetail->openProjects($tmpquery);
-$comptProjectDetail = count($projectDetail->pro_id);
+$comptProjectDetail = teste_count($projectDetail->pro_id);
 
 if ($comptProjectDetail == "0") {
     header("Location: ../projects/listprojects.php?msg=blank");
@@ -50,7 +50,7 @@ $block1->sorting("team", $sortingUser->sor_team[0], "mem.name ASC", $sortingFiel
 $tmpquery = "WHERE tea.project = '$id' AND mem.profil != '3' ORDER BY $block1->sortingValue";
 $listTeam = new request();
 $listTeam->openTeams($tmpquery);
-$comptListTeam = count($listTeam->tea_id);
+$comptListTeam = teste_count($listTeam->tea_id);
 
 $block1->openResults();
 

@@ -20,7 +20,7 @@ $teamMember = "false";
 $tmpquery = "WHERE tea.project = '" . $meetingDetail->mee_project[0] . "' AND tea.member = '" . $_SESSION['idSession'] . "'";
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 
 if ($comptMemberTest == "0") {
     $teamMember = "false";
@@ -112,7 +112,7 @@ $tmpquery = "WHERE tea.project = '" . $projectDetail->pro_id[0] . "' ORDER BY me
 
 $projmem = new request();
 $projmem->openTeams($tmpquery);
-$comptProjmem = count($projmem->tea_mem_id);
+$comptProjmem = teste_count($projmem->tea_mem_id);
 
 echo "
 <tr class='odd'>

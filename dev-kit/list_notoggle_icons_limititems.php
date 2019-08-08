@@ -46,7 +46,7 @@ $block1->recordsTotal = compt($initrequest["organizations"] . " " . $tmpquery);
 
 $listOrganizations = new request();
 $listOrganizations->openOrganizations($tmpquery, $block1->borne, $block1->rowsLimit);
-$comptListOrganizations = count($listOrganizations->org_id);
+$comptListOrganizations = teste_count($listOrganizations->org_id);
 
 if ($comptListOrganizations != "0") {
     $block1->openResults();
@@ -96,7 +96,7 @@ $block2->recordsTotal = compt($initrequest["organizations"] . " " . $tmpquery);
 
 $listOrganizations2 = new request();
 $listOrganizations2->openOrganizations($tmpquery, $block2->borne, $block2->rowsLimit);
-$comptlistOrganizations2 = count($listOrganizations2->org_id);
+$comptlistOrganizations2 = teste_count($listOrganizations2->org_id);
 
 if ($comptlistOrganizations2 != "0") {
     $block2->openResults();

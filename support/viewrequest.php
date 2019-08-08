@@ -34,13 +34,13 @@ $requestDetail->openSupportRequests($tmpquery);
 $tmpquery = "WHERE sp.request_id = '$id' ORDER BY sp.date DESC";
 $listPosts = new request();
 $listPosts->openSupportPosts($tmpquery);
-$comptListPosts = count($listPosts->sp_id);
+$comptListPosts = teste_count($listPosts->sp_id);
 
 $teamMember = "false";
 $tmpquery = "WHERE tea.project = '" . $requestDetail->sr_project[0] . "' AND tea.member = '" . $_SESSION['idSession'] . "'";
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 if ($comptMemberTest == "0") {
     $teamMember = "false";
 } else {
@@ -88,13 +88,13 @@ else {
 $block1->openContent();
 $block1->contentTitle($strings["info"]);
 
-$comptSupStatus = count($requestStatus);
+$comptSupStatus = teste_count($requestStatus);
 for ($i = 0;$i < $comptSupStatus;$i++) {
     if ($requestDetail->sr_status[0] == $i) {
         $status = $requestStatus[$i];
     } 
 } 
-$comptPri = count($priority);
+$comptPri = teste_count($priority);
 for ($i = 0;$i < $comptPri;$i++) {
     if ($requestDetail->sr_priority[0] == $i) {
         $requestPriority = $priority[$i];

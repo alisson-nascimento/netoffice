@@ -53,7 +53,7 @@ if ($demoMode == true) {
 } 
 $listMembers = new request();
 $listMembers->openMembers($tmpquery);
-$comptListMembers = count($listMembers->mem_id);
+$comptListMembers = teste_count($listMembers->mem_id);
 
 if ($comptListMembers != "0") {
     $block1->openResults();

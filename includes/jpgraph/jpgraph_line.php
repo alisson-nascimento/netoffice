@@ -185,7 +185,7 @@ class LinePlot extends Plot{
         $idx=0;
         $numpoints=count($this->coords[0]);
         if( isset($this->coords[1]) ) {
-            if( count($this->coords[1])!=$numpoints ) {
+            if( teste_count($this->coords[1])!=$numpoints ) {
                 JpGraphError::RaiseL(2003,count($this->coords[1]),$numpoints);
             //("Number of X and Y points are not equal. Number of X-points:".count($this->coords[1])." Number of Y-points:$numpoints");
             }
@@ -474,7 +474,7 @@ class AccLinePlot extends Plot {
     // CONSTRUCTOR
     function __construct($plots) {
         $this->plots = $plots;
-        $this->nbrplots = count($plots);
+        $this->nbrplots = teste_count($plots);
         $this->numpoints = $plots[0]->numpoints;
 
         // Verify that all plots have the same number of data points
@@ -500,9 +500,9 @@ class AccLinePlot extends Plot {
     function Max() {
         list($xmax) = $this->plots[0]->Max();
         $nmax=0;
-        $n = count($this->plots);
+        $n = teste_count($this->plots);
         for($i=0; $i < $n; ++$i) {
-            $nc = count($this->plots[$i]->coords[0]);
+            $nc = teste_count($this->plots[$i]->coords[0]);
             $nmax = max($nmax,$nc);
             list($x) = $this->plots[$i]->Max();
             $xmax = Max($xmax,$x);
@@ -526,9 +526,9 @@ class AccLinePlot extends Plot {
     function Min() {
         $nmax=0;
         list($xmin,$ysetmin) = $this->plots[0]->Min();
-        $n = count($this->plots);
+        $n = teste_count($this->plots);
         for($i=0; $i < $n; ++$i) {
-            $nc = count($this->plots[$i]->coords[0]);
+            $nc = teste_count($this->plots[$i]->coords[0]);
             $nmax = max($nmax,$nc);
             list($x,$y) = $this->plots[$i]->Min();
             $xmin = Min($xmin,$x);
@@ -651,7 +651,7 @@ class AccLinePlot extends Plot {
     // since this method would have a side effect.
     function Stroke($img,$xscale,$yscale) {
         $img->SetLineWeight($this->weight);
-        $this->numpoints = count($this->plots[0]->coords[0]);
+        $this->numpoints = teste_count($this->plots[0]->coords[0]);
         // Allocate array
         $coords[$this->nbrplots][$this->numpoints]=0;
         for($i=0; $i<$this->numpoints; $i++) {

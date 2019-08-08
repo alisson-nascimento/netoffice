@@ -100,7 +100,7 @@ if ($S_mem != 'ALL' && $S_mem != "") {
 $tmpquery = "$query ORDER BY org.name,pro.name,mem.name,tim.date";
 $listHours = new request();
 $listHours->openTaskTime($tmpquery);
-$comptListHours = count($listHours->tim_id);
+$comptListHours = teste_count($listHours->tim_id);
 
 $dump_buffer = $reportHeader . $crlf;
 

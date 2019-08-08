@@ -25,12 +25,12 @@ if ( ($_SESSION['profilSession'] == 4) || ($_SESSION['profilSession'] == 3) ||
 $tmpquery = "WHERE org.id = '$organization'";
 $detailClient = new request();
 $detailClient->openOrganizations($tmpquery);
-$comptDetailClient = count($detailClient->org_id);
+$comptDetailClient = teste_count($detailClient->org_id);
 
 $tmpquery = "WHERE mem.id = '$id'";
 $userDetail = new request();
 $userDetail->openMembers($tmpquery);
-$comptUserDetail = count($userDetail->mem_id);
+$comptUserDetail = teste_count($userDetail->mem_id);
 // case update client user
 if ($action == "update") {
     if (!ereg("^[A-Za-z0-9]+$", $un)) {
@@ -40,7 +40,7 @@ if ($action == "update") {
         $tmpquery = "WHERE mem.login = '$un' AND mem.login != '$unOld'";
         $existsUser = new request();
         $existsUser->openMembers($tmpquery);
-        $comptExistsUser = count($existsUser->mem_id);
+        $comptExistsUser = teste_count($existsUser->mem_id);
         if ($comptExistsUser != "0") {
             $error = $strings["user_already_exists"];
         } else {
@@ -126,7 +126,7 @@ echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">" . $strings["use
 $tmpquery = "WHERE org.id != '1' ORDER BY org.name";
 $selectClient = new request();
 $selectClient->openOrganizations($tmpquery);
-$comptSelectClient = count($selectClient->org_id);
+$comptSelectClient = teste_count($selectClient->org_id);
 for ($i = 0;$i < $comptSelectClient;$i++) {
     if ($userDetail->mem_organization[0] == $selectClient->org_id[$i]) {
         echo "<option value=\"" . $selectClient->org_id[$i] . "\" selected>" . $selectClient->org_name[$i] . "</option>";

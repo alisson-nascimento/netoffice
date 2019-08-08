@@ -24,7 +24,7 @@ if ($supportType == "team") {
     $tmpquery = "WHERE tea.project = '" . $requestDetail->sr_project[0] . "'";
     $listTeam = new request();
     $listTeam->openTeams($tmpquery);
-    $comptListTeam = count($listTeam->tea_id);
+    $comptListTeam = teste_count($listTeam->tea_id);
 
     for ($i = 0;$i < $comptListTeam;$i++) {
         if ($_SESSION['idSession'] == $listTeam->tea_mem_id[$i]) {

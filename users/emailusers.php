@@ -35,7 +35,7 @@ if ($action == "email") {
     $tmpquery = "WHERE mem.id IN($id) ORDER BY mem.name";
     $listMembers = new request();
     $listMembers->openMembers($tmpquery);
-    $comptListMembers = count($listMembers->mem_id);
+    $comptListMembers = teste_count($listMembers->mem_id);
     // format body and message
     $subject = stripslashes($subject);
     $message = stripslashes($message);
@@ -102,7 +102,7 @@ $id = str_replace("**", ",", $id);
 $tmpquery = "WHERE mem.id IN($id) ORDER BY mem.name";
 $listMembers = new request();
 $listMembers->openMembers($tmpquery);
-$comptListMembers = count($listMembers->mem_id);
+$comptListMembers = teste_count($listMembers->mem_id);
 
 for ($i = 0;$i < $comptListMembers;$i++) {
     if ($listMembers->mem_email_work[$i] != "") {

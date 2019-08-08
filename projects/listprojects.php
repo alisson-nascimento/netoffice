@@ -39,7 +39,7 @@ $breadcrumbs[]=$strings['projects'];
 
 if ($show == 'inactive') {
 	$breadcrumbs[]=
-		buildLink('../projects/listprojects.php?show=active', $strings['active'], in)
+		buildLink('../projects/listprojects.php?show=active', $strings['active'], 'in')
 		.' | '. $strings['inactive']
 		.' | '. buildLink('../projects/listprojects.php?show=all', $strings['all'], LINK_INSIDE);
 }
@@ -47,13 +47,13 @@ else if ($show == 'active') {
 	$breadcrumbs[]=
 	    $strings['active']
 		.' | '
-		.buildLink('../projects/listprojects.php?show=inactive', $strings['inactive'], in)
+		.buildLink('../projects/listprojects.php?show=inactive', $strings['inactive'], 'in')
 		.' | '
 		.buildLink('../projects/listprojects.php?show=all', $strings['all'], LINK_INSIDE);
 }
 else if ($show == 'all') {
     $breadcrumbs[]=
-    	buildLink('../projects/listprojects.php?show=active', $strings['active'], in)
+    	buildLink('../projects/listprojects.php?show=active', $strings['active'], 'in')
     	. ' | ' . buildLink('../projects/listprojects.php?show=inactive', $strings['inactive'], LINK_INSIDE)
     	. ' | ' . $strings['all'];
 }
@@ -145,7 +145,7 @@ $blockPage->bornesNumber = '1';
 
 	$listProjects = new request();
 	$listProjects->openProjects($tmpquery, $block1->borne, $block1->rowsLimit);
-	$comptListProjects = count($listProjects->pro_id);
+	$comptListProjects = teste_count($listProjects->pro_id);
 
 	if ($comptListProjects != 0) {
 	    $block1->openResults();

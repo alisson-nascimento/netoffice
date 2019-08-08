@@ -18,7 +18,7 @@ require_once("../includes/library.php");
 $tmpquery = "WHERE pro.id = '$project'";
 $projectDetail = new request();
 $projectDetail->openProjects($tmpquery);
-$comptProjectDetail = count($projectDetail->pro_id);
+$comptProjectDetail = teste_count($projectDetail->pro_id);
 
 if ($comptProjectDetail == "0") {
     header("Location: ../projects/listprojects.php?msg=blank");
@@ -37,7 +37,7 @@ if ($action == "delete") {
         $tmpquery = "WHERE mem.id IN($id)";
         $listMembers = new request();
         $listMembers->openMembers($tmpquery);
-        $comptListMembers = count($listMembers->mem_id);
+        $comptListMembers = teste_count($listMembers->mem_id);
 
         for ($i = 0;$i < $comptListMembers;$i++) {
             $Htpasswd->deleteUser($listMembers->mem_login[$i]);
@@ -48,7 +48,7 @@ if ($action == "delete") {
         // include mantis library
         require_once("../mantis/core_API.php");
     } 
-    $compt = count($pieces);
+    $compt = teste_count($pieces);
     for ($i = 0;$i < $compt;$i++) {
         $tmpquery1 = "DELETE FROM " . $tableCollab["teams"] . " WHERE member = '$pieces[$i]'";
         connectSql("$tmpquery1");
@@ -93,7 +93,7 @@ $id = str_replace("**", ",", $id);
 $tmpquery = "WHERE mem.id IN($id) ORDER BY mem.name";
 $listMembers = new request();
 $listMembers->openMembers($tmpquery);
-$comptListMembers = count($listMembers->mem_id);
+$comptListMembers = teste_count($listMembers->mem_id);
 
 for ($i = 0;$i < $comptListMembers;$i++) {
     $block1->contentRow("#" . $listMembers->mem_id[$i], $listMembers->mem_login[$i] . " (" . $listMembers->mem_name[$i] . ")");

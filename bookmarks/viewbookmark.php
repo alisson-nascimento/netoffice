@@ -35,7 +35,7 @@ $bookmarkDetail->openBookmarks($tmpquery);
 
 if ($bookmarkDetail->boo_users[0] != '') {
     $pieces = explode('|', $bookmarkDetail->boo_users[0]);
-    $comptPieces = count($pieces);
+    $comptPieces = teste_count($pieces);
     $private = 'false';
 
     for ($i = 0;$i < $comptPieces;$i++) {

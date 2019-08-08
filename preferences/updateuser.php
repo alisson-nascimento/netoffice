@@ -53,7 +53,7 @@ if ($action == "update") {
 $tmpquery = "WHERE mem.id = '" . $_SESSION['idSession'] . "'";
 $userPrefs = new request();
 $userPrefs->openMembers($tmpquery);
-$comptUserPrefs = count($userPrefs->mem_id);
+$comptUserPrefs = teste_count($userPrefs->mem_id);
 
 if ($comptUserPrefs == "0") {
     header("Location: ../users/listusers.php?msg=blankUser");

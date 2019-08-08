@@ -37,7 +37,7 @@ if ($action == "update") {
                 $tmpquery = "WHERE tea.member = '" . $_SESSION['idSession'] . "'";
                 $listProjects = new request();
                 $listProjects->openTeams($tmpquery);
-                $comptListProjects = count($listProjects->tea_id);
+                $comptListProjects = teste_count($listProjects->tea_id);
 
                 if ($comptListProjects != "0") {
                     for ($i = 0;$i < $comptListProjects;$i++) {
@@ -76,7 +76,7 @@ if ($action == "update") {
 $tmpquery = "WHERE mem.id = '" . $_SESSION['idSession'] . "'";
 $userDetail = new request();
 $userDetail->openMembers($tmpquery);
-$comptUserDetail = count($userDetail->mem_id);
+$comptUserDetail = teste_count($userDetail->mem_id);
 
 if ($comptUserDetail == "0") {
     header("Location: ../users/listusers.php?msg=blankUser");

@@ -19,7 +19,7 @@ $detailTopic->openTopics($tmpquery);
 $tmpquery = "WHERE tea.project = '$project' AND tea.member != '" . $_SESSION['idSession'] . "' ORDER BY mem.id";
 $listTeam = new request();
 $listTeam->openTeams($tmpquery);
-$comptListTeam = count($listTeam->tea_id);
+$comptListTeam = teste_count($listTeam->tea_id);
 
 for ($i = 0;$i < $comptListTeam;$i++) {
     $posters .= $listTeam->tea_member[$i] . ",";
@@ -32,7 +32,7 @@ if ($posters != "") {
     $tmpquery = "WHERE noti.member IN($posters)";
     $listNotifications = new request();
     $listNotifications->openNotifications($tmpquery);
-    $comptListNotifications = count($listNotifications->not_id);
+    $comptListNotifications = teste_count($listNotifications->not_id);
 
     $mail = new notification();
 

@@ -77,7 +77,7 @@ class htmltextsystem {
         sort($breaks);
 
         $i = 0;
-        while ($i < count($breaks) && $secs >= (2 * $breaks[$i])) {
+        while ($i < teste_count($breaks) && $secs >= (2 * $breaks[$i])) {
             $i++;
         } 
         $i--;

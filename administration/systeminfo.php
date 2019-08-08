@@ -61,7 +61,7 @@ if ($databaseType == 'mysql') {
     $databaseTypeMore = 'MySql';
     $MY_DBH = openDatabase();
     $local_query = 'SELECT VERSION() as version';
-    $res = mysql_query($local_query, $MY_DBH);
+    $res = mysql_query_to_mysqli_query($local_query, $MY_DBH);
     $databaseVersion = mysql_result($res, 0, 'version');
 } 
 
@@ -74,7 +74,7 @@ $block1->contentRow($databaseTypeMore . ' version', $databaseVersion);
 $block1->contentRow('extension_dir', ini_get(extension_dir));
 
 $ext = get_loaded_extensions();
-$comptExt = count($ext);
+$comptExt = teste_count($ext);
 
 for ($i = 0;$i < $comptExt;$i++) {
     $extensions .= $ext[$i];

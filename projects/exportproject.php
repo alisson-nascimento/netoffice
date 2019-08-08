@@ -66,7 +66,7 @@ $dump_buffer .= '"' . $projectDetail->pro_name[0] . '";"' . $projectDetail->pro_
 $tmpquery = "WHERE tas.project = '$id'";
 $listTasks = new request();
 $listTasks->openTasks($tmpquery);
-$comptListTasks = count($listTasks->tas_id);
+$comptListTasks = teste_count($listTasks->tas_id);
 
 if ($comptListTasks != '0') {
     $dump_buffer .= $strings['tasks'] . $crlf;

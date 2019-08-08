@@ -24,7 +24,7 @@ if ($action == "delete") {
     $tmpquery = "WHERE tas.id IN($id)";
     $listTasks = new request();
     $listTasks->openTasks($tmpquery);
-    $comptListTasks = count($listTasks->tas_id);
+    $comptListTasks = teste_count($listTasks->tas_id);
     for ($i = 0;$i < $comptListTasks;$i++) {
         if ($fileManagement == "true") {
             delDir("../files/" . $listTasks->tas_project[$i] . "/" . $listTasks->tas_id[$i]);
@@ -77,7 +77,7 @@ $id = str_replace("**", ",", $id);
 $tmpquery = "WHERE tas.id IN($id) ORDER BY tas.name";
 $listTasks = new request();
 $listTasks->openTasks($tmpquery);
-$comptListTasks = count($listTasks->tas_id);
+$comptListTasks = teste_count($listTasks->tas_id);
 
 for ($i = 0;$i < $comptListTasks;$i++) {
     echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">#" . $listTasks->tas_id[$i] . "</td><td>" . $listTasks->tas_name[$i] . "</td></tr>";

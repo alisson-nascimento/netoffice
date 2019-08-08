@@ -25,7 +25,7 @@ require_once("../includes/library.php");
 
 //--- header ---
 $breadcrumbs[]=$strings['reports'];
-$breadcrumbs[]=buildLink('../reports/createreport.php?typeReports=create', $strings["create_report"], in) . ' | ' . buildLink('../reports/createreport.php?typeReports=custom', $strings['custom_reports'], LINK_INSIDE);
+$breadcrumbs[]=buildLink('../reports/createreport.php?typeReports=create', $strings["create_report"], 'in') . ' | ' . buildLink('../reports/createreport.php?typeReports=custom', $strings['custom_reports'], LINK_INSIDE);
 
 $pageSection = 'reports';
 require_once("../themes/" . THEME . "/header.php");
@@ -36,7 +36,7 @@ $query = " WHERE pro.owner = '" . $_SESSION['idSession'] . "' and pro.status > 1
 $tmpquery = "$query ORDER BY pro.name";
 $listProjects = new request();
 $listProjects->openProjects($tmpquery);
-$comptListProjects = count($listProjects->pro_id);
+$comptListProjects = teste_count($listProjects->pro_id);
 // show the nice number-of-results header
 $block0 = new block();
 $block0->openContent();
@@ -87,7 +87,7 @@ if ($comptListProjects != "0") {
 
         $listTasks = new request();
         $listTasks->openTasks($tmpqueryTask);
-        $comptListTasks = count($listTasks->tas_id);
+        $comptListTasks = teste_count($listTasks->tas_id);
 		
         $blockProject->openResults("false");
 

@@ -118,7 +118,7 @@ if ($auth == 'on') {
 
     $loginUser = new request();
     $loginUser->openMembers($tmpquery);
-    $comptLoginUser = count($loginUser->mem_id); 
+    $comptLoginUser = teste_count($loginUser->mem_id); 
 
     // test if user exits
     if ($comptLoginUser == '0') {
@@ -179,7 +179,7 @@ if ($auth == 'on') {
             $tmpquery = "WHERE log.login = '$loginForm'";
             $registerLog = new request();
             $registerLog->openLogs($tmpquery);
-            $comptRegisterLog = count($registerLog->log_id);
+            $comptRegisterLog = teste_count($registerLog->log_id);
             $session = session_id();
 
             if ($comptRegisterLog == '0') {
@@ -284,7 +284,7 @@ $block1->contentRow($strings['language'], $selectLanguage);
 $block1->contentRow('* ' . $strings['user_name'], '<input value="' . $loginForm . '" type="text" name="loginForm">');
 $block1->contentRow('* ' . $strings['password'], '<input value="' . $passwordForm . '" type="password" name="passwordForm">');
 $block1->contentRow($strings['remember_password'],'<input type="checkbox" name="rememberForm" value="on">');
-$block1->contentRow('', '<input type="submit" name="loginSubmit" value="' . $strings['login'] . '"><br><br><br>' . buildLink('../general/sendpassword.php', $strings['forgot_pwd'], in));
+$block1->contentRow('', '<input type="submit" name="loginSubmit" value="' . $strings['login'] . '"><br><br><br>' . buildLink('../general/sendpassword.php', $strings['forgot_pwd'], 'in'));
 
 $block1->closeContent();
 $block1->headingForm_close();

@@ -33,17 +33,17 @@ if ($enableHelpSupport == true) {
     $tmpquery = "WHERE sr.status='0'";
     $listNewRequests = new request();
     $listNewRequests->openSupportRequests($tmpquery);
-    $comptListNewRequests = count($listNewRequests->sr_id);
+    $comptListNewRequests = teste_count($listNewRequests->sr_id);
 
     $tmpquery = "WHERE sr.status='1'";
     $listOpenRequests = new request();
     $listOpenRequests->openSupportRequests($tmpquery);
-    $comptListOpenRequests = count($listOpenRequests->sr_id);
+    $comptListOpenRequests = teste_count($listOpenRequests->sr_id);
 
     $tmpquery = "WHERE sr.status='2'";
     $listCompleteRequests = new request();
     $listCompleteRequests->openSupportRequests($tmpquery);
-    $comptListCompleteRequests = count($listCompleteRequests->sr_id);
+    $comptListCompleteRequests = teste_count($listCompleteRequests->sr_id);
 
     $block1 = new block();
     $block1->form = 'help';

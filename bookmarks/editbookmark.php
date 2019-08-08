@@ -38,7 +38,7 @@ if ($id != '') {
             $tmpquery = "WHERE boocat.name = '$category_new'";
             $listCategories = new request();
             $listCategories->openBookmarksCategories($tmpquery);
-            $comptListCategories = count($listCategories->boocat_id);
+            $comptListCategories = teste_count($listCategories->boocat_id);
 
             if ($comptListCategories == '0') {
                 $tmpquery1 = 'INSERT INTO ' . $tableCollab['bookmarks_categories'] . "(name) VALUES('$category_new')";
@@ -111,7 +111,7 @@ if ($id == '') {
             $tmpquery = "WHERE boocat.name = '$category_new'";
             $listCategories = new request();
             $listCategories->openBookmarksCategories($tmpquery);
-            $comptListCategories = count($listCategories->boocat_id);
+            $comptListCategories = teste_count($listCategories->boocat_id);
 
             if ($comptListCategories == '0') {
                 $tmpquery1 = 'INSERT INTO ' . $tableCollab['bookmarks_categories'] . "(name) VALUES('$category_new')";
@@ -202,7 +202,7 @@ echo '
 $tmpquery = 'ORDER BY boocat.name';
 $listCategories = new request();
 $listCategories->openBookmarksCategories($tmpquery);
-$comptListCategories = count($listCategories->boocat_id);
+$comptListCategories = teste_count($listCategories->boocat_id);
 
 for ($i = 0;$i < $comptListCategories;$i++) {
     if ($listCategories->boocat_id[$i] == $bookmarkDetail->boo_category[0]) {
@@ -252,13 +252,13 @@ if ($demoMode == true) {
 
 $listUsers = new request();
 $listUsers->openMembers($tmpquery);
-$comptListUsers = count($listUsers->mem_id);
+$comptListUsers = teste_count($listUsers->mem_id);
 
 $oldCaptured = $bookmarkDetail->boo_users[0];
 
 if ($bookmarkDetail->boo_users[0] != "") {
     $listCaptured = explode('|', $bookmarkDetail->boo_users[0]);
-    $comptListCaptured = count($listCaptured);
+    $comptListCaptured = teste_count($listCaptured);
 } 
 
 if ($comptListUsers != '0') {

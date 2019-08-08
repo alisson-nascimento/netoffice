@@ -27,7 +27,7 @@ if ($requestDetail->sr_project[0] != $_SESSION['projectSession'] || $requestDeta
 $tmpquery = "WHERE sp.request_id = '$id' ORDER BY sp.date";
 $postDetail = new request();
 $postDetail->openSupportPosts($tmpquery);
-$comptPostDetail = count($postDetail->sp_id);
+$comptPostDetail = teste_count($postDetail->sp_id);
 
 $bouton[6] = "over";
 $titlePage = $strings["support"];
@@ -36,13 +36,13 @@ require_once ("include_header.php");
 echo "<table cellspacing=\"0\" width=\"90%\" cellpadding=\"3\">
 <tr><th colspan=\"4\">" . $strings["information"] . ":</th></tr>";
 
-$comptSupStatus = count($requestStatus);
+$comptSupStatus = teste_count($requestStatus);
 for ($i = 0;$i < $comptSupStatus;$i++) {
     if ($requestDetail->sr_status[0] == $i) {
         $requestStatus = $requestStatus[$i];
     } 
 } 
-$comptPri = count($priority);
+$comptPri = teste_count($priority);
 for ($i = 0;$i < $comptPri;$i++) {
     if ($requestDetail->sr_priority[0] == $i) {
         $requestPriority = $priority[$i];

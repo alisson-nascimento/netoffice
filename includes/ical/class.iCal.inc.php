@@ -705,7 +705,7 @@ class iCal {
 	* @uses $icalevents
 	*/
 	function countEvents() {
-		return (int) count($this->icalevents);
+		return (int) teste_count($this->icalevents);
 	} // end function
 
 	/**
@@ -716,7 +716,7 @@ class iCal {
 	* @uses $icaltodos
 	*/
 	function countToDos() {
-		return (int) count($this->icaltodos);
+		return (int) teste_count($this->icaltodos);
 	} // end function
 
 	/**
@@ -727,7 +727,7 @@ class iCal {
 	* @uses $icalfbs
 	*/
 	function countFreeBusys() {
-		return (int) count($this->icalfbs);
+		return (int) teste_count($this->icalfbs);
 	} // end function
 
 	/**
@@ -738,7 +738,7 @@ class iCal {
 	* @uses $icaljournals
 	*/
 	function countJournals() {
-		return (int) count($this->icaljournals);
+		return (int) teste_count($this->icaljournals);
 	} // end function
 	/**#@-*/
 
@@ -967,7 +967,7 @@ class iCal {
 	*/
 	function generateAttendeesOutput($attendees, $format = 'ics') {
 		$output = (string) '';
-		if ($this->method == 0 && count($attendees) > 0) {
+		if ($this->method == 0 && teste_count($attendees) > 0) {
 			if ($format === 'ics') {
 				if (count($attendees) > 0) {
 					foreach ($attendees as $name => $data) {
@@ -1292,7 +1292,7 @@ class iCal {
 					$this->output .= (string) '</vevent>';
 				} // end foreach event
 				$this->output .= (string) '</vCalendar>';
-			} // end if count($this->icalevents) > 0
+			} // end if teste_count($this->icalevents) > 0
 			if (count($this->icaltodos) > 0) {
 				$this->output .= (string) '<vCalendar version="2.0" prodid="' . $this->prodid . '" method="' . $this->getMethod() . '">';
 				$todokeys = (array) array_keys($this->icaltodos);
@@ -1363,7 +1363,7 @@ class iCal {
 					$this->output .= (string) '</vtodo>';
 				} // end foreach event
 				$this->output .= (string) '</vCalendar>';
-			} // end if count($this->icaljournals) > 0
+			} // end if teste_count($this->icaljournals) > 0
 			if (count($this->icaljournals) > 0) {
 				$this->output .= (string) '<vCalendar version="2.0" prodid="' . $this->prodid . '" method="' . $this->getMethod() . '">';
 				$journalkeys = (array) array_keys($this->icaljournals);
@@ -1423,7 +1423,7 @@ class iCal {
 					$this->output .= (string) '</vjournal>';
 				} // end foreach event
 				$this->output .= (string) '</vCalendar>';
-			} // end if count($this->icaltodos) > 0
+			} // end if teste_count($this->icaltodos) > 0
 			if (count($this->icalfbs) > 0) {
 				$this->output .= (string) '<vCalendar version="2.0" prodid="' . $this->prodid . '" method="' . $this->getMethod() . '">';
 				$fbkeys = (array) array_keys($this->icalfbs);
@@ -1462,7 +1462,7 @@ class iCal {
 					$this->output .= (string) '</vfreebusy>';
 				} // end foreach event
 				$this->output .= (string) '</vCalendar>';
-			} // end if count($this->icaltodos) > 0
+			} // end if teste_count($this->icaltodos) > 0
 			$this->output .= (string) '</iCalendar>';
 		} // end if xcs
 		elseif ($this->output_format == 'rdf') {

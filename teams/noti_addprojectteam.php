@@ -15,7 +15,7 @@
 $tmpquery = "WHERE noti.member IN($id)";
 $listNotifications = new request();
 $listNotifications->openNotifications($tmpquery);
-$comptListNotifications = count($listNotifications->not_id);
+$comptListNotifications = teste_count($listNotifications->not_id);
 
 $mail = new notification();
 

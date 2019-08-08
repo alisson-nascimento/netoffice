@@ -18,7 +18,7 @@ require_once("../includes/library.php");
 $tmpquery = "WHERE pro.id = '$project'";
 $projectDetail = new request();
 $projectDetail->openProjects($tmpquery);
-$comptProjectDetail = count($projectDetail->pro_id);
+$comptProjectDetail = teste_count($projectDetail->pro_id);
 
 if ($comptProjectDetail == "0") {
     header("Location: ../projects/listprojects.php?msg=blank");
@@ -38,7 +38,7 @@ if ($action == "add") {
             $tmpquery = "WHERE mem.id IN($id)";
             $listMembers = new request();
             $listMembers->openMembers($tmpquery);
-            $comptListMembers = count($listMembers->mem_id);
+            $comptListMembers = teste_count($listMembers->mem_id);
 
             for ($i = 0;$i < $comptListMembers;$i++) {
                 $Htpasswd->addUser($listMembers->mem_login[$i], $listMembers->mem_password[$i]);
@@ -49,7 +49,7 @@ if ($action == "add") {
             // include mantis library
             require_once("../mantis/core_API.php");
         } 
-        $comptTeam = count($pieces);
+        $comptTeam = teste_count($pieces);
         for($i = 0;$i < $comptTeam;$i++) {
             $tmpquery = "INSERT INTO " . $tableCollab["teams"] . "(project, member,published,authorized) VALUES ('" . $projectDetail->pro_id[0] . "','$pieces[$i]','1','0')";
             connectSql("$tmpquery");
@@ -103,7 +103,7 @@ $block1->sorting("team", $sortingUser->sor_users[0], "mem.name ASC", $sortingFie
 $tmpquery = "WHERE tea.project = '$project' AND mem.profil = '3'";
 $concatMembers = new request();
 $concatMembers->openTeams($tmpquery);
-$comptConcatMembers = count($concatMembers->tea_id);
+$comptConcatMembers = teste_count($concatMembers->tea_id);
 if ($comptConcatMembers != "0") {
     for ($i = 0;$i < $comptConcatMembers;$i++) {
         $membersTeam .= $concatMembers->tea_mem_id[$i];
@@ -117,7 +117,7 @@ if ($comptConcatMembers != "0") {
 $tmpquery = "WHERE mem.organization = '" . $projectDetail->pro_organization[0] . "' $queryBonus AND mem.profil = '3' ORDER BY $block1->sortingValue";
 $listMembers = new request();
 $listMembers->openMembers($tmpquery);
-$comptListMembers = count($listMembers->mem_id);
+$comptListMembers = teste_count($listMembers->mem_id);
 
 if ($comptListMembers != "0") {
     $block1->openResults();

@@ -42,7 +42,7 @@ $block1->sorting("reports", $sortingUser->sor_reports[0], "rep.name ASC", $sorti
 $tmpquery = "WHERE rep.owner = '" . $_SESSION['idSession'] . "' ORDER BY $block1->sortingValue";
 $listReports = new request();
 $listReports->openReports($tmpquery);
-$comptListReports = count($listReports->rep_id);
+$comptListReports = teste_count($listReports->rep_id);
 
 if ($comptListReports != "0") {
     $block1->openResults();

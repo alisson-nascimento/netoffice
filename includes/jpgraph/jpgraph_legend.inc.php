@@ -427,7 +427,7 @@ class Legend {
                     $prect=null;
                 }
                 else {
-                    if( is_array($color) && count($color)==2 ) {
+                    if( is_array($color) && teste_count($color)==2 ) {
                         // The client want a gradient color
                         $grad->FilledRectangle($x1-$boxsize/2,$ym,
                                                $x1+$boxsize/2,$ym+$boxsize,

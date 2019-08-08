@@ -51,7 +51,7 @@ $teamMember = "false";
 $tmpquery = "WHERE tea.project = '$project' AND tea.member = '" . $_SESSION['idSession'] . "'";
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 if ($comptMemberTest == "0") {
     $teamMember = "false";
 } else {
@@ -109,7 +109,7 @@ $block1->recordsTotal = compt($initrequest["meetings"] . " " . $tmpquery);
 
 $listMeetings = new request();
 $listMeetings->openMeetings($tmpquery, $block1->borne, $block1->rowsLimit);
-$comptListMeetings = count($listMeetings->mee_id);
+$comptListMeetings = teste_count($listMeetings->mee_id);
 
 if ($comptListMeetings != "0") {
     $block1->openResults();

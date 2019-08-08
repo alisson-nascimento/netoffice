@@ -23,7 +23,7 @@ $id = str_replace("**", ",", $id);
 $tmpquery = "WHERE tas.id IN($id)";
 $listTasks = new request();
 $listTasks->openTasks($tmpquery);
-$comptListTasks = count($listTasks->tas_id);
+$comptListTasks = teste_count($listTasks->tas_id);
 
 if ($action == "update") {
     $acomm = convertData($acomm);
@@ -109,7 +109,7 @@ if ($action == "update") {
                 $tmpquery = "WHERE tea.project = '$project' AND tea.member = '$at'";
                 $testinTeam = new request();
                 $testinTeam->openTeams($tmpquery);
-                $comptTestinTeam = count($testinTeam->tea_id);
+                $comptTestinTeam = teste_count($testinTeam->tea_id);
                 if ($comptTestinTeam == "0") {
                     $tmpquery3 = "INSERT INTO " . $tableCollab["teams"] . "(project,member,published,authorized) VALUES('$project','$at','1','0')";
                     connectSql("$tmpquery3");
@@ -171,7 +171,7 @@ if ($_SESSION['idSession'] == "1") {
 $tmpquery = "WHERE mem.id != '1' AND mem.profil != '3' ORDER BY mem.name";
 $assignTo = new request();
 $assignTo->openMembers($tmpquery);
-$comptAssignTo = count($assignTo->mem_id);
+$comptAssignTo = teste_count($assignTo->mem_id);
 
 for ($i = 0;$i < $comptAssignTo;$i++) {
     echo "<option value=\"" . $assignTo->mem_id[$i] . "\">" . $assignTo->mem_name[$i] . "</option>";
@@ -182,7 +182,7 @@ echo "</select></td></tr>
 <tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">" . $strings["status"] . " :</td><td><select name=\"st\" onchange=\"changeSt(this)\">
 <option value=\"" . $strings["no_change"] . "\" selected>" . $strings["no_change"] . "</option>";
 
-$comptSta = count($status);
+$comptSta = teste_count($status);
 
 for ($i = 0;$i < $comptSta;$i++) {
     echo "<option value=\"$i\">$status[$i]</option>";
@@ -201,7 +201,7 @@ echo "</select></td></tr>
 <tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">" . $strings["priority"] . " : </td><td><select name=\"pr\">
 <option value=\"" . $strings["no_change"] . "\" selected>" . $strings["no_change"] . "</option>";
 
-$comptPri = count($priority);
+$comptPri = teste_count($priority);
 
 for ($i = 0;$i < $comptPri;$i++) {
     echo "<option value=\"$i\">$priority[$i]</option>";

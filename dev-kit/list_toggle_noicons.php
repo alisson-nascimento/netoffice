@@ -35,7 +35,7 @@ $block1->sorting("organizations", $sortingUser->sor_organizations[0], "org.name 
 $tmpquery = "WHERE org.id != '1' ORDER BY $block1->sortingValue";
 $listOrganizations = new request();
 $listOrganizations->openOrganizations($tmpquery);
-$comptListOrganizations = count($listOrganizations->org_id);
+$comptListOrganizations = teste_count($listOrganizations->org_id);
 
 if ($comptListOrganizations != "0") {
     $block1->openResults();

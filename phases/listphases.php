@@ -25,7 +25,7 @@ $teamMember = "false";
 $tmpquery = "WHERE tea.project = '$id' AND tea.member = '" . $_SESSION['idSession'] . "'";
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 
 if ($comptMemberTest == "0") {
     $teamMember = "false";
@@ -64,7 +64,7 @@ if ($teamMember == "true" || $_SESSION['profilSession'] == "5") {
     $tmpquery = "WHERE pha.project_id = '$id' ORDER BY $block7->sortingValue";
     $listPhases = new request();
     $listPhases->openPhases($tmpquery);
-    $comptListPhases = count($listPhases->pha_id);
+    $comptListPhases = teste_count($listPhases->pha_id);
 
     $block7->headingToggle($strings['phases'] . " <span class=addition>($comptListPhases)</span>");
     $block7->openPaletteIcon();
@@ -97,7 +97,7 @@ if ($teamMember == "true" || $_SESSION['profilSession'] == "5") {
         $tmpquery = "WHERE tas.project = '$id'";
         $countPhaseTasks = new request();
         $countPhaseTasks->openTasks($tmpquery);
-        $comptlistTasks = count($countPhaseTasks->tas_id);
+        $comptlistTasks = teste_count($countPhaseTasks->tas_id);
 
         for ($i = 0; $i < $comptListPhases; $i++) {
             $comptlistTasksRow = 0;
@@ -191,7 +191,7 @@ if ($teamMember == "true" || $_SESSION['profilSession'] == "5") {
 
     $listTasks = new request();
     $listTasks->openTasks($tmpquery, $block2->borne, $block2->rowsLimit);
-    $comptListTasks = count($listTasks->tas_id);
+    $comptListTasks = teste_count($listTasks->tas_id);
     
     $block2->headingToggle($strings['tasks_open'] . ' <span class=addition>(' . $comptListTasks . ')</span>');
     $block2->openPaletteIcon();
@@ -385,7 +385,7 @@ if ($teamMember == "true" || $_SESSION['profilSession'] == "5") {
 
     $listMilestones = new request();
     $listMilestones->openTasks($tmpquery, $block9->borne, $block9->rowsLimit);
-    $comptListMilestones = count($listMilestones->tas_id);
+    $comptListMilestones = teste_count($listMilestones->tas_id);
     
     $block9->headingToggle($strings['milestone']. ' <span class=addition>(' . $comptListMilestones . ')</span>');
     $block9->openPaletteIcon();
@@ -496,7 +496,7 @@ if ($teamMember == "true" || $_SESSION['profilSession'] == "5") {
     //--- list ---------
     $listTasks = new request();
     $listTasks->openTasks($tmpquery, $block10->borne, $block10->rowsLimit);
-    $comptListTasks = count($listTasks->tas_id);
+    $comptListTasks = teste_count($listTasks->tas_id);
     
     $block10->headingToggle($strings['tasks_closed'] . ' <span class=addition>(' . $comptListTasks . ')</span>');
     $block10->openPaletteIcon();

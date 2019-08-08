@@ -170,7 +170,7 @@ if (!empty($lang) && empty($available_languages[$lang])) {
 //    variable
 if (empty($lang) && !empty($HTTP_ACCEPT_LANGUAGE)) {
     $accepted    = explode(',', $HTTP_ACCEPT_LANGUAGE);
-    $acceptedCnt = count($accepted);
+    $acceptedCnt = teste_count($accepted);
     reset($accepted);
     for ($i = 0; $i < $acceptedCnt && empty($lang); $i++) { 
         PMA_langDetect($accepted[$i], 1);

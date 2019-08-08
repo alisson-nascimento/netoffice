@@ -28,7 +28,7 @@ if ($action == 'delete') {
 
 	$listOrganizations = new request();
 	$listOrganizations->openOrganizations($tmpquery);
-	$comptListOrganizations = count($listOrganizations->org_id);
+	$comptListOrganizations = teste_count($listOrganizations->org_id);
 
 	for ($i = 0; $i < $comptListOrganizations; $i++) {
 	    if (file_exists('logos_clients/' . $listOrganizations->org_id[$i] . '.' . $listOrganizations->org_extension_logo[$i])) {
@@ -74,7 +74,7 @@ $tmpquery = "WHERE org.id IN($id) ORDER BY org.name";
 
 $listOrganizations = new request();
 $listOrganizations->openOrganizations($tmpquery);
-$comptListOrganizations = count($listOrganizations->org_id);
+$comptListOrganizations = teste_count($listOrganizations->org_id);
 
 for ($i = 0; $i < $comptListOrganizations; $i++) {
     $block1->contentRow('#' . $listOrganizations->org_id[$i], $listOrganizations->org_name[$i]);

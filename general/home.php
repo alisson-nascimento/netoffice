@@ -51,7 +51,7 @@ if ($action == 'publish') {
             $id = str_replace('**', ',', $id);
             $tmpquery1 = 'UPDATE ' . $tableCollab['topics'] . " SET status='0' WHERE id IN($id)";
             $pieces = explode(',', $id);
-            $num = count($pieces);
+            $num =teste_count($pieces);
         } else {
             $tmpquery1 = 'UPDATE ' . $tableCollab['topics'] . " SET status='0' WHERE id = '$id'";
             $num = '1';
@@ -120,7 +120,7 @@ require_once('../themes/' . THEME . '/header.php');
 	$listBookmarks = new request();
 	$listBookmarks->openBookmarks($tmpquery);
 
-	$comptListBookmarks = count($listBookmarks->boo_id);
+	$comptListBookmarks = teste_count($listBookmarks->boo_id);
 
 	if ($comptListBookmarks != '0') {
 	    $block6->form = 'boo';
@@ -147,7 +147,7 @@ require_once('../themes/' . THEME . '/header.php');
 	    $listBookmarks = new request();
 	    $listBookmarks->openBookmarks($tmpquery);
 
-	    $comptListBookmarks = count($listBookmarks->boo_id);
+	    $comptListBookmarks =teste_count($listBookmarks->boo_id);
 
 	    if ($comptListBookmarks != '0') {
 	        $block6->openResults();
@@ -157,7 +157,7 @@ require_once('../themes/' . THEME . '/header.php');
 	        for ($i = 0;$i < $comptListBookmarks;$i++) {
 	            $block6->openRow($listBookmarks->boo_id[$i]);
 	            $block6->checkboxRow($listBookmarks->boo_id[$i]);
-	            $block6->cellRow(buildLink("../bookmarks/viewbookmark.php?view=$view&amp;id=" . $listBookmarks->boo_id[$i], $listBookmarks->boo_name[$i], in) . ' ' . buildLink($listBookmarks->boo_url[$i], "(" . $strings["url"] . ")", LINK_OUT));
+	            $block6->cellRow(buildLink("../bookmarks/viewbookmark.php?view=$view&amp;id=" . $listBookmarks->boo_id[$i], $listBookmarks->boo_name[$i], 'in') . ' ' . buildLink($listBookmarks->boo_url[$i], "(" . $strings["url"] . ")", LINK_OUT));
 	            $block6->cellRow($listBookmarks->boo_boocat_name[$i]);
 
 	            if ($listBookmarks->boo_shared[$i] == "1") {
@@ -219,7 +219,7 @@ require_once('../themes/' . THEME . '/header.php');
 	$tmpquery = "WHERE tea.member = '" . $_SESSION['idSession'] . "' AND pro.status IN(0,2,3,5) ORDER BY $block1->sortingValue";
 	$listProjects = new request();
 	$listProjects->openTeams($tmpquery);
-	$comptListProjects = count($listProjects->tea_id);
+	$comptListProjects =teste_count($listProjects->tea_id);
 
 	//--- title ---
 	$block1->headingToggle($strings["my_projects"]." <span class=addition>($comptListProjects)</span>");
@@ -384,7 +384,7 @@ require_once('../themes/' . THEME . '/header.php');
 
 	$listTasks = new request();
 	$listTasks->openTasks($tmpquery);
-	$comptListTasks = count($listTasks->tas_id);
+	$comptListTasks =teste_count($listTasks->tas_id);
 
   	$block2->headingToggle($strings["my_tasks"]." <span class=addition>($comptListTasks)</span>");
 
@@ -512,7 +512,7 @@ require_once('../themes/' . THEME . '/header.php');
 
     $listMeetings = new request();
     $listMeetings->openMeetings($tmpquery);
-    $comptListMeetings = count($listMeetings->mee_id);
+    $comptListMeetings =teste_count($listMeetings->mee_id);
 
     $block6->headingToggle($strings["my_meetings"]." <span class=addition>($comptListMeetings)</span>");
 
@@ -596,7 +596,7 @@ require_once('../themes/' . THEME . '/header.php');
 	$tmpquery = "WHERE topic.project IN($projectsTopics) AND topic.last_post > '$dateFilter' AND topic.status = '1' ORDER BY $block3->sortingValue";
 	$listTopics = new request();
 	$listTopics->openTopics($tmpquery);
-	$comptListTopics = count($listTopics->top_id);
+	$comptListTopics =teste_count($listTopics->top_id);
 
 	$block3->form = "wbTh";
 	$block3->openForm("../general/home.php#" . $block3->form . "Anchor");
@@ -663,7 +663,7 @@ require_once('../themes/' . THEME . '/header.php');
 {
     $block5 = new block();
 
-    $comptTopic = count($topicNote);
+    $comptTopic =teste_count($topicNote);
     if ($comptTopic != "0") {
         $block5->sorting(
         "notes",
@@ -695,7 +695,7 @@ require_once('../themes/' . THEME . '/header.php');
     $tmpquery = "WHERE note.owner = '" . $_SESSION['idSession'] . "' AND note.date > '$dateFilter' AND pro.status IN(0,2,3) ORDER BY $block5->sortingValue";
     $listNotes = new request();
     $listNotes->openNotes($tmpquery);
-    $comptListNotes = count($listNotes->note_id);
+    $comptListNotes =teste_count($listNotes->note_id);
 
     $block5->form = "saJ";
     $block5->openForm("../general/home.php?project=$project#" . $block5->form . "Anchor");
@@ -804,7 +804,7 @@ require_once('../themes/' . THEME . '/header.php');
 	$tmpquery = "WHERE rep.owner = '" . $_SESSION['idSession'] . "' ORDER BY $block4->sortingValue";
 	$listReports = new request();
 	$listReports->openReports($tmpquery);
-	$comptListReports = count($listReports->rep_id);
+	$comptListReports =teste_count($listReports->rep_id);
 
 
 	$block4->headingToggle($strings["my_reports"]." <span class=addition>($comptListReports)</span>" );

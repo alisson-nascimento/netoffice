@@ -20,7 +20,7 @@ if ($clientsFilter == 'true' && $_SESSION['profilSession'] == '2') {
     $tmpquery = "WHERE tea.member = '" . $_SESSION['idSession'] . "' AND org2.id = '$id'";
     $memberTest = new request();
     $memberTest->openTeams($tmpquery);
-    $comptMemberTest = count($memberTest->tea_id);
+    $comptMemberTest = teste_count($memberTest->tea_id);
 
     if ($comptMemberTest == '0') {
         header('Location: ../clients/listclients.php?msg=blankClient');
@@ -36,7 +36,7 @@ if ($clientsFilter == 'true' && $_SESSION['profilSession'] == '2') {
 
 $clientDetail = new request();
 $clientDetail->openOrganizations($tmpquery);
-$comptClientDetail = count($clientDetail->org_id);
+$comptClientDetail = teste_count($clientDetail->org_id);
 
 if ($comptClientDetail == '0') {
     header('Location: ../clients/listclients.php?msg=blankClient');
@@ -141,7 +141,7 @@ require_once('../themes/' . THEME . '/header.php');
 
 	$listProjects = new request();
 	$listProjects->openProjects($tmpquery);
-	$comptListProjects = count($listProjects->pro_id);
+	$comptListProjects = teste_count($listProjects->pro_id);
 
 	if ($comptListProjects != '0') {
 	    $block2->openResults();
@@ -227,7 +227,7 @@ require_once('../themes/' . THEME . '/header.php');
 	$tmpquery = "WHERE mem.organization = '$id' ORDER BY $block3->sortingValue";
 	$listMembers = new request();
 	$listMembers->openMembers($tmpquery);
-	$comptListMembers = count($listMembers->mem_id);
+	$comptListMembers = teste_count($listMembers->mem_id);
 
 	if ($comptListMembers != '0') {
 	    $block3->openResults();

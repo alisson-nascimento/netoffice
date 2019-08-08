@@ -36,7 +36,7 @@ $teamMember = "false";
 $tmpquery = "WHERE tea.project = '$project' AND tea.member = '" . $_SESSION['idSession'] . "'";
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 if ($comptMemberTest == "0") {
     $teamMember = "false";
 } else {
@@ -125,7 +125,7 @@ echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">" . $strings["pro
 $tmpquery = "WHERE tea.member = '" . $_SESSION['idSession'] . "' ORDER BY pro.name";
 $listProjects = new request();
 $listProjects->openTeams($tmpquery);
-$comptListProjects = count($listProjects->tea_id);
+$comptListProjects = teste_count($listProjects->tea_id);
 
 for ($i = 0;$i < $comptListProjects;$i++) {
     if ($listProjects->tea_pro_id[$i] == $noteDetail->note_project[0] || $project == $listProjects->tea_pro_id[$i]) {
@@ -139,7 +139,7 @@ echo "</select></td></tr>";
 
 $block1->contentRow($strings["date"], "<input type=\"text\" style=\"width: 150px;\" name=\"dd\" id=\"sel3\" size=\"20\" value=\"$dd\"><button type=\"reset\" id=\"trigger_b\">...</button><script type=\"text/javascript\">Calendar.setup({ inputField:\"sel3\", button:\"trigger_b\" });</script>");
 
-$comptTopic = count($topicNote);
+$comptTopic = teste_count($topicNote);
 
 if ($comptTopic != "0") {
     echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">" . $strings["topic"] . " :</td><td><select name=\"topic\"><option value=\"\">" . $strings["choice"] . "</option>";

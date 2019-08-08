@@ -59,7 +59,7 @@ if ($clientsFilter == 'true' && $_SESSION['profilSession'] == '2') {
     $tmpquery = "WHERE tea.member = '" . $_SESSION['idSession'] . "'";
     $memberTest = new request();
     $memberTest->openTeams($tmpquery);
-    $comptMemberTest = count($memberTest->tea_id);
+    $comptMemberTest = teste_count($memberTest->tea_id);
 
     if ($comptMemberTest == '0') {
         $listClients = 'false';
@@ -89,7 +89,7 @@ $block1->recordsTotal = compt($initrequest['organizations'] . ' ' . $tmpquery);
 if ($listClients != 'false') {
     $listOrganizations = new request();
     $listOrganizations->openOrganizations($tmpquery, $block1->borne, $block1->rowsLimit);
-    $comptListOrganizations = count($listOrganizations->org_id);
+    $comptListOrganizations = teste_count($listOrganizations->org_id);
 } else {
     $comptListOrganizations = 0;
 }

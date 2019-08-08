@@ -154,7 +154,7 @@ if ($type == "calendEdit") {
         }
         $detailCalendar = new request();
         $detailCalendar->openCalendar($tmpquery);
-        $comptDetailCalendar = count($detailCalendar->cal_id);
+        $comptDetailCalendar = teste_count($detailCalendar->cal_id);
         if ($comptDetailCalendar == "0") {
             header('Location: ../calendar/viewcalendar.php');
             exit;
@@ -173,7 +173,7 @@ if ($type == "calendDetail") {
     }
     $detailCalendar = new request();
     $detailCalendar->openCalendar($tmpquery);
-    $comptDetailCalendar = count($detailCalendar->cal_id);
+    $comptDetailCalendar = teste_count($detailCalendar->cal_id);
     if ($comptDetailCalendar == "0") {
         header("Location: ../calendar/viewcalendar.php");
         exit;
@@ -396,7 +396,7 @@ else if ($type == "dayList") {
     // $tmpquery = "WHERE cal.owner = '" . $_SESSION['idSession'] . "' AND cal.date_start <= '$dateCalend' AND cal.date_end >= '$dateCalend' ORDER BY $block1->sortingValue";
     $listCalendar = new request();
     $listCalendar->openCalendar($tmpquery);
-    $comptListCalendar = count($listCalendar->cal_id);
+    $comptListCalendar = teste_count($listCalendar->cal_id);
 
     if ($comptListCalendar != "0") {
         $block1->openResults();
@@ -437,7 +437,7 @@ else if ($type == "monthPreview") {
     $tmpquery = "WHERE tea.member = '" . $_SESSION['idSession'] . "' ORDER BY tea.project";
     $teamList = new request();
     $teamList->openTeams($tmpquery);
-    $comptTeamList = count($teamList->tea_id);
+    $comptTeamList = teste_count($teamList->tea_id);
 
     $block9 = new block();
     $block9->form = "caV";
@@ -484,13 +484,13 @@ else if ($type == "monthPreview") {
 
     $listTasks = new request();
     $listTasks->openTasks($tmpquery);
-    $comptListTasks = count($listTasks->tas_id);
+    $comptListTasks = teste_count($listTasks->tas_id);
 
     if ($viewCalend == 0) {
         $tmpquery = "WHERE att.member = '" . $_SESSION['idSession'] . "'";
         $listAttendants = new request();
         $listAttendants->openAttendants($tmpquery);
-        $comptListAttendants = count($listAttendants->att_id);
+        $comptListAttendants = teste_count($listAttendants->att_id);
         $meetingIdList = "";
         for ($m = 0; $m < $comptListAttendants; $m++) {
             if ($meetingIdList != "") {
@@ -509,7 +509,7 @@ else if ($type == "monthPreview") {
 
     $listMeetings = new request();
     $listMeetings->openMeetings($tmpquery);
-    $comptListMeetings = count($listMeetings->mee_id);
+    $comptListMeetings = teste_count($listMeetings->mee_id);
 
     for ($g = 0;$g < $comptListTasks;$g++) {
         if (substr($listTasks->tas_start_date[$g], 0, 7) == substr($dateCalend, 0, 7)) {
@@ -539,7 +539,7 @@ else if ($type == "monthPreview") {
 
         $listCalendarScan = new request();
         $listCalendarScan->openCalendar($tmpquery);
-        $comptListCalendarScan = count($listCalendarScan->cal_id);
+        $comptListCalendarScan = teste_count($listCalendarScan->cal_id);
 
         if (($i < $firstday) || ($a == "00")) {
             echo "<td width=14% class=even>&nbsp;</td>";

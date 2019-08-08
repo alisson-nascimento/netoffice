@@ -18,7 +18,7 @@ require_once("../includes/library.php");
 $tmpquery = "WHERE mem.id = '$id'";
 $userDetail = new request();
 $userDetail->openMembers($tmpquery);
-$comptUserDetail = count($userDetail->mem_id);
+$comptUserDetail = teste_count($userDetail->mem_id);
 
 if ($comptUserDetail == "0") {
     header("Location: ../clients/viewclient.php?msg=blankUser&id=$organization");
@@ -31,7 +31,7 @@ if ($clientsFilter == "true" && $_SESSION['profilSession'] == "2") {
     $tmpquery = "WHERE tea.member = '" . $_SESSION['idSession'] . "' AND org2.id = '$organization'";
     $memberTest = new request();
     $memberTest->openTeams($tmpquery);
-    $comptMemberTest = count($memberTest->tea_id);
+    $comptMemberTest = teste_count($memberTest->tea_id);
     if ($comptMemberTest == "0") {
         header("Location: ../clients/listclients.php?msg=blankClient");
         exit;
@@ -46,7 +46,7 @@ if ($clientsFilter == "true" && $_SESSION['profilSession'] == "2") {
 $comptDetailClient = "0";
 $detailClient = new request();
 $detailClient->openOrganizations($tmpquery);
-$comptDetailClient = count($detailClient->org_id);
+$comptDetailClient = teste_count($detailClient->org_id);
 
 if ($comptDetailClient == "0") {
     header("Location: ../clients/listclients.php?msg=blankClient");

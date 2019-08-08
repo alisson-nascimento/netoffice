@@ -236,12 +236,12 @@ class BarPlot extends Plot {
 
     function SetPattern($aPattern, $aColor='black'){
         if( is_array($aPattern) ) {
-            $n = count($aPattern);
+            $n = teste_count($aPattern);
             $this->iPattern = array();
             $this->iPatternDensity = array();
             if( is_array($aColor) ) {
                 $this->iPatternColor = array();
-                if( count($aColor) != $n ) {
+                if( teste_count($aColor) != $n ) {
                     JpGraphError::RaiseL(2001);//('NUmber of colors is not the same as the number of patterns in BarPlot::SetPattern()');
                 }
             }
@@ -311,9 +311,9 @@ class BarPlot extends Plot {
 
     function Stroke($img,$xscale,$yscale) {
 
-        $numpoints = count($this->coords[0]);
+        $numpoints = teste_count($this->coords[0]);
         if( isset($this->coords[1]) ) {
-            if( count($this->coords[1])!=$numpoints ) {
+            if( teste_count($this->coords[1])!=$numpoints ) {
                 JpGraphError::RaiseL(2003,count($this->coords[1]),$numpoints);
             //"Number of X and Y points are not equal. Number of X-points:".count($this->coords[1])."Number of Y-points:$numpoints");
             }
@@ -346,7 +346,7 @@ class BarPlot extends Plot {
 
         // Count pontetial pattern array to avoid doing the count for each iteration
         if( is_array($this->iPattern) ) {
-            $np = count($this->iPattern);
+            $np = teste_count($this->iPattern);
         }
 
         $grad = null;
@@ -391,7 +391,7 @@ class BarPlot extends Plot {
                     // an array to specify both (from, to style) for each individual bar. The way to know the difference is
                     // to investgate the first element. If this element is an integer [0,255] then we assume it is an RGB
                     // triple.
-                    $ng = count($this->grad_fromcolor);
+                    $ng = teste_count($this->grad_fromcolor);
                     if( $ng === 3 ) {
                         if( is_numeric($this->grad_fromcolor[0]) && $this->grad_fromcolor[0] > 0 && $this->grad_fromcolor[0] < 256 ) {
                             // RGB Triple
@@ -422,7 +422,7 @@ class BarPlot extends Plot {
             }
             elseif( !empty($this->fill_color) ) {
                 if(is_array($this->fill_color)) {
-                    $img->PushColor($this->fill_color[$i % count($this->fill_color)]);
+                    $img->PushColor($this->fill_color[$i % teste_count($this->fill_color)]);
                 } else {
                     $img->PushColor($this->fill_color);
                 }
@@ -463,7 +463,7 @@ class BarPlot extends Plot {
                     $sp[10]=$pts[4]+$ssh; $sp[11]=$pts[5]-$ssv;
                 }
                 if( is_array($this->bar_shadow_color) ) {
-                    $numcolors = count($this->bar_shadow_color);
+                    $numcolors = teste_count($this->bar_shadow_color);
                     if( $numcolors == 0 ) {
                         JpGraphError::RaiseL(2005);//('You have specified an empty array for shadow colors in the bar plot.');
                     }
@@ -564,7 +564,7 @@ class BarPlot extends Plot {
 
             // Stroke the outline of the bar
             if( is_array($this->color) ) {
-                $img->SetColor($this->color[$i % count($this->color)]);
+                $img->SetColor($this->color[$i % teste_count($this->color)]);
             }
             else {
                 $img->SetColor($this->color);
@@ -684,7 +684,7 @@ class GroupBarPlot extends BarPlot {
     function GroupBarPlot($plots) {
         $this->width=0.7;
         $this->plots = $plots;
-        $this->nbrplots = count($plots);
+        $this->nbrplots = teste_count($plots);
         if( $this->nbrplots < 1 ) {
             JpGraphError::RaiseL(2007);//('Cannot create GroupBarPlot from empty plot array.');
         }
@@ -700,7 +700,7 @@ class GroupBarPlot extends BarPlot {
     //---------------
     // PUBLIC METHODS
     function Legend($graph) {
-        $n = count($this->plots);
+        $n = teste_count($this->plots);
         for($i=0; $i < $n; ++$i) {
             $c = get_class($this->plots[$i]);
             if( !($this->plots[$i] instanceof BarPlot) ) {
@@ -713,7 +713,7 @@ class GroupBarPlot extends BarPlot {
 
     function Min() {
         list($xmin,$ymin) = $this->plots[0]->Min();
-        $n = count($this->plots);
+        $n = teste_count($this->plots);
         for($i=0; $i < $n; ++$i) {
             list($xm,$ym) = $this->plots[$i]->Min();
             $xmin = max($xmin,$xm);
@@ -724,7 +724,7 @@ class GroupBarPlot extends BarPlot {
 
     function Max() {
         list($xmax,$ymax) = $this->plots[0]->Max();
-        $n = count($this->plots);
+        $n = teste_count($this->plots);
         for($i=0; $i < $n; ++$i) {
             list($xm,$ym) = $this->plots[$i]->Max();
             $xmax = max($xmax,$xm);
@@ -734,7 +734,7 @@ class GroupBarPlot extends BarPlot {
     }
 
     function GetCSIMareas() {
-        $n = count($this->plots);
+        $n = teste_count($this->plots);
         $csimareas='';
         for($i=0; $i < $n; ++$i) {
             $csimareas .= $this->plots[$i]->csimareas;
@@ -745,7 +745,7 @@ class GroupBarPlot extends BarPlot {
     // Stroke all the bars next to each other
     function Stroke($img,$xscale,$yscale) {
         $tmp=$xscale->off;
-        $n = count($this->plots);
+        $n = teste_count($this->plots);
         $subwidth = $this->width/$this->nbrplots ;
 
         for( $i=0; $i < $n; ++$i ) {
@@ -775,7 +775,7 @@ class AccBarPlot extends BarPlot {
     // CONSTRUCTOR
     function __construct($plots) {
         $this->plots = $plots;
-        $this->nbrplots = count($plots);
+        $this->nbrplots = teste_count($plots);
         if( $this->nbrplots < 1 ) {
             JpGraphError::RaiseL(2010);//('Cannot create AccBarPlot from empty plot array.');
         }
@@ -804,7 +804,7 @@ class AccBarPlot extends BarPlot {
     //---------------
     // PUBLIC METHODS
     function Legend($graph) {
-        $n = count($this->plots);
+        $n = teste_count($this->plots);
         for( $i=$n-1; $i >= 0; --$i ) {
             $c = get_class($this->plots[$i]);
             if( !($this->plots[$i] instanceof BarPlot) ) {
@@ -818,8 +818,8 @@ class AccBarPlot extends BarPlot {
     function Max() {
         list($xmax) = $this->plots[0]->Max();
         $nmax=0;
-        for($i=0; $i < count($this->plots); ++$i) {
-            $n = count($this->plots[$i]->coords[0]);
+        for($i=0; $i < teste_count($this->plots); ++$i) {
+            $n = teste_count($this->plots[$i]->coords[0]);
             $nmax = max($nmax,$n);
             list($x) = $this->plots[$i]->Max();
             $xmax = max($xmax,$x);
@@ -856,8 +856,8 @@ class AccBarPlot extends BarPlot {
     function Min() {
         $nmax=0;
         list($xmin,$ysetmin) = $this->plots[0]->Min();
-        for($i=0; $i < count($this->plots); ++$i) {
-            $n = count($this->plots[$i]->coords[0]);
+        for($i=0; $i < teste_count($this->plots); ++$i) {
+            $n = teste_count($this->plots[$i]->coords[0]);
             $nmax = max($nmax,$n);
             list($x,$y) = $this->plots[$i]->Min();
             $xmin = Min($xmin,$x);
@@ -947,7 +947,7 @@ class AccBarPlot extends BarPlot {
                         // the total value is larger than 0 then we
                         // add the shadow.
                         if( is_array($this->bar_shadow_color) ) {
-                            $numcolors = count($this->bar_shadow_color);
+                            $numcolors = teste_count($this->bar_shadow_color);
                             if( $numcolors == 0 ) {
                                 JpGraphError::RaiseL(2013);//('You have specified an empty array for shadow colors in the bar plot.');
                             }
@@ -987,7 +987,7 @@ class AccBarPlot extends BarPlot {
                         // an array to specify both (from, to style) for each individual bar. The way to know the difference is
                         // to investgate the first element. If this element is an integer [0,255] then we assume it is an RGB
                         // triple.
-                        $ng = count($this->plots[$j]->grad_fromcolor);
+                        $ng = teste_count($this->plots[$j]->grad_fromcolor);
                         if( $ng === 3 ) {
                             if( is_numeric($this->plots[$j]->grad_fromcolor[0]) && $this->plots[$j]->grad_fromcolor[0] > 0 &&
                                  $this->plots[$j]->grad_fromcolor[0] < 256 ) {
@@ -1020,7 +1020,7 @@ class AccBarPlot extends BarPlot {
                     }
                 } else {
                     if (is_array($this->plots[$j]->fill_color) ) {
-                        $numcolors = count($this->plots[$j]->fill_color);
+                        $numcolors = teste_count($this->plots[$j]->fill_color);
                         $fillcolor = $this->plots[$j]->fill_color[$i % $numcolors];
                         // If the bar is specified to be non filled then the fill color is false
                         if( $fillcolor !== false ) {
@@ -1065,7 +1065,7 @@ class AccBarPlot extends BarPlot {
 
                 // CSIM array
 
-                if( $i < count($this->plots[$j]->csimtargets) ) {
+                if( $i < teste_count($this->plots[$j]->csimtargets) ) {
                     // Create the client side image map
                     $rpts = $img->ArrRotate($pts);
                     $csimcoord=round($rpts[0]).", ".round($rpts[1]);

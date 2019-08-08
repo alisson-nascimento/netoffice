@@ -477,7 +477,7 @@ class WindrosePlot {
     }
 
     function SetCompassLabels($aLabels) {
-        if( count($aLabels) != 16 ) {
+        if( teste_count($aLabels) != 16 ) {
             JpgraphError::RaiseL(22004); //('Label specification for windrose directions must have 16 values (one for each compass direction).');
         }
         $this->iAllDirectionLabels = $aLabels ;
@@ -617,8 +617,8 @@ class WindrosePlot {
 
         if( ! $this->legend->iShow ) return 0;
 
-        $nlc = count($this->iLegColors);
-        $nlw = count($this->iLegweights);
+        $nlc = teste_count($this->iLegColors);
+        $nlw = teste_count($this->iLegweights);
 
         // Setup font for ranges
         $value = new Text();
@@ -675,7 +675,7 @@ class WindrosePlot {
         // Stroke all used ranges
         $txty = $y -
         round($this->iLegweights[($this->scale->iMaxNum-1)%$nlw]*$scaling) - 4*$scaling;
-        if( $this->scale->iMaxNum >= count($this->iRanges) ) {
+        if( $this->scale->iMaxNum >= teste_count($this->iRanges) ) {
             JpGraphError::RaiseL(22007); //('To few values for the range legend.');
         }
         $i=0;$idx=0;
@@ -772,7 +772,7 @@ class WindrosePlot {
             $this->scale->iAngle = $found*22.5;
         }
         else {
-            $n = count($this->iData);
+            $n = teste_count($this->iData);
             foreach( $this->iData as $dir => $leg ) {
                 if( !is_numeric($dir) ) {
                     $pos = array_search(strtoupper($dir),$this->iAllDirectionLabels);
@@ -787,7 +787,7 @@ class WindrosePlot {
             $keys = array_keys($data);
             sort($keys, SORT_NUMERIC);
 
-            $n = count($data);
+            $n = teste_count($data);
             $found = false;
             $max = 0 ;
             for( $i=0; $i < 15; ++$i ) {
@@ -875,13 +875,13 @@ class WindrosePlot {
         // (or none) data.
         $this->SetAutoScaleAngle(false);
 
-        $nlc = count($this->iLegColors);
-        $nlw = count($this->iLegweights);
+        $nlc = teste_count($this->iLegColors);
+        $nlw = teste_count($this->iLegweights);
 
         // Stroke grid lines for directions and remember the
         // position for the labels
         $txtpos=array();
-        $num = count($this->iData);
+        $num = teste_count($this->iData);
 
         $keys = array_keys($this->iData);
 
@@ -1000,7 +1000,7 @@ class WindrosePlot {
         $i=0;
         foreach($this->iData as $dir => $legdata) {
             $legdata = array_slice($legdata,1);
-            $nn = count($legdata);
+            $nn = teste_count($legdata);
 
             $a = $txtpos[$i][2];
             $rri = $ri/$scaling;
@@ -1068,8 +1068,8 @@ class WindrosePlot {
         // (or none) data.
         $this->SetAutoScaleAngle(true);
 
-        $nlc = count($this->iLegColors);
-        $nlw = count($this->iLegweights);
+        $nlc = teste_count($this->iLegColors);
+        $nlw = teste_count($this->iLegweights);
 
         $this->iRadialColorArray = $this->FixupIndexes($this->iRadialColorArray,$num);
         $this->iRadialWeightArray = $this->FixupIndexes($this->iRadialWeightArray,$num);
@@ -1162,7 +1162,7 @@ class WindrosePlot {
         $keys = array_keys($this->iData);
         foreach($this->iData as $idx => $legdata) {
             $legdata = array_slice($legdata,1);
-            $nn = count($legdata);
+            $nn = teste_count($legdata);
             if( is_string($idx) ) {
                 $idx = strtoupper($idx);
                 $idx = array_search($idx,$this->iAllDirectionLabels);
@@ -1215,7 +1215,7 @@ class WindrosePlot {
         // The code below gives a possible a little to large margin. The
         // really, really proper way would be to account for what angle
         // the label are at
-        $n = count($this->iLabels);
+        $n = teste_count($this->iLabels);
         if( $n > 0 ) {
             $maxh=0;$maxw=0;
             foreach($this->iLabels as $key => $lbl) {
@@ -1255,7 +1255,7 @@ class WindrosePlot {
         // The code below gives a possible a little to large margin. The
         // really, really proper way would be to account for what angle
         // the label are at
-        $n = count($this->iLabels);
+        $n = teste_count($this->iLabels);
         if( $n > 0 ) {
             $maxh=0;$maxw=0;
             foreach($this->iLabels as $key => $lbl) {
@@ -1463,7 +1463,7 @@ class WindroseGraph extends Graph {
 
     function StrokeTexts() {
         if( $this->texts != null ) {
-            $n = count($this->texts);
+            $n = teste_count($this->texts);
             for($i=0; $i < $n; ++$i ) {
                 $this->texts[$i]->Stroke($this->img);
             }
@@ -1472,7 +1472,7 @@ class WindroseGraph extends Graph {
 
     function StrokeIcons() {
         if( $this->iIcons != null ) {
-            $n = count($this->iIcons);
+            $n = teste_count($this->iIcons);
             for( $i=0; $i < $n; ++$i ) {
                 // Since Windrose graphs doesn't have any linear scale the position of
                 // each icon has to be given as absolute coordinates
@@ -1484,7 +1484,7 @@ class WindroseGraph extends Graph {
     //---------------
     // PUBLIC METHODS
     function Add($aObj) {
-        if( is_array($aObj) && count($aObj) > 0 ) {
+        if( is_array($aObj) && teste_count($aObj) > 0 ) {
             $cl = $aObj[0];
         }
         else {
@@ -1538,7 +1538,7 @@ class WindroseGraph extends Graph {
         }
 
         // n holds number of plots
-        $n = count($this->plots);
+        $n = teste_count($this->plots);
         for($i=0; $i < $n ; ++$i) {
      		$this->plots[$i]->Stroke($this);
         }

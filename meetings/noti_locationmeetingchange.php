@@ -23,7 +23,7 @@ $projectNoti->openProjects($tmpquery);
 $tmpquery = "WHERE noti.member IN($att_mem_id_list)";
 $listNotifications = new request();
 $listNotifications->openNotifications($tmpquery);
-$comptListNotifications = count($listNotifications->not_id);
+$comptListNotifications = teste_count($listNotifications->not_id);
 
 $count1 = 0;
 for ($i = 0; $i < $comptListNotifications; $i++) {

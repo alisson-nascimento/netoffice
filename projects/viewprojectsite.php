@@ -62,13 +62,13 @@ if ($msg == 'demo') {
 $tmpquery = "WHERE pro.id = '$id'";
 $projectDetail = new request();
 $projectDetail->openProjects($tmpquery);
-$comptProjectDetail = count($projectDetail->pro_id);
+$comptProjectDetail = teste_count($projectDetail->pro_id);
 
 $teamMember = 'false';
 $tmpquery = "WHERE tea.project = '$id' AND tea.member = '" . $_SESSION['idSession'] . "'";
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 
 if ($comptMemberTest == '0') {
     $teamMember = 'false';
@@ -178,7 +178,7 @@ if ($projectDetail->pro_organization[0] != '' && $projectDetail->pro_organizatio
     $tmpquery = "WHERE tea.project = '$id' AND mem.profil = '3' ORDER BY $block2->sortingValue";
     $listPermitted = new request();
     $listPermitted->openTeams($tmpquery);
-    $comptListPermitted = count($listPermitted->tea_id);
+    $comptListPermitted = teste_count($listPermitted->tea_id);
 
     if ($comptListPermitted != '0') {
         $block2->openResults();

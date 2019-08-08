@@ -68,7 +68,7 @@ echo "<table cellspacing=\"0\" width=\"90%\" cellpadding=\"3\">
 $tmpquery = "WHERE pos.topic = '" . $detailTopic->top_id[0] . "' ORDER BY pos.created DESC";
 $listPosts = new request();
 $listPosts->openPosts($tmpquery);
-$comptListPosts = count($listPosts->pos_id);
+$comptListPosts = teste_count($listPosts->pos_id);
 
 if ($comptListPosts != "0") {
     for ($i = 0;$i < $comptListPosts;$i++) {

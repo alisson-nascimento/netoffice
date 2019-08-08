@@ -318,7 +318,7 @@ class DateScaleUtils {
     }
 
     static function GetTicks($aData,$aType=1,$aMinor=false,$aEndPoints=false) {
-        $n = count($aData);
+        $n = teste_count($aData);
         return self::GetTicksFromMinMax($aData[0],$aData[$n-1],$aType,$aMinor,$aEndPoints);
     }
 
@@ -343,12 +343,12 @@ class DateScaleUtils {
             array($spy, array(1,DSUTILS_DAY1,'d M',2,DSUTILS_DAY2,'d M',4,DSUTILS_DAY4,'d M',7,DSUTILS_WEEK1,$w,14,DSUTILS_WEEK2,$w,30,DSUTILS_MONTH1,'M',60,DSUTILS_MONTH2,'M',-1,DSUTILS_MONTH3,'M')),
             array(-1, array(30,DSUTILS_MONTH1,'M-Y',60,DSUTILS_MONTH2,'M-Y',90,DSUTILS_MONTH3,'M-Y',180,DSUTILS_MONTH6,'M-Y',352,DSUTILS_YEAR1,'Y',704,DSUTILS_YEAR2,'Y',-1,DSUTILS_YEAR5,'Y')));
 
-        $ntt = count($tt);
+        $ntt = teste_count($tt);
         $nd = floor($diff/$spd);
         for($i=0; $i < $ntt; ++$i ) {
             if( $diff <= $tt[$i][0] || $i==$ntt-1) {
                 $t = $tt[$i][1];
-                $n = count($t)/3;
+                $n = teste_count($t)/3;
                 for( $j=0; $j < $n; ++$j ) {
                     if( $nd/$t[3*$j] <= $aMaxTicks || $j==$n-1) {
                         $type = $t[3*$j+1];
@@ -432,7 +432,7 @@ Class ReadFileData {
 
         // Now make sure that all data is numeric. By default
         // all data is read as strings
-        $n = count($tmp);
+        $n = teste_count($tmp);
         $aData = array();
         $cnt=0;
         for($i=0; $i < $n; ++$i) {
@@ -502,10 +502,10 @@ Class ReadFileData {
         }
 
         $num_lines = 0;
-        $num_cols  = count($aLine);
+        $num_cols  = teste_count($aLine);
 
         while ($aLine !== false) {
-            if( is_array($aLine) && count($aLine) != $num_cols ) {
+            if( is_array($aLine) && teste_count($aLine) != $num_cols ) {
                 JpGraphError::RaiseL(24004);
                 // 'ReadCSV2: Column count mismatch in %s line %d'
             }
@@ -557,7 +557,7 @@ Class ReadFileData {
                 $aCol2[] = floatval(trim($split[1]));
         }
 
-        return count($lines);
+        return teste_count($lines);
     }
 
     // Read data from one columns in a plain text file
@@ -570,7 +570,7 @@ Class ReadFileData {
                 $aCol1[] = floatval(trim($datarow));
         }
 
-        return count($lines);
+        return teste_count($lines);
     }
 
     static function FromMatrix($aFile,$aSepChar=' ') {
@@ -604,7 +604,7 @@ class LinearRegression {
         public $iDet=0, $iCorr=0, $iStdErr=0;
 
         public function __construct($aDataX,$aDataY) {
-                if( count($aDataX) !== count($aDataY) ) {
+                if( teste_count($aDataX) !== teste_count($aDataY) ) {
                         JpGraph::Raise('LinearRegression: X and Y data array must be of equal length.');
                 }
                 $this->ix = $aDataX;
@@ -615,7 +615,7 @@ class LinearRegression {
 
                 $this->icalculated = true;
 
-                $n = count($this->ix);
+                $n = teste_count($this->ix);
                 $sx2 = 0 ;
                 $sy2 = 0 ;
                 $sxy = 0 ;

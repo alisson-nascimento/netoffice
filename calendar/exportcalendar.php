@@ -18,7 +18,7 @@ require_once("../includes/library.php");
 $tmpquery = "WHERE cal.owner = '" . $_SESSION['idSession'] . "' AND cal.id = '$id'";
 $detailCalendar = new request();
 $detailCalendar->openCalendar($tmpquery);
-$comptDetailCalendar = count($detailCalendar->cal_id);
+$comptDetailCalendar = teste_count($detailCalendar->cal_id);
 // echo $_SESSION['idSession'] . " - $id - $comptDetailCalendar<br>";
 if ($comptDetailCalendar != "0") {
     $filename = $detailCalendar->cal_subject[0] . ".ics";

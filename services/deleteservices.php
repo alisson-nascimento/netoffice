@@ -53,7 +53,7 @@ $id = str_replace("**", ",", $id);
 $tmpquery = "WHERE serv.id IN($id) ORDER BY serv.name";
 $listServices = new request();
 $listServices->openServices($tmpquery);
-$comptListServices = count($listServices->serv_id);
+$comptListServices = teste_count($listServices->serv_id);
 
 for ($i = 0;$i < $comptListServices;$i++) {
     echo "<tr class=\"odd\"><td valign=\"top\" class=\"leftvalue\">&nbsp;</td><td>" . $listServices->serv_name[$i] . "&nbsp;(" . $listServices->serv_name_print[$i] . ")</td></tr>";

@@ -47,7 +47,7 @@ $id = str_replace('**', ',', $id);
 $tmpquery = 'WHERE boo.id IN(' . $id . ') ORDER BY boo.name';
 $listBookmarks = new request();
 $listBookmarks->openBookmarks($tmpquery);
-$comptListBookmarks = count($listBookmarks->boo_id);
+$comptListBookmarks = teste_count($listBookmarks->boo_id);
 
 for ($i = 0;$i < $comptListBookmarks;$i++) {
     $block1->contentRow('#' . $listBookmarks->boo_id[$i], $listBookmarks->boo_name[$i]);

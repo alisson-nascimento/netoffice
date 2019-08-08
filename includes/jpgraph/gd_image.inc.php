@@ -291,7 +291,7 @@ class Image {
     // Get the specific height for a text string
     function GetTextHeight($txt="",$angle=0) {
         $tmp = preg_split('/\n/',$txt);
-        $n = count($tmp);
+        $n = teste_count($tmp);
         $m=0;
         for($i=0; $i< $n; ++$i) {
             $m = max($m,strlen($tmp[$i]));
@@ -339,7 +339,7 @@ class Image {
     function GetTextWidth($txt,$angle=0) {
 
         $tmp = preg_split('/\n/',$txt);
-        $n = count($tmp);
+        $n = teste_count($tmp);
         if( $this->font_family <= FF_FONT2+1 ) {
 
             $m=0;
@@ -665,7 +665,7 @@ class Image {
         else {
             if( preg_match('/\n/',$txt) ) {
                 $tmp = preg_split('/\n/',$txt);
-                for($i=0; $i < count($tmp); ++$i) {
+                for($i=0; $i < teste_count($tmp); ++$i) {
                     $w1 = $this->GetTextWidth($tmp[$i]);
                     if( $paragraph_align=="left" ) {
                         imagestring($this->img,$use_font,$x,$y-$h+1+$i*$fh,$tmp[$i],$this->current_color);
@@ -702,7 +702,7 @@ class Image {
         // the width will be too muchy otherwise since when
         // we print we stroke the individually lines by hand.
         $e = explode("\n",$aTxt);
-        $n = count($e);
+        $n = teste_count($e);
         for($i=0; $i<$n; ++$i) {
             $e[$i]=str_replace("\r","",$e[$i]);
         }
@@ -993,7 +993,7 @@ class Image {
 
             $y -= $linemargin/2;
             $tmp = preg_split('/\n/',$txt);
-            $nl = count($tmp);
+            $nl = teste_count($tmp);
             $h = $nl * $fh;
 
             if( $this->text_halign=='right') {
@@ -2034,7 +2034,7 @@ class RotImage extends Image {
     }
 
     function ArrRotate($pnts) {
-        $n = count($pnts)-1;
+        $n = teste_count($pnts)-1;
         for($i=0; $i < $n; $i+=2) {
             list ($x,$y) = $this->Rotate($pnts[$i],$pnts[$i+1]);
             $pnts[$i] = $x; $pnts[$i+1] = $y;

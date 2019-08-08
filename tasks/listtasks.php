@@ -56,7 +56,7 @@ $tmpquery = "WHERE tea.project = '$project' AND tea.member = '" . $_SESSION['idS
 
 $memberTest = new request();
 $memberTest->openTeams($tmpquery);
-$comptMemberTest = count($memberTest->tea_id);
+$comptMemberTest = teste_count($memberTest->tea_id);
 
 if ($comptMemberTest == '0') {
     $teamMember = 'false';
@@ -140,7 +140,7 @@ if ($projectDetail->pro_phase_set[0] != '0') {
 
     $listOpenTasks = new request();
     $listOpenTasks->openTasks($tmpquery, $block2->borne, $block2->rowsLimit);
-    $comptListTasks = count($listOpenTasks->tas_id);
+    $comptListTasks = teste_count($listOpenTasks->tas_id);
     
     $block2->headingToggle($strings['tasks_open'] . ' <span class=addition>(' . $comptListTasks . ')</span>');
     $block2->openPaletteIcon();
@@ -366,7 +366,7 @@ if ($projectDetail->pro_phase_set[0] != '0') {
 
     $listMilestones = new request();
     $listMilestones->openTasks($tmpquery, $block4->borne, $block4->rowsLimit);
-    $comptListMilestones = count($listMilestones->tas_id);
+    $comptListMilestones = teste_count($listMilestones->tas_id);
     
     $block4->headingToggle($strings['milestone']. ' <span class=addition>(' . $comptListMilestones . ')</span>');
     $block4->openPaletteIcon();
@@ -505,7 +505,7 @@ if ($projectDetail->pro_phase_set[0] != '0') {
     //--- list ---------
     $listClosedTasks = new request();
     $listClosedTasks->openTasks($tmpquery, $block3->borne, $block3->rowsLimit);
-    $comptListTasks = count($listClosedTasks->tas_id);
+    $comptListTasks = teste_count($listClosedTasks->tas_id);
     
     $block3->headingToggle($strings['tasks_closed'] . ' <span class=addition>(' . $comptListTasks . ')</span>');
     $block3->openPaletteIcon();
